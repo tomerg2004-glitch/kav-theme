@@ -41,7 +41,8 @@
     "p3"
    ],
    "settings": {
-    "link": "/products/contrast-01"
+    "link": "/products/contrast-01",
+    "product": "contrast-01"
    }
   },
   "service": {
