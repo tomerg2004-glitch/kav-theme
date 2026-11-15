@@ -1,0 +1,240 @@
+{%- comment -%}
+  Runway hero: two looks walk out of the dark toward the viewer.
+  Load: they approach from deep in the frame with a step rhythm, the light comes up, the type rises.
+  Scroll (sticky stage): they keep walking past the camera and part to the sides; the floor light follows.
+  Pointer: the spotlight follows the cursor, figures and the wordmark drift in depth.
+{%- endcomment -%}
+<section class="kr" id="Runway-{{ section.id }}" aria-labelledby="RunwayH-{{ section.id }}" data-runway>
+  <div class="kr__stage">
+    <div class="kr__bg" aria-hidden="true">
+      <span class="kr__beam kr__beam--a"></span>
+      <span class="kr__beam kr__beam--b"></span>
+      <span class="kr__spot"></span>
+    </div>
+
+    <p class="kr__mark" aria-hidden="true">{%- assign wm = section.settings.wordmark | default: 'KAV' | split: '' -%}{%- for ch in wm -%}<span style="--i:{{ forloop.index0 }}">{{ ch }}</span>{%- endfor -%}</p>
+
+    <div class="kr__floor" aria-hidden="true"></div>
+
+    <div class="kr__cast">
+      {%- for n in (1..2) -%}
+        {%- if n == 1 -%}{%- assign img = section.settings.image -%}{%- assign lbl = section.settings.label1 -%}{%- assign lnk = section.settings.link1 -%}{%- else -%}{%- assign img = section.settings.image2 -%}{%- assign lbl = section.settings.label2 -%}{%- assign lnk = section.settings.link2 -%}{%- endif -%}
+        {%- if img -%}
+          {%- assign alt = img.alt | default: lbl -%}
+          <a class="kr__fig kr__fig--{{ n }}" href="{{ lnk | default: '#' }}" data-fig="{{ n }}">
+            <span class="kr__walk">
+              {{ img | image_url: width: 1400 | image_tag: widths: '500,800,1100,1400', sizes: '(min-width: 750px) 40vw, 60vw', fetchpriority: 'high', class: 'kr__img', alt: alt }}
+              {{ img | image_url: width: 800 | image_tag: class: 'kr__echo', alt: '', loading: 'lazy', aria-hidden: 'true' }}
+            </span>
+            <span class="kr__tag"><span>{{ lbl }}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="kr__veil" aria-hidden="true"></div>
+
+    <div class="kr__copy k-wrap">
+      <h1 id="RunwayH-{{ section.id }}" class="kr__h1">
+        {%- assign words = section.settings.headline | split: ' ' -%}
+        {%- for w in words -%}<span class="kr__w"><span style="--i:{{ forloop.index0 }}">{{ w }}</span></span>{% unless forloop.last %} {% endunless %}{%- endfor -%}
+      </h1>
+      <div class="kr__side">
+        {%- if section.settings.season != blank -%}<p class="kr__season">{{ section.settings.season }}</p>{%- endif -%}
+        {%- if section.settings.btn_label != blank -%}
+          <a class="kr__btn" href="{{ section.settings.btn_link | default: '#cat-shoes' }}" data-magnet><span>{{ section.settings.btn_label }}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="kr__cue" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+<style>
+.kr{--p:0;--mx:0;--my:0;position:relative;height:190vh;background:#090909;color:#f4f1ea;margin-top:calc(-1 * var(--hdr-h,76px))}
+.kr__stage{position:sticky;top:0;height:100svh;min-height:620px;overflow:hidden;isolation:isolate}
+.kr__bg{position:absolute;inset:0;z-index:0;background:radial-gradient(120% 80% at 50% 110%,#1a1916 0%,#0b0b0a 55%,#070707 100%)}
+.kr__spot{position:absolute;width:70vmax;height:70vmax;left:50%;top:38%;border-radius:50%;background:radial-gradient(circle,rgba(255,244,222,.16),rgba(255,244,222,.05) 35%,transparent 65%);transform:translate(calc(-50% + var(--mx) * 9vw),calc(-50% + var(--my) * 6vh));transition:transform 1.2s cubic-bezier(.16,1,.3,1);opacity:0;animation:krFade 2.4s ease-out .3s forwards}
+.kr__beam{position:absolute;top:-20%;width:34vw;height:140%;background:linear-gradient(to bottom,rgba(255,250,238,.13),rgba(255,250,238,0) 75%);filter:blur(22px);transform-origin:50% 0;opacity:0;mix-blend-mode:screen}
+.kr__beam--a{left:22%;animation:krBeamIn 2s ease-out .2s forwards,krSweepA 9s ease-in-out 2.2s infinite alternate}
+.kr__beam--b{right:22%;animation:krBeamIn 2s ease-out .5s forwards,krSweepB 11s ease-in-out 2.5s infinite alternate}
+@keyframes krBeamIn{to{opacity:1}}
+@keyframes krSweepA{from{transform:rotate(14deg)}to{transform:rotate(4deg)}}
+@keyframes krSweepB{from{transform:rotate(-14deg)}to{transform:rotate(-3deg)}}
+@keyframes krFade{to{opacity:1}}
+
+/* giant wordmark behind the cast */
+.kr__mark{position:absolute;z-index:1;inset-inline:0;top:50%;margin:0;display:flex;justify-content:center;direction:ltr;font-family:Heebo,system-ui,sans-serif;font-weight:900;font-size:clamp(180px,38vw,640px);line-height:.8;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(244,241,234,.16);transform:translate(calc(var(--mx) * -26px),calc(-58% + var(--p) * -14vh)) scale(calc(1 + var(--p) * .25));pointer-events:none;user-select:none}
+.kr__mark span{display:inline-block;opacity:0;transform:translateY(40%);animation:krRise 1.6s cubic-bezier(.16,1,.3,1) calc(.15s + var(--i) * .12s) forwards}
+@keyframes krRise{to{opacity:1;transform:none}}
+
+/* floor light */
+.kr__floor{position:absolute;z-index:2;left:50%;bottom:0;width:90vw;height:30vh;transform:translateX(-50%) scaleX(calc(.6 + var(--p) * .5));background:radial-gradient(50% 60% at 50% 100%,rgba(255,244,222,.12),transparent 70%);opacity:0;animation:krFade 2.6s ease-out .6s forwards}
+
+/* the cast */
+.kr__cast{position:absolute;inset:0;z-index:3}
+.kr__fig{position:absolute;bottom:-2vh;height:92%;aspect-ratio:4/5;display:block;color:inherit;text-decoration:none;transform-origin:50% 100%;
+  --side:1;--dx:0px;
+  transform:translateX(calc(var(--dx) + var(--mx) * 14px * var(--depth,1) + var(--side) * var(--p) * 30vw)) scale(calc(1 + var(--p) * .55));
+  opacity:calc(1 - var(--p) * 1.15);will-change:transform}
+.kr__fig--1{inset-inline-start:50%;margin-inline-start:-7%;--side:1;--depth:1.3}
+.kr__fig--2{inset-inline-end:50%;margin-inline-end:-7%;--side:-1;--depth:.8}
+[dir="rtl"] .kr__fig--1{--side:-1}
+[dir="rtl"] .kr__fig--2{--side:1}
+.kr__walk{position:absolute;inset:0;display:block;transform-origin:50% 100%}
+.kr__img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 100%;
+  -webkit-mask-image:radial-gradient(62% 75% at 50% 48%,#000 58%,transparent 100%),linear-gradient(to top,transparent 0,#000 12%);-webkit-mask-composite:source-in;
+  mask-image:radial-gradient(62% 75% at 50% 48%,#000 58%,transparent 100%),linear-gradient(to top,transparent 0,#000 12%);mask-composite:intersect;
+  filter:contrast(1.06) saturate(.88);transition:filter .6s ease}
+.kr__echo{position:absolute;left:0;top:100%;width:100%;height:100%;object-fit:contain;object-position:50% 0;transform:scaleY(-1);opacity:.14;filter:blur(2px);-webkit-mask-image:linear-gradient(to top,transparent 70%,#000);mask-image:linear-gradient(to top,transparent 70%,#000);pointer-events:none}
+.kr__tag{position:absolute;top:30%;inset-inline-start:72%;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid rgba(244,241,234,.35);border-radius:999px;background:rgba(9,9,9,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:13px;font-weight:500;white-space:nowrap;opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .45s cubic-bezier(.16,1,.3,1)}
+.kr__tag svg{width:14px;height:14px}
+.kr__fig--2 .kr__tag{inset-inline-start:auto;inset-inline-end:72%}
+@media (hover:hover) and (pointer:fine){
+  .kr__cast:hover .kr__fig:not(:hover) .kr__img{filter:brightness(.4) contrast(1.06) saturate(.6)}
+  .kr__fig:hover .kr__tag,.kr__fig:focus-visible .kr__tag{opacity:1;transform:none}
+}
+.kr__fig:focus-visible{outline:2px solid #f4f1ea;outline-offset:-6px}
+
+.kr__veil{position:absolute;inset:0;z-index:4;pointer-events:none;background:linear-gradient(to top,rgba(9,9,9,.9),rgba(9,9,9,0) 38%),linear-gradient(to bottom,rgba(9,9,9,.55),rgba(9,9,9,0) 20%)}
+
+/* copy */
+.kr__copy{position:absolute;inset-inline:0;bottom:0;z-index:5;padding-bottom:clamp(28px,5vh,56px);display:flex;align-items:flex-end;justify-content:space-between;gap:28px 48px;flex-wrap:wrap;pointer-events:none;transform:translateY(calc(var(--p) * -8vh));opacity:calc(1 - var(--p) * 1.6)}
+.kr__copy a{pointer-events:auto}
+.kr__h1{margin:0;font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:300;font-size:clamp(52px,8.4vw,150px);line-height:.92;letter-spacing:-.02em;max-width:11ch}
+.kr__w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.06em}
+.kr__w>span{display:inline-block;transform:translateY(110%);animation:krWord 1.1s cubic-bezier(.16,1,.3,1) calc(1.5s + var(--i) * .09s) forwards}
+@keyframes krWord{to{transform:none}}
+.kr__side{display:flex;flex-direction:column;align-items:flex-start;gap:18px;opacity:0;animation:krFade .9s ease-out 2.1s forwards}
+.kr__season{margin:0;font-size:14px;letter-spacing:.08em;color:rgba(244,241,234,.7)}
+.kr__btn{display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 28px;border-radius:999px;background:#f4f1ea;color:#0b0b0b;font-size:15px;font-weight:600;text-decoration:none;transition:transform .5s cubic-bezier(.16,1,.3,1),background-color .2s ease}
+.kr__btn svg{width:16px;height:16px;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+@media (hover:hover){.kr__btn:hover{background:#fff}.kr__btn:hover svg{transform:translateY(3px)}}
+.kr__btn:active{transform:scale(.97)}
+.kr__btn:focus-visible{outline:2px solid #f4f1ea;outline-offset:4px}
+
+.kr__cue{position:absolute;z-index:5;left:50%;bottom:18px;width:1px;height:44px;background:rgba(244,241,234,.18);overflow:hidden;opacity:calc(1 - var(--p) * 4)}
+.kr__cue span{position:absolute;inset:0;background:#f4f1ea;transform:translateY(-100%);animation:krCue 2.6s cubic-bezier(.65,0,.35,1) 2.6s infinite}
+@keyframes krCue{0%{transform:translateY(-100%)}55%{transform:translateY(0)}100%{transform:translateY(100%)}}
+
+/* header sits on the dark stage */
+.template-index .k-header:not(.is-scrolled):not(.is-open){background:transparent;color:#fff}
+
+@media (max-width:749px){
+  .kr{height:160vh}
+  .kr__fig{height:66%;bottom:24%}
+  .kr__fig--1{margin-inline-start:-16%}
+  .kr__fig--2{margin-inline-end:-16%}
+  .kr__copy{flex-direction:column;align-items:stretch}
+  .kr__side{width:100%}
+  .kr__btn{justify-content:center;width:100%}
+  .kr__tag,.kr__cue{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .kr{height:auto}
+  .kr__stage{position:relative}
+  .kr *,.kr *::before{animation:none!important;opacity:1!important;transition:none!important}
+  .kr__mark span,.kr__w>span{transform:none!important}
+  .kr__fig{transform:none!important}
+  .kr__beam{opacity:.6!important}
+}
+</style>
+
+<script>
+(() => {
+  const root = document.getElementById('Runway-{{ section.id }}');
+  if (!root || root.dataset.ready) return;
+  root.dataset.ready = '1';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+  const figs = [...root.querySelectorAll('.kr__fig')];
+  const walks = figs.map(f => f.querySelector('.kr__walk'));
+
+  // 1. Entrance: each look walks out of the dark toward the camera.
+  //    Depth = scale + blur + darkness; the step = a short dip every stride with a slight hip sway.
+  const strideMs = 520, steps = 7;
+  walks.forEach((w, i) => {
+    const delay = 150 + i * 320;
+    w.animate([
+      { transform: 'translateY(-16%) scale(.38)', filter: 'brightness(0) blur(10px)', opacity: 0 },
+      { opacity: 1, offset: .18 },
+      { filter: 'brightness(.55) blur(2px)', offset: .55 },
+      { transform: 'translateY(0) scale(1)', filter: 'brightness(1) blur(0)', opacity: 1 }
+    ], { duration: strideMs * steps, delay, easing: 'cubic-bezier(.3,.55,.35,1)', fill: 'both' });
+    const img = w.querySelector('.kr__img');
+    const frames = [];
+    for (let s = 0; s <= steps * 2; s++) {
+      const up = s % 2 === 0;
+      const sway = (Math.floor(s / 2) % 2 ? 1 : -1) * (up ? .7 : .25);
+      frames.push({ transform: `translateY(${up ? 0 : 1.6}%) rotate(${sway}deg)` });
+    }
+    frames.push({ transform: 'none' });
+    img.animate(frames, { duration: strideMs * steps, delay, easing: 'ease-in-out', fill: 'both' });
+    // 2. Idle: they stay alive — a slow breath and weight shift.
+    setTimeout(() => {
+      img.animate([
+        { transform: 'translateY(0) rotate(0) scale(1)' },
+        { transform: `translateY(-.35%) rotate(${i ? -.35 : .35}deg) scale(1.006)` },
+        { transform: 'translateY(0) rotate(0) scale(1)' }
+      ], { duration: 4200 + i * 500, iterations: Infinity, easing: 'ease-in-out' });
+    }, delay + strideMs * steps);
+  });
+
+  // 3. Scroll: the stage stays pinned while the looks walk past the camera.
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      const r = root.getBoundingClientRect();
+      const span = root.offsetHeight - innerHeight;
+      const p = Math.min(1, Math.max(0, -r.top / (span || 1)));
+      root.style.setProperty('--p', p.toFixed(4));
+      ticking = false;
+    });
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // 4. Pointer: spotlight follows, layers drift in depth.
+  if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+    const loop = () => {
+      cx += (tx - cx) * .06; cy += (ty - cy) * .06;
+      root.style.setProperty('--mx', cx.toFixed(4));
+      root.style.setProperty('--my', cy.toFixed(4));
+      raf = Math.abs(tx - cx) + Math.abs(ty - cy) > .001 ? requestAnimationFrame(loop) : 0;
+    };
+    root.addEventListener('pointermove', e => {
+      const b = root.getBoundingClientRect();
+      tx = (e.clientX - b.left) / b.width * 2 - 1;
+      ty = (e.clientY - b.top) / Math.min(b.height, innerHeight) * 2 - 1;
+      if (!raf) raf = requestAnimationFrame(loop);
+    });
+    // magnetic button
+    root.querySelectorAll('[data-magnet]').forEach(btn => {
+      btn.addEventListener('pointermove', e => {
+        const b = btn.getBoundingClientRect();
+        btn.style.transform = `translate(${(e.clientX - b.left - b.width / 2) * .25}px,${(e.clientY - b.top - b.height / 2) * .35}px)`;
+      });
+      btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{"name":"פתיחה – מסלול","tag":"div","settings":[
+{"type":"image_picker","id":"image","label":"לוק 1"},
+{"type":"text","id":"label1","label":"שם לוק 1","default":"לוק 1"},
+{"type":"url","id":"link1","label":"קישור לוק 1"},
+{"type":"image_picker","id":"image2","label":"לוק 2"},
+{"type":"text","id":"label2","label":"שם לוק 2","default":"לוק 2"},
+{"type":"url","id":"link2","label":"קישור לוק 2"},
+{"type":"text","id":"wordmark","label":"מילה ענקית ברקע","default":"KAV"},
+{"type":"text","id":"headline","label":"כותרת","default":"פשוט להתלבש טוב."},
+{"type":"text","id":"season","label":"שורה קטנה","default":"חורף 2026"},
+{"type":"text","id":"btn_label","label":"כפתור","default":"לראות מה יש"},
+{"type":"url","id":"btn_link","label":"קישור הכפתור"}],
+"presets":[{"name":"פתיחה – מסלול"}]}
+{% endschema %}

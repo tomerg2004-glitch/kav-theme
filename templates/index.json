@@ -1,23 +1,19 @@
 {
  "sections": {
   "hero": {
-   "type": "hero",
+   "type": "runway",
    "settings": {
-    "dark": true,
-    "asset": "kav-camo-1.jpg",
-    "alt": "דוגמן KAV הולך קדימה על רקע שחור, באוברשירט חרמון מעל טי-שירט לבנה וג׳ינס יפו בכחול בהיר",
-    "focus": "50% 30%",
     "image": "shopify://shop_images/kav-hero-model-02.png",
     "image2": "shopify://shop_images/kav-look-02b.png",
-    "line1": "פשוט להתלבש טוב.",
-    "line2": "חורף 2026.",
-    "fact": "",
-    "btn_label": "לראות מה יש",
-    "btn_link": "#cat-shoes",
-    "label1": "לוק NOMAD ו-DRIFT",
-    "label2": "לוק VOID ו-RECON",
+    "label1": "NOMAD + DRIFT",
     "link1": "/collections/button-shirts",
-    "link2": "/collections/pants"
+    "label2": "VOID + RECON",
+    "link2": "/collections/pants",
+    "wordmark": "KAV",
+    "headline": "פשוט להתלבש טוב.",
+    "season": "חורף 2026",
+    "btn_label": "לראות מה יש",
+    "btn_link": "#cat-shoes"
    }
   },
   "service": {
