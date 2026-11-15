@@ -86,7 +86,8 @@
     "details": "פרטי המוצר",
     "size_fit": "מידות וגזרה",
     "shipping_returns": "משלוח וביטול עסקה",
-    "colors": "צבעים"
+    "colors": "צבעים",
+    "look_total": "כל הלוק"
   },
   "search": {
     "none": "לא נמצאו תוצאות עבור \"{{ terms }}\".",

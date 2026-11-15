@@ -1,0 +1,50 @@
+<section class="k-look" id="{{ section.settings.anchor }}" aria-labelledby="H-{{ section.id }}">
+  <div class="k-wrap k-look__grid{% if section.settings.flip %} k-look__grid--flip{% endif %}">
+    <div class="k-look__media">
+      {%- if section.settings.image -%}{{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600,900,1200,1400', sizes: '(min-width: 900px) 50vw, 100vw', alt: section.settings.image.alt }}{%- endif -%}
+    </div>
+    <div class="k-look__body">
+      <h2 id="H-{{ section.id }}" class="k-display k-h2">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}<p class="k-lead">{{ section.settings.text }}</p>{%- endif -%}
+      <ul class="k-look__items">
+        {%- assign total = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- assign p = block.settings.product -%}
+          {%- if p != blank -%}
+          {%- liquid
+            assign v = p.selected_or_first_available_variant
+            if block.settings.color != blank
+              for x in p.variants
+                if x.title contains block.settings.color
+                  assign v = x
+                  break
+                endif
+              endfor
+            endif
+            assign total = total | plus: v.price
+            assign img = v.featured_media | default: p.featured_media
+          -%}
+          <li {{ block.shopify_attributes }}>
+            <a class="k-look__item" href="{{ v.url }}">
+              <span class="k-look__thumb">{%- if img -%}{{ img | image_url: width: 200 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span>
+              <span class="k-look__name"><strong>{{ p.title }}</strong><span>{{ p.type }}{% if block.settings.color != blank %} · {{ block.settings.color }}{% endif %}</span></span>
+              <span class="k-price">{{ v.price | money_without_trailing_zeros }}</span>
+            </a>
+          </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+      <p class="k-look__total"><span>{{ 'products.look_total' | t }}</span><span class="k-price">{{ total | money_without_trailing_zeros }}</span></p>
+    </div>
+  </div>
+</section>
+{% schema %}
+{"name":"הלוק המלא","tag":"div","settings":[
+{"type":"text","id":"anchor","label":"מזהה (לקישור)","default":"look-1"},
+{"type":"image_picker","id":"image","label":"תמונת הלוק"},
+{"type":"checkbox","id":"flip","label":"תמונה בצד השני","default":false},
+{"type":"text","id":"title","label":"כותרת","default":"לוק 1"},
+{"type":"textarea","id":"text","label":"טקסט"}],
+"blocks":[{"type":"item","name":"פריט","limit":5,"settings":[{"type":"product","id":"product","label":"מוצר"},{"type":"text","id":"color","label":"צבע (אם יש)"}]}],
+"presets":[{"name":"הלוק המלא"}]}
+{% endschema %}

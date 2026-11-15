@@ -7,7 +7,10 @@
     "asset": "kav-camo-1.jpg",
     "alt": "דוגמן KAV הולך קדימה על רקע שחור, באוברשירט חרמון מעל טי-שירט לבנה וג׳ינס יפו בכחול בהיר",
     "focus": "50% 30%",
-    "image": "shopify://shop_images/kav-hero-model-02.png"
+    "image": "shopify://shop_images/kav-hero-model-02.png",
+    "image2": "shopify://shop_images/kav-look-02.png",
+    "line1": "שני לוקים.",
+    "line2": "מהדורה אחת."
    }
   },
   "service": {
@@ -49,50 +52,6 @@
    "type": "newsletter",
    "settings": {}
   },
-  "looks": {
-   "type": "chapters",
-   "blocks": {
-    "c1": {
-     "type": "chapter",
-     "settings": {
-      "asset": "kav-camo-3.jpg",
-      "alt": "ג׳ינס רמון בהדפס הסוואה עם קפוצ׳ון אפור, מבט מהצד",
-      "title": "רמון, ליום רגיל",
-      "text": "ג׳ינס רחב שנופל על הנעל, קפוצ׳ון אפור וסניקרס בשחור-לבן.",
-      "link": "/products/camo-04",
-      "link_label": "לג׳ינס רמון"
-     }
-    },
-    "c2": {
-     "type": "chapter",
-     "settings": {
-      "asset": "kav-plaid-3.jpg",
-      "alt": "אוברשירט חרמון פתוח מעל טי-שירט לבנה, מבט מהצד",
-      "title": "חרמון, פתוח",
-      "text": "אוברשירט משבצות מעל טי-שירט לבנה ומכנסי צ׳ינו בהירים.",
-      "link": "/products/plaid-05",
-      "link_label": "לאוברשירט חרמון"
-     }
-    },
-    "c3": {
-     "type": "chapter",
-     "settings": {
-      "asset": "kav-shorts-2.jpg",
-      "alt": "שורט ג׳ינס פלורנטין באפור עם גרביים לבנות גבוהות, מבט מאחור",
-      "title": "פלורנטין, בקיץ",
-      "text": "שורט ג׳ינס אפור עם שוליים פרומים, גרביים גבוהות וסניקרס לבנות.",
-      "link": "/products/raw-02",
-      "link_label": "לשורט פלורנטין"
-     }
-    }
-   },
-   "block_order": [
-    "c1",
-    "c2",
-    "c3"
-   ],
-   "settings": {}
-  },
   "ticker": {
    "type": "marquee",
    "settings": {}
@@ -132,18 +91,91 @@
    "settings": {
     "collection": "shirts"
    }
+  },
+  "look1": {
+   "type": "shop-look",
+   "blocks": {
+    "a": {
+     "type": "item",
+     "settings": {
+      "product": "plaid-05"
+     }
+    },
+    "b": {
+     "type": "item",
+     "settings": {
+      "product": "yafo-jeans",
+      "color": "כחול בהיר"
+     }
+    },
+    "c": {
+     "type": "item",
+     "settings": {
+      "product": "contrast-01",
+      "color": "שחור / לבן"
+     }
+    }
+   },
+   "block_order": [
+    "a",
+    "b",
+    "c"
+   ],
+   "settings": {
+    "anchor": "look-1",
+    "image": "shopify://shop_images/kav-hero-model-02.png",
+    "title": "חרמון ויפו",
+    "text": "אוברשירט משבצות פתוח מעל טי-שירט לבנה, ג׳ינס רחב בשטיפה בהירה וסניקרס בשחור-לבן."
+   }
+  },
+  "look2": {
+   "type": "shop-look",
+   "blocks": {
+    "a": {
+     "type": "item",
+     "settings": {
+      "product": "boston-tee"
+     }
+    },
+    "b": {
+     "type": "item",
+     "settings": {
+      "product": "camo-04"
+     }
+    },
+    "c": {
+     "type": "item",
+     "settings": {
+      "product": "contrast-01",
+      "color": "שחור / לבן"
+     }
+    }
+   },
+   "block_order": [
+    "a",
+    "b",
+    "c"
+   ],
+   "settings": {
+    "anchor": "look-2",
+    "image": "shopify://shop_images/kav-look-02.png",
+    "flip": true,
+    "title": "בוסטון ורמון",
+    "text": "טי-שירט אוברסייז שחורה עם מפתח רחב, ג׳ינס רחב בהדפס הסוואה וסניקרס בשחור-לבן."
+   }
   }
  },
  "order": [
   "hero",
   "catnav",
+  "look1",
+  "look2",
   "c_shoes",
   "c_shorts",
   "c_pants",
   "c_button",
   "c_shirts",
   "ticker",
-  "looks",
   "service",
   "news"
  ]

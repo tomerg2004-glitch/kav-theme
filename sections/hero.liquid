@@ -1,9 +1,12 @@
 <section class="k-hero1{% if section.settings.dark %} k-hero1--dark{% endif %}" aria-labelledby="Hero-{{ section.id }}">
-  <div class="k-hero1__img">
+  <div class="k-hero1__img{% if section.settings.image2 %} k-hero1__img--duo{% endif %}">
     {%- if section.settings.image -%}
-      {{ section.settings.image | image_url: width: 2400 | image_tag: widths: '750,1100,1600,2000,2400', sizes: '100vw', fetchpriority: 'high', alt: section.settings.image.alt | default: section.settings.alt, style: 'object-position:' | append: section.settings.focus }}
+      <a class="k-hero1__fig" href="{{ section.settings.link1 | default: '#look-1' }}" aria-label="{{ section.settings.label1 | escape }}">{{ section.settings.image | image_url: width: 1600 | image_tag: widths: '600,900,1200,1600', sizes: '(min-width: 750px) 50vw, 100vw', fetchpriority: 'high', alt: section.settings.image.alt | default: section.settings.alt }}</a>
     {%- else -%}
       <img src="{{ section.settings.asset | asset_url }}" width="900" height="1125" fetchpriority="high" alt="{{ section.settings.alt | escape }}">
+    {%- endif -%}
+    {%- if section.settings.image2 -%}
+      <a class="k-hero1__fig" href="{{ section.settings.link2 | default: '#look-2' }}" aria-label="{{ section.settings.label2 | escape }}">{{ section.settings.image2 | image_url: width: 1600 | image_tag: widths: '600,900,1200,1600', sizes: '50vw', alt: section.settings.image2.alt }}</a>
     {%- endif -%}
   </div>
   <div class="k-hero1__shade" aria-hidden="true"></div>
@@ -17,7 +20,7 @@
 </section>
 {% schema %}
 {"name":"פתיחה","tag":"div","settings":[
-{"type":"image_picker","id":"image","label":"תמונה"},{"type":"text","id":"asset","label":"תמונה מהתבנית (אם לא נבחרה)","default":"kav-plaid-2.jpg"},{"type":"checkbox","id":"dark","label":"רקע שחור, הדמות יוצאת מהחושך","default":true},
+{"type":"image_picker","id":"image","label":"תמונה"},{"type":"image_picker","id":"image2","label":"תמונה שנייה (לוק 2)"},{"type":"text","id":"label1","label":"שם לוק 1","default":"לוק 1: חרמון ויפו"},{"type":"url","id":"link1","label":"קישור לוק 1"},{"type":"text","id":"label2","label":"שם לוק 2","default":"לוק 2: בוסטון ורמון"},{"type":"url","id":"link2","label":"קישור לוק 2"},{"type":"text","id":"asset","label":"תמונה מהתבנית (אם לא נבחרה)","default":"kav-plaid-2.jpg"},{"type":"checkbox","id":"dark","label":"רקע שחור, הדמות יוצאת מהחושך","default":true},
 {"type":"text","id":"alt","label":"תיאור התמונה","default":"גבר באוברשירט חרמון מעל טי-שירט לבנה"},
 {"type":"text","id":"focus","label":"מיקוד התמונה (CSS)","default":"50% 22%"},
 {"type":"text","id":"line1","label":"כותרת שורה 1","default":"בגדי רחוב"},

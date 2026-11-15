@@ -86,7 +86,8 @@
     "details": "Details",
     "size_fit": "Size & fit",
     "shipping_returns": "Shipping & returns",
-    "colors": "colors"
+    "colors": "colors",
+    "look_total": "Whole look"
   },
   "search": {
     "none": "No results for \"{{ terms }}\".",
