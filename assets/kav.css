@@ -337,9 +337,6 @@ html{scrollbar-color:#9A948A var(--paper);accent-color:var(--ink)}
 /* =========================================================
    v3 — luxury layer
    ========================================================= */
-@view-transition{navigation:auto}
-::view-transition-old(root){animation:kVtOut 220ms var(--ease-out-smooth) both}
-::view-transition-new(root){animation:kVtIn 420ms var(--ease-out-smooth) both}
 @keyframes kVtOut{to{opacity:0}}
 @keyframes kVtIn{from{opacity:0;transform:translateY(6px)}}
 
@@ -446,3 +443,6 @@ html{scrollbar-color:#9A948A var(--paper);accent-color:var(--ink)}
 @keyframes kStepOut{0%{opacity:0;transform:translateY(-3%) scale(.86);filter:brightness(0) contrast(1.08) saturate(.85)}55%{opacity:1}100%{opacity:1;transform:none;filter:brightness(1) contrast(1.08) saturate(.85)}}
 .k-hero1--dark .k-hero1__shade{background:linear-gradient(to top,rgba(5,5,5,.85),rgba(5,5,5,0) 40%)}
 @media (max-width:749px){.k-hero1--dark .k-hero1__img img{height:78%;align-self:flex-start;margin-top:12%}}
+
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

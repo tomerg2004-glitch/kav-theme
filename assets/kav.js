@@ -221,6 +221,6 @@ document.querySelectorAll('[data-swatch-stage]').forEach(function(s){
 (function(){
   var chips=[].slice.call(document.querySelectorAll('.k-catnav .k-chip[href^="#"]'));if(!chips.length||!('IntersectionObserver' in window))return;
   var map={};chips.forEach(function(c){map[c.getAttribute('href').slice(1)]=c});
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){chips.forEach(function(c){c.classList.remove('is-on')});var c=map[e.target.id];if(c){c.classList.add('is-on');c.scrollIntoView({block:'nearest',inline:'center'});}}})},{rootMargin:'-40% 0px -55% 0px'});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){chips.forEach(function(c){c.classList.remove('is-on')});var c=map[e.target.id];if(c){c.classList.add('is-on');var row=c.parentNode,rr=row.getBoundingClientRect(),cr=c.getBoundingClientRect();row.scrollBy({left:(cr.left+cr.width/2)-(rr.left+rr.width/2),behavior:'smooth'});}}})},{rootMargin:'-40% 0px -55% 0px'});
   Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)});
 })();
