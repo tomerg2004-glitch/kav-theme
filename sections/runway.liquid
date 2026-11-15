@@ -6,11 +6,7 @@
 {%- endcomment -%}
 <section class="kr" id="Runway-{{ section.id }}" aria-labelledby="RunwayH-{{ section.id }}" data-runway>
   <div class="kr__stage">
-    <div class="kr__bg" aria-hidden="true">
-      <span class="kr__beam kr__beam--a"></span>
-      <span class="kr__beam kr__beam--b"></span>
-      <span class="kr__spot"></span>
-    </div>
+    <div class="kr__bg" aria-hidden="true"></div>
 
     <p class="kr__mark" aria-hidden="true">{%- assign wm = section.settings.wordmark | default: 'KAV' | split: '' -%}{%- for ch in wm -%}<span style="--i:{{ forloop.index0 }}">{{ ch }}</span>{%- endfor -%}</p>
 
@@ -32,6 +28,11 @@
       {%- endfor -%}
     </div>
 
+    <div class="kr__light" aria-hidden="true">
+      <span class="kr__beam kr__beam--a"></span>
+      <span class="kr__beam kr__beam--b"></span>
+      <span class="kr__spot"></span>
+    </div>
     <div class="kr__veil" aria-hidden="true"></div>
 
     <div class="kr__copy k-wrap">
@@ -55,8 +56,8 @@
 .kr{--p:0;--mx:0;--my:0;position:relative;height:190vh;background:#090909;color:#f4f1ea;margin-top:calc(-1 * var(--hdr-h,76px))}
 .kr__stage{position:sticky;top:0;height:100svh;min-height:620px;overflow:hidden;isolation:isolate}
 .kr__bg{position:absolute;inset:0;z-index:0;background:radial-gradient(120% 80% at 50% 110%,#1a1916 0%,#0b0b0a 55%,#070707 100%)}
-.kr__spot{position:absolute;width:70vmax;height:70vmax;left:50%;top:38%;border-radius:50%;background:radial-gradient(circle,rgba(255,244,222,.16),rgba(255,244,222,.05) 35%,transparent 65%);transform:translate(calc(-50% + var(--mx) * 9vw),calc(-50% + var(--my) * 6vh));transition:transform 1.2s cubic-bezier(.16,1,.3,1);opacity:0;animation:krFade 2.4s ease-out .3s forwards}
-.kr__beam{position:absolute;top:-20%;width:34vw;height:140%;background:linear-gradient(to bottom,rgba(255,250,238,.13),rgba(255,250,238,0) 75%);filter:blur(22px);transform-origin:50% 0;opacity:0;mix-blend-mode:screen}
+.kr__spot{position:absolute;width:70vmax;height:70vmax;left:50%;top:38%;border-radius:50%;background:radial-gradient(circle,rgba(255,244,222,.11),rgba(255,244,222,.035) 35%,transparent 65%);transform:translate(calc(-50% + var(--mx) * 9vw),calc(-50% + var(--my) * 6vh));transition:transform 1.2s cubic-bezier(.16,1,.3,1);opacity:0;animation:krFade 2.4s ease-out .3s forwards}
+.kr__beam{position:absolute;top:-20%;width:34vw;height:140%;background:linear-gradient(to bottom,rgba(255,250,238,.10),rgba(255,250,238,0) 70%);filter:blur(26px);transform-origin:50% 0;opacity:0;mix-blend-mode:screen}
 .kr__beam--a{left:22%;animation:krBeamIn 2s ease-out .2s forwards,krSweepA 9s ease-in-out 2.2s infinite alternate}
 .kr__beam--b{right:22%;animation:krBeamIn 2s ease-out .5s forwards,krSweepB 11s ease-in-out 2.5s infinite alternate}
 @keyframes krBeamIn{to{opacity:1}}
@@ -65,7 +66,7 @@
 @keyframes krFade{to{opacity:1}}
 
 /* giant wordmark behind the cast */
-.kr__mark{position:absolute;z-index:1;inset-inline:0;top:50%;margin:0;display:flex;justify-content:center;direction:ltr;font-family:Heebo,system-ui,sans-serif;font-weight:900;font-size:clamp(180px,38vw,640px);line-height:.8;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(244,241,234,.16);transform:translate(calc(var(--mx) * -26px),calc(-58% + var(--p) * -14vh)) scale(calc(1 + var(--p) * .25));pointer-events:none;user-select:none}
+.kr__mark{position:absolute;z-index:1;inset-inline:0;top:50%;margin:0;display:flex;justify-content:center;direction:ltr;font-family:Heebo,system-ui,sans-serif;font-weight:900;font-size:clamp(180px,38vw,640px);line-height:.8;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(244,241,234,.13);transform:translate(calc(var(--mx) * -26px),calc(-58% + var(--p) * -14vh)) scale(calc(1 + var(--p) * .25));pointer-events:none;user-select:none}
 .kr__mark span{display:inline-block;opacity:0;transform:translateY(40%);animation:krRise 1.6s cubic-bezier(.16,1,.3,1) calc(.15s + var(--i) * .12s) forwards}
 @keyframes krRise{to{opacity:1;transform:none}}
 
@@ -73,7 +74,8 @@
 .kr__floor{position:absolute;z-index:2;left:50%;bottom:0;width:90vw;height:30vh;transform:translateX(-50%) scaleX(calc(.6 + var(--p) * .5));background:radial-gradient(50% 60% at 50% 100%,rgba(255,244,222,.12),transparent 70%);opacity:0;animation:krFade 2.6s ease-out .6s forwards}
 
 /* the cast */
-.kr__cast{position:absolute;inset:0;z-index:3;mix-blend-mode:lighten}
+.kr__cast{position:absolute;inset:0;z-index:3}
+.kr__light{position:absolute;inset:0;z-index:4;pointer-events:none;mix-blend-mode:screen;overflow:hidden}
 .kr__fig{position:absolute;bottom:-2vh;height:92%;aspect-ratio:4/5;display:block;color:inherit;text-decoration:none;transform-origin:50% 100%;
   --side:1;--dx:0px;
   transform:translateX(calc(var(--dx) + var(--mx) * 14px * var(--depth,1) + var(--side) * var(--p) * 30vw)) scale(calc(1 + var(--p) * .55));
@@ -84,8 +86,8 @@
 [dir="rtl"] .kr__fig--2{--side:1}
 .kr__walk{position:absolute;inset:0;display:block;transform-origin:50% 100%}
 .kr__img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 100%;
-  -webkit-mask-image:radial-gradient(48% 62% at 50% 46%,#000 52%,transparent 100%),linear-gradient(to top,transparent 0,#000 12%);-webkit-mask-composite:source-in;
-  mask-image:radial-gradient(48% 62% at 50% 46%,#000 52%,transparent 100%),linear-gradient(to top,transparent 0,#000 12%);mask-composite:intersect;
+  -webkit-mask-image:radial-gradient(44% 58% at 50% 45%,#000 45%,transparent 100%),linear-gradient(to top,transparent 0,#000 12%);-webkit-mask-composite:source-in;
+  mask-image:radial-gradient(44% 58% at 50% 45%,#000 45%,transparent 100%),linear-gradient(to top,transparent 0,#000 12%);mask-composite:intersect;
   filter:contrast(1.06) saturate(.88);transition:filter .6s ease}
 .kr__echo{position:absolute;left:0;top:100%;width:100%;height:100%;object-fit:contain;object-position:50% 0;transform:scaleY(-1);opacity:.14;filter:blur(2px);-webkit-mask-image:linear-gradient(to top,transparent 70%,#000);mask-image:linear-gradient(to top,transparent 70%,#000);pointer-events:none}
 .kr__tag{position:absolute;top:30%;inset-inline-start:72%;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid rgba(244,241,234,.35);border-radius:999px;background:rgba(9,9,9,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:13px;font-weight:500;white-space:nowrap;opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .45s cubic-bezier(.16,1,.3,1)}
@@ -102,7 +104,7 @@
 /* copy */
 .kr__copy{position:absolute;inset-inline:0;bottom:0;z-index:5;padding-bottom:clamp(28px,5vh,56px);display:flex;align-items:flex-end;justify-content:space-between;gap:28px 48px;flex-wrap:wrap;pointer-events:none;transform:translateY(calc(var(--p) * -8vh));opacity:calc(1 - var(--p) * 1.6)}
 .kr__copy a{pointer-events:auto}
-.kr__h1{margin:0;font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:300;font-size:clamp(44px,min(6.4vw,11vh),118px);line-height:.95;letter-spacing:-.02em;max-width:8.5ch}
+.kr__h1{margin:0;font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:300;font-size:clamp(40px,min(5.6vw,9.5vh),108px);line-height:.98;letter-spacing:-.02em;max-width:13ch}
 .kr__w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.06em;margin-inline-end:.24em}
 .kr__w>span{display:inline-block;transform:translateY(110%);animation:krWord 1.1s cubic-bezier(.16,1,.3,1) calc(1.5s + var(--i) * .09s) forwards}
 @keyframes krWord{to{transform:none}}
