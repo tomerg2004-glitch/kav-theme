@@ -1,0 +1,88 @@
+{
+ "accessibility": {
+  "skip": "Skip to content"
+ },
+ "cart": {
+  "checkout": "Check out",
+  "continue": "Continue shopping",
+  "decrease": "Decrease quantity for {{ title }}",
+  "empty": "Your cart is empty.",
+  "increase": "Increase quantity for {{ title }}",
+  "note": "Order note",
+  "quantity": "Quantity",
+  "subtotal": "Subtotal",
+  "summary": "Order summary",
+  "taxes": "Prices include VAT. Shipping calculated at checkout.",
+  "title": "Your cart",
+  "update": "Update cart",
+  "remove": "Remove"
+ },
+ "collections": {
+  "all": "All collections",
+  "empty": "No products in this collection yet."
+ },
+ "customer": {
+  "account": "My account",
+  "create": "Create account",
+  "email": "Email",
+  "first_name": "First name",
+  "login": "Log in",
+  "logout": "Log out",
+  "no_orders": "You haven't placed any orders yet.",
+  "password": "Password",
+  "sign_in": "Sign in"
+ },
+ "errors": {
+  "404_text": "The page you were looking for doesn't exist.",
+  "404_title": "Page not found"
+ },
+ "general": {
+  "back_home": "Back to home",
+  "home": "Home",
+  "page": "Page {{ page }}",
+  "pagination": "Pagination"
+ },
+ "gift_card": {
+  "expired": "This gift card has expired"
+ },
+ "header": {
+  "account": "Account",
+  "cart": "Cart",
+  "main_nav": "Main",
+  "menu": "Menu",
+  "search": "Search"
+ },
+ "newsletter": {
+  "email": "Email",
+  "success": "You're on the list."
+ },
+ "password": {
+  "enter": "Enter",
+  "notify": "Notify me",
+  "owner": "Store owner login",
+  "password": "Password",
+  "title": "Opening soon"
+ },
+ "products": {
+  "add": "Add to cart",
+  "added": "Added ✓",
+  "breadcrumbs": "Breadcrumbs",
+  "choose_size": "Please choose a size to add to cart.",
+  "color": "Color",
+  "error": "Something went wrong. Try again.",
+  "from": "From",
+  "image_n": "Image {{ n }}",
+  "images": "Product images",
+  "sample": "Sample product",
+  "sold_out": "Sold out",
+  "added_title": "Added to cart",
+  "view_cart": "View cart",
+  "choose_and_add": "Choose size & add"
+ },
+ "search": {
+  "none": "No results for \"{{ terms }}\".",
+  "placeholder": "What are you looking for?",
+  "submit": "Search",
+  "title": "Search"
+ }
+}

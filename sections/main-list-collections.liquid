@@ -1,0 +1,9 @@
+<div class="k-wrap" style="padding-bottom:104px">
+  <header class="k-colhead"><h1 class="k-display k-h2">{{ 'collections.all' | t }}</h1></header>
+  <div class="k-grid">
+    {%- for c in collections -%}
+      <a class="k-card k-pcard" href="{{ c.url }}"><div class="k-pcard__media">{%- if c.featured_image -%}{{ c.featured_image | image_url: width: 900 | image_tag: class: 'k-ph', loading: 'lazy' }}{%- else -%}{{ 'collection-1' | placeholder_svg_tag: 'k-placeholder' }}{%- endif -%}</div><div class="k-pcard__meta"><strong>{{ c.title }}</strong></div></a>
+    {%- endfor -%}
+  </div>
+</div>
+{% schema %}{"name":"כל הקולקציות"}{% endschema %}

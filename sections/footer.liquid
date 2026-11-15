@@ -1,0 +1,18 @@
+<footer class="k-footer">
+  <div class="k-wrap k-footer__grid">
+    <div class="k-footer__col">
+      <span class="k-logo">{{ shop.name }}</span>
+      {%- if section.settings.tagline != blank -%}<span>{{ section.settings.tagline }}</span>{%- endif -%}
+    </div>
+    {%- for block in section.blocks -%}
+      <nav class="k-footer__col" aria-label="{{ block.settings.title | escape }}" {{ block.shopify_attributes }}>
+        <span class="k-footer__title">{{ block.settings.title }}</span>
+        {%- for link in block.settings.menu.links -%}<a class="k-u" href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+      </nav>
+    {%- endfor -%}
+  </div>
+  <div class="k-wrap k-footer__base">© {{ 'now' | date: '%Y' }} {{ shop.name }}</div>
+</footer>
+{% schema %}
+{"name":"כותרת תחתונה","tag":"div","settings":[{"type":"text","id":"tagline","label":"משפט קצר","default":"נעליים ובגדים לגברים"}],"blocks":[{"type":"menu","name":"עמודת קישורים","settings":[{"type":"text","id":"title","label":"כותרת","default":"שירות"},{"type":"link_list","id":"menu","label":"תפריט","default":"footer"}]}],"enabled_on":{"groups":["footer"]}}
+{% endschema %}

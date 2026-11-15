@@ -1,0 +1,7 @@
+{"sections":{
+"hero":{"type":"hero","blocks":{"c1":{"type":"shot","settings":{"name":"שחור / שמנת","chip":"linear-gradient(135deg,#1A1917 50%,#E6DFD2 50%)"}},"c2":{"type":"shot","settings":{"name":"זמש שחור","chip":"#1A1917"}},"c3":{"type":"shot","settings":{"name":"לבן / אפור","chip":"linear-gradient(135deg,#FFFFFF 50%,#A9A9A6 50%)"}}},"block_order":["c1","c2","c3"],"settings":{"btn1_link":"/products/contrast-01","btn2_link":"/products/contrast-01"}},
+"street":{"type":"image-pair","blocks":{"i1":{"type":"image","settings":{}},"i2":{"type":"image","settings":{}}},"block_order":["i1","i2"],"settings":{}},
+"details":{"type":"details","blocks":{"d1":{"type":"detail","settings":{"title":"שרוכי חבל עבים","text":"רכים, בגוון מנוגד לנעל. הם החתימה של הדגם."}},"d2":{"type":"detail","settings":{"title":"תפר מנוגד","text":"חוט בהיר שמסמן כל פאנל, גם על הזמש השחור."}},"d3":{"type":"detail","settings":{"title":"סוליה מוגבהת","text":"עבה ועמידה בשחיקה, לנוחות של יום שלם."}}},"block_order":["d1","d2","d3"],"settings":{}},
+"new":{"type":"featured-collection","settings":{"title":"חדש בביגוד","limit":3}},
+"news":{"type":"newsletter","settings":{}}
+},"order":["hero","street","details","new","news"]}

@@ -1,0 +1,39 @@
+<div class="k-wrap">
+  <header class="k-colhead"><h1 class="k-display k-h2">{{ 'cart.title' | t }}</h1></header>
+  {%- if cart.item_count > 0 -%}
+  <form action="{{ routes.cart_url }}" method="post" class="k-cart">
+    <div class="k-cart__items">
+      {%- for item in cart.items -%}
+      <div class="k-line">
+        {%- if item.image -%}<a href="{{ item.url }}">{{ item.image | image_url: width: 200 | image_tag: alt: item.product.title }}</a>{%- endif -%}
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <a class="k-u" href="{{ item.url }}" style="font-weight:500;align-self:flex-start">{{ item.product.title }}</a>
+          {%- unless item.product.has_only_default_variant -%}<span class="k-sub" style="font-size:14px">{{ item.variant.title }}</span>{%- endunless -%}
+          <div class="k-qty" data-qty>
+            <button type="button" data-step="-1" aria-label="{{ 'cart.decrease' | t: title: item.product.title }}">−</button>
+            <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="{{ 'cart.quantity' | t }}">
+            <button type="button" data-step="1" aria-label="{{ 'cart.increase' | t: title: item.product.title }}">+</button>
+          </div>
+          <a class="k-remove" href="{{ item.url_to_remove }}">{{ 'cart.remove' | t }}</a>
+        </div>
+        <span class="k-price">{{ item.final_line_price | money_without_trailing_zeros }}</span>
+      </div>
+      {%- endfor -%}
+    </div>
+    <aside class="k-cart__sum" aria-label="{{ 'cart.summary' | t }}">
+      <div style="display:flex;justify-content:space-between;font-size:20px;font-weight:500"><span>{{ 'cart.subtotal' | t }}</span><span>{{ cart.total_price | money_without_trailing_zeros }}</span></div>
+      <p class="k-sub" style="font-size:14px">{{ 'cart.taxes' | t }}</p>
+      <label for="CartNote" style="font-size:15px">{{ 'cart.note' | t }}</label>
+      <textarea id="CartNote" name="note" rows="2" style="border:1.5px solid var(--line);border-radius:14px;padding:10px;background:transparent">{{ cart.note }}</textarea>
+      <button type="submit" name="checkout" class="k-btn k-btn--dark k-btn--block">{{ 'cart.checkout' | t }}</button>
+      <button type="submit" name="update" class="k-btn k-btn--line k-btn--block">{{ 'cart.update' | t }}</button>
+    </aside>
+  </form>
+  {%- else -%}
+  <div style="padding-bottom:104px;display:flex;flex-direction:column;gap:20px;align-items:flex-start">
+    <p class="k-lead">{{ 'cart.empty' | t }}</p>
+    <a class="k-btn k-btn--dark" href="{{ routes.all_products_collection_url }}">{{ 'cart.continue' | t }}</a>
+  </div>
+  {%- endif -%}
+</div>
+{% schema %}{"name":"סל קניות"}{% endschema %}

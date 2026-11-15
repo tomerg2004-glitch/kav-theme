@@ -1,0 +1,52 @@
+<section class="k-wrap k-hero" data-hero aria-labelledby="Hero-{{ section.id }}">
+  <div class="k-hero__text">
+    {%- if section.settings.eyebrow != blank -%}<p class="k-eyebrow k-fade">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h1 id="Hero-{{ section.id }}" class="k-display k-h1 k-hero__h1">
+      <span><span>{{ section.settings.line1 }}</span></span>
+      {%- if section.settings.line2 != blank -%}<span><span>{{ section.settings.line2 }}</span></span>{%- endif -%}
+    </h1>
+    {%- if section.settings.text != blank -%}<p class="k-lead k-fade">{{ section.settings.text }}</p>{%- endif -%}
+    {%- if section.settings.facts != blank -%}
+      <p class="k-hero__facts k-fade">{%- assign facts = section.settings.facts | split: '|' -%}{%- for f in facts -%}<span>{{ f | strip }}</span>{%- endfor -%}</p>
+    {%- endif -%}
+    <div class="k-hero__actions k-fade">
+      {%- if section.settings.btn1_label != blank -%}<a class="k-btn k-btn--dark" href="{{ section.settings.btn1_link }}">{{ section.settings.btn1_label }}</a>{%- endif -%}
+      {%- if section.settings.btn2_label != blank -%}<a class="k-btn k-btn--line" href="{{ section.settings.btn2_link }}">{{ section.settings.btn2_label }}</a>{%- endif -%}
+    </div>
+  </div>
+  {%- if section.blocks.size > 0 -%}
+  <div class="k-hero__visual">
+    <div class="k-hero__stage">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image -%}
+          <img src="{{ block.settings.image | image_url: width: 1400 }}" srcset="{{ block.settings.image | image_url: width: 700 }} 700w, {{ block.settings.image | image_url: width: 1100 }} 1100w, {{ block.settings.image | image_url: width: 1400 }} 1400w" sizes="(min-width: 990px) 55vw, 100vw" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" alt="{{ block.settings.name | escape }}" data-hero-img{% if forloop.first %} class="is-on"{% else %} loading="lazy"{% endif %}>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    {%- if section.blocks.size > 1 -%}
+    <div class="k-hero__bar">
+      <div class="k-swatches" role="radiogroup" aria-label="{{ 'products.color' | t }}">
+        {%- for block in section.blocks -%}
+          <button type="button" class="k-sw" role="radio" data-hero-sw aria-checked="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ block.settings.name | escape }}" {{ block.shopify_attributes }}><span style="background:{{ block.settings.chip }}"></span></button>
+        {%- endfor -%}
+      </div>
+      <span aria-live="polite"><span style="color:var(--muted)">{{ 'products.color' | t }}: </span><span data-hero-label>{{ section.blocks.first.settings.name }}</span></span>
+    </div>
+    {%- endif -%}
+  </div>
+  {%- endif -%}
+</section>
+{% schema %}
+{"name":"Hero עם צבעים","tag":"div","settings":[
+{"type":"text","id":"eyebrow","label":"שורה קטנה","default":"השקה ראשונה · CONTRAST 01"},
+{"type":"text","id":"line1","label":"כותרת שורה 1","default":"סניקרס לגברים"},
+{"type":"text","id":"line2","label":"כותרת שורה 2","default":"עם עמוד שדרה."},
+{"type":"textarea","id":"text","label":"טקסט","default":"עור, תפר מנוגד ושרוכי חבל עבים. זוג אחד שהולך עם ג'ינס, עם חליפה, ועם כל מה שביניהם."},
+{"type":"text","id":"facts","label":"עובדות (מופרדות ב-|)","default":"₪290 | מידות 40–47 | 6 צבעים | החזרה חינם תוך 14 יום"},
+{"type":"text","id":"btn1_label","label":"כפתור ראשי","default":"לקנות את CONTRAST 01"},
+{"type":"url","id":"btn1_link","label":"קישור כפתור ראשי"},
+{"type":"text","id":"btn2_label","label":"כפתור משני","default":"לראות את כל הצבעים"},
+{"type":"url","id":"btn2_link","label":"קישור כפתור משני"}],
+"blocks":[{"type":"shot","name":"צבע","limit":6,"settings":[{"type":"text","id":"name","label":"שם הצבע","default":"שחור / שמנת"},{"type":"image_picker","id":"image","label":"תמונה (מבט צד, רקע בהיר)"},{"type":"text","id":"chip","label":"צבע הנקודה (CSS)","default":"linear-gradient(135deg,#1A1917 50%,#E6DFD2 50%)"}]}],
+"presets":[{"name":"Hero עם צבעים","blocks":[{"type":"shot"},{"type":"shot","settings":{"name":"זמש שחור","chip":"#1A1917"}},{"type":"shot","settings":{"name":"לבן / אפור","chip":"linear-gradient(135deg,#FFFFFF 50%,#A9A9A6 50%)"}}]}]}
+{% endschema %}

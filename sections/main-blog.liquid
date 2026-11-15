@@ -1,0 +1,3 @@
+<div class="k-wrap" style="padding-bottom:104px"><header class="k-colhead"><h1 class="k-display k-h2">{{ blog.title }}</h1></header>
+<div class="k-grid">{%- for article in blog.articles -%}<a class="k-card k-pcard" href="{{ article.url }}"><div class="k-pcard__media" style="aspect-ratio:4/3">{%- if article.image -%}{{ article.image | image_url: width: 900 | image_tag: class: 'k-ph', loading: 'lazy' }}{%- endif -%}</div><div class="k-pcard__meta"><strong>{{ article.title }}</strong></div></a>{%- endfor -%}</div></div>
+{% schema %}{"name":"בלוג"}{% endschema %}

@@ -1,0 +1,16 @@
+{%- liquid
+  assign img = product.featured_media
+-%}
+<a class="k-card k-pcard" href="{{ product.url }}">
+  <div class="k-pcard__media">
+    {%- if img -%}
+      {{ img | image_url: width: 900 | image_tag: loading: 'lazy', class: 'k-ph', sizes: '(min-width: 990px) 33vw, 100vw', widths: '360,540,720,900', alt: img.alt | default: product.title }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'k-ph k-placeholder' }}
+    {%- endif -%}
+  </div>
+  <div class="k-pcard__meta">
+    <span><strong>{{ product.title }}</strong>{% if product.metafields.custom.subtitle != blank %} · {{ product.metafields.custom.subtitle }}{% endif %}</span>
+    <span class="k-price">{% if product.price_varies %}{{ 'products.from' | t }} {% endif %}{{ product.price_min | money_without_trailing_zeros }}</span>
+  </div>
+</a>

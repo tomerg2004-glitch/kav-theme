@@ -1,0 +1,23 @@
+<header class="k-header">
+  <div class="k-wrap k-header__bar">
+    <a class="k-logo" href="{{ routes.root_url }}">
+      {%- if section.settings.logo -%}{{ section.settings.logo | image_url: width: 300 | image_tag: alt: shop.name }}{%- else -%}{{ shop.name }}{%- endif -%}
+    </a>
+    <button class="k-iconbtn k-menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="KavNav" aria-label="{{ 'header.menu' | t }}">{% render 'icon', name: 'menu' %}</button>
+    <nav id="KavNav" class="k-nav" aria-label="{{ 'header.main_nav' | t }}">
+      {%- for link in section.settings.menu.links -%}
+        <a class="k-u" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+    <div class="k-header__icons">
+      <a class="k-iconbtn" href="{{ routes.search_url }}" aria-label="{{ 'header.search' | t }}">{% render 'icon', name: 'search' %}</a>
+      {%- if shop.customer_accounts_enabled -%}
+      <a class="k-iconbtn" href="{{ routes.account_url }}" aria-label="{{ 'header.account' | t }}">{% render 'icon', name: 'user' %}</a>
+      {%- endif -%}
+      <a class="k-iconbtn" href="{{ routes.cart_url }}">{% render 'icon', name: 'bag' %}<span>{{ 'header.cart' | t }} (<span data-cart-count>{{ cart.item_count }}</span>)</span></a>
+    </div>
+  </div>
+</header>
+{% schema %}
+{"name":"כותרת עליונה","tag":"div","settings":[{"type":"image_picker","id":"logo","label":"לוגו (אופציונלי)"},{"type":"link_list","id":"menu","label":"תפריט","default":"main-menu"}],"enabled_on":{"groups":["header"]}}
+{% endschema %}

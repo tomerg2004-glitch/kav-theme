@@ -1,0 +1,17 @@
+<div class="k-wrap" style="padding-bottom:104px">
+  <header class="k-colhead">
+    <h1 class="k-display k-h2">{{ 'search.title' | t }}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="k-news__row" style="margin-top:20px;max-width:560px">
+      <label for="SearchQ" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">{{ 'search.title' | t }}</label>
+      <input id="SearchQ" class="k-input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}">
+      <input type="hidden" name="type" value="product">
+      <button class="k-btn k-btn--dark" type="submit">{{ 'search.submit' | t }}</button>
+    </form>
+  </header>
+  {%- if search.performed -%}
+    <div class="k-grid">
+      {%- for item in search.results -%}{%- if item.object_type == 'product' -%}{% render 'product-card', product: item %}{%- endif -%}{%- else -%}<p class="k-sub">{{ 'search.none' | t: terms: search.terms }}</p>{%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+{% schema %}{"name":"חיפוש"}{% endschema %}

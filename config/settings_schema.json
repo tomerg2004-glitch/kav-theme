@@ -1,0 +1,11 @@
+[
+{"name":"theme_info","theme_name":"KAV","theme_version":"1.0.0","theme_author":"KAV","theme_documentation_url":"https://help.shopify.com","theme_support_url":"https://help.shopify.com"},
+{"name":"צבעים","settings":[
+{"type":"color","id":"color_paper","label":"רקע","default":"#F1EEE8"},
+{"type":"color","id":"color_ink","label":"טקסט ראשי","default":"#141412"},
+{"type":"color","id":"color_accent","label":"הדגשה","default":"#B5391C"},
+{"type":"color","id":"color_muted","label":"טקסט משני","default":"#4A4640"},
+{"type":"color","id":"color_line","label":"קווים","default":"#D9D3C8"},
+{"type":"color","id":"color_card","label":"רקע לתמונות","default":"#E8E3DA"}]},
+{"name":"כללי","settings":[{"type":"image_picker","id":"favicon","label":"Favicon"}]}
+]

@@ -1,0 +1,16 @@
+<section class="k-wrap k-section" aria-labelledby="H-{{ section.id }}">
+  <div class="k-sechead">
+    <h2 id="H-{{ section.id }}" class="k-display k-h2">{{ section.settings.title }}</h2>
+    {%- if section.settings.text != blank -%}<p class="k-lead">{{ section.settings.text }}</p>{%- endif -%}
+  </div>
+  <div class="k-grid">
+    {%- if section.settings.collection != blank -%}
+      {%- for product in section.settings.collection.products limit: section.settings.limit -%}{% render 'product-card', product: product %}{%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..3) -%}<div class="k-pcard"><div class="k-pcard__media">{{ 'product-1' | placeholder_svg_tag: 'k-placeholder' }}</div><div class="k-pcard__meta"><span><strong>{{ 'products.sample' | t }}</strong></span></div></div>{%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{"name":"מוצרים מקולקציה","tag":"div","settings":[{"type":"text","id":"title","label":"כותרת","default":"חדש בביגוד"},{"type":"textarea","id":"text","label":"טקסט","default":"פריטים שהולכים אחד עם השני, וגם עם CONTRAST 01."},{"type":"collection","id":"collection","label":"קולקציה"},{"type":"range","id":"limit","label":"כמה מוצרים","min":2,"max":12,"step":1,"default":3}],"presets":[{"name":"מוצרים מקולקציה"}]}
+{% endschema %}

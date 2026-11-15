@@ -1,0 +1,19 @@
+<section class="k-section k-section--dark" aria-labelledby="H-{{ section.id }}">
+  <div class="k-wrap">
+    <h2 id="H-{{ section.id }}" class="k-display k-h2" style="margin-bottom:48px">{{ section.settings.title }}{% if section.settings.title_accent != blank %} <span style="color:{{ section.settings.accent }}">{{ section.settings.title_accent }}</span>{% endif %}</h2>
+    <div class="k-grid">
+      {%- for block in section.blocks -%}
+      <div class="k-detail" {{ block.shopify_attributes }}>
+        <div class="k-tile k-tile--45">
+          {%- if block.settings.image -%}{{ block.settings.image | image_url: width: 900 | image_tag: class: 'k-ph', loading: 'lazy', alt: block.settings.title, style: 'object-position:' | append: block.settings.position }}{%- else -%}{{ 'detail-1' | placeholder_svg_tag: 'k-placeholder' }}{%- endif -%}
+        </div>
+        <h3>{{ block.settings.title }}</h3>
+        <p class="k-sub">{{ block.settings.text }}</p>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{"name":"פרטים מקרוב","tag":"div","settings":[{"type":"text","id":"title","label":"כותרת","default":"שלושה פרטים,"},{"type":"text","id":"title_accent","label":"המשך כותרת בצבע","default":"אפס פשרות"},{"type":"color","id":"accent","label":"צבע הדגשה","default":"#E0654A"}],"blocks":[{"type":"detail","name":"פרט","limit":4,"settings":[{"type":"image_picker","id":"image","label":"תמונת תקריב"},{"type":"select","id":"position","label":"מיקוד בתמונה","default":"center","options":[{"value":"center","label":"מרכז"},{"value":"top","label":"למעלה"},{"value":"bottom","label":"למטה"},{"value":"left","label":"שמאל"},{"value":"right","label":"ימין"}]},{"type":"text","id":"title","label":"כותרת","default":"שרוכי חבל עבים"},{"type":"textarea","id":"text","label":"טקסט","default":"רכים, בגוון מנוגד לנעל."}]}],"presets":[{"name":"פרטים מקרוב","blocks":[{"type":"detail"},{"type":"detail","settings":{"title":"תפר מנוגד","text":"חוט בהיר שמסמן כל פאנל."}},{"type":"detail","settings":{"title":"סוליה מוגבהת","text":"עבה ועמידה בשחיקה."}}]}]}
+{% endschema %}

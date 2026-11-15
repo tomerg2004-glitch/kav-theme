@@ -1,0 +1,6 @@
+{%- if section.settings.text != blank -%}
+<div class="k-announce">{{ section.settings.text }}</div>
+{%- endif -%}
+{% schema %}
+{"name":"פס הודעה","tag":"section","settings":[{"type":"text","id":"text","label":"טקסט","default":"החזרה חינם תוך 14 יום"}],"presets":[{"name":"פס הודעה"}],"enabled_on":{"groups":["header"]}}
+{% endschema %}

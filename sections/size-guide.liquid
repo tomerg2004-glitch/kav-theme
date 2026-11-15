@@ -1,0 +1,22 @@
+{%- assign rows = product.metafields.custom.size_chart.value | default: section.settings.rows -%}
+{%- if rows != blank -%}
+<section id="size-guide" class="k-wrap k-section" aria-labelledby="H-{{ section.id }}">
+  <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+    <div style="flex:1 1 320px;display:flex;flex-direction:column;gap:16px">
+      <h2 id="H-{{ section.id }}" class="k-display k-h2">{{ section.settings.title }}</h2>
+      <p class="k-lead" style="font-size:17px">{{ section.settings.text }}</p>
+    </div>
+    <div class="k-table-wrap" style="flex:2 1 560px">
+      {%- assign pairs = rows | split: '|' -%}
+      <table class="k-table">
+        <caption style="text-align:start;font-size:14px;color:var(--muted);padding-bottom:12px">{{ section.settings.caption }}</caption>
+        <thead><tr><th scope="row">{{ section.settings.row1 }}</th>{%- for p in pairs -%}{%- assign kv = p | split: ':' -%}<th scope="col">{{ kv[0] | strip }}</th>{%- endfor -%}</tr></thead>
+        <tbody><tr><th scope="row">{{ section.settings.row2 }}</th>{%- for p in pairs -%}{%- assign kv = p | split: ':' -%}<td>{{ kv[1] | strip }}</td>{%- endfor -%}</tr></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{% schema %}
+{"name":"טבלת מידות","tag":"div","settings":[{"type":"text","id":"title","label":"כותרת","default":"איך בוחרים מידה"},{"type":"textarea","id":"text","label":"הסבר","default":"עומדים על דף, מסמנים את הנקודה הרחוקה ביותר של הבוהן ומודדים מהעקב. אם יצא בין שתי מידות, או שכף הרגל רחבה, כדאי לבחור את הגדולה."},{"type":"text","id":"caption","label":"כיתוב לטבלה","default":"אורך כף רגל לפי מידה"},{"type":"text","id":"row1","label":"שורה 1","default":"מידה (EU)"},{"type":"text","id":"row2","label":"שורה 2","default":"אורך (ס\"מ)"},{"type":"text","id":"rows","label":"נתונים לברירת מחדל (מידה:ערך|...)","info":"אפשר גם לכל מוצר דרך metafield custom.size_chart","default":""}],"presets":[{"name":"טבלת מידות"}]}
+{% endschema %}

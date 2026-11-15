@@ -1,0 +1,16 @@
+<div class="k-wrap"><div class="k-page">
+{%- case request.page_type -%}
+{%- when 'customers/login' -%}
+  <h1 class="k-display k-h2">{{ 'customer.login' | t }}</h1>
+  {%- form 'customer_login', class: 'k-form' -%}{{ form.errors | default_errors }}<label for="LEmail">{{ 'customer.email' | t }}</label><input id="LEmail" class="k-input" type="email" name="customer[email]" autocomplete="email" dir="ltr"><label for="LPass">{{ 'customer.password' | t }}</label><input id="LPass" class="k-input" type="password" name="customer[password]" autocomplete="current-password"><button class="k-btn k-btn--dark" type="submit">{{ 'customer.sign_in' | t }}</button><a class="k-u" href="{{ routes.account_register_url }}">{{ 'customer.create' | t }}</a>{%- endform -%}
+{%- when 'customers/register' -%}
+  <h1 class="k-display k-h2">{{ 'customer.create' | t }}</h1>
+  {%- form 'create_customer', class: 'k-form' -%}{{ form.errors | default_errors }}<label for="RFirst">{{ 'customer.first_name' | t }}</label><input id="RFirst" class="k-input" type="text" name="customer[first_name]" autocomplete="given-name"><label for="REmail">{{ 'customer.email' | t }}</label><input id="REmail" class="k-input" type="email" name="customer[email]" autocomplete="email" dir="ltr"><label for="RPass">{{ 'customer.password' | t }}</label><input id="RPass" class="k-input" type="password" name="customer[password]" autocomplete="new-password"><button class="k-btn k-btn--dark" type="submit">{{ 'customer.create' | t }}</button>{%- endform -%}
+{%- else -%}
+  <h1 class="k-display k-h2">{{ 'customer.account' | t }}</h1>
+  {%- if customer -%}<p class="k-lead">{{ customer.first_name }}</p>
+  {%- for order in customer.orders -%}<p><a class="k-u" href="{{ order.customer_url }}">{{ order.name }}</a> · {{ order.created_at | date: '%d/%m/%Y' }} · {{ order.total_price | money }}</p>{%- else -%}<p class="k-sub">{{ 'customer.no_orders' | t }}</p>{%- endfor -%}
+  <a class="k-btn k-btn--line" href="{{ routes.account_logout_url }}">{{ 'customer.logout' | t }}</a>{%- endif -%}
+{%- endcase -%}
+</div></div>
+{% schema %}{"name":"חשבון לקוח"}{% endschema %}
