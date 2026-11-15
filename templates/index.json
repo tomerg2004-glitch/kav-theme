@@ -101,6 +101,12 @@
    "settings": {
     "collection": "shirts"
    }
+  },
+  "c_hoodies": {
+   "type": "category-row",
+   "settings": {
+    "collection": "hoodies-sweaters"
+   }
   }
  },
  "order": [
@@ -110,6 +116,7 @@
   "c_pants",
   "c_button",
   "c_shirts",
+  "c_hoodies",
   "c_shorts",
   "ticker",
   "service",
