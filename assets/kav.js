@@ -32,6 +32,7 @@
     function showMedia(id){
       if(!id)return;
       stage.forEach(function(im){im.classList.toggle('is-on',im.getAttribute('data-media-id')==String(id))});
+      var hit=root.querySelector('.k-gallery [data-media-id="'+id+'"]');if(hit){var fig=hit.closest('figure'),g=fig.parentNode;if(g.firstElementChild!==fig){g.insertBefore(fig,g.firstElementChild);}}
       thumbs.forEach(function(t){t.classList.toggle('is-on',t.getAttribute('data-thumb')==String(id));t.setAttribute('aria-pressed',t.getAttribute('data-thumb')==String(id)?'true':'false')});
     }
     function money(c){return '₪'+(c/100).toLocaleString('he-IL',{minimumFractionDigits:c%100?2:0,maximumFractionDigits:2});}
