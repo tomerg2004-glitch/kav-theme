@@ -430,3 +430,12 @@ html{scrollbar-color:#9A948A var(--paper);accent-color:var(--ink)}
 .k-cat{padding-block:88px 24px;scroll-margin-top:150px}
 .k-cat__head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:36px;padding-bottom:20px;border-bottom:1px solid var(--line)}
 .k-cat + .k-cat{padding-top:64px}
+.k-nav{gap:22px;font-size:14px}
+.k-nav a{white-space:nowrap}
+@media (max-width:1180px){
+  .k-header__bar{grid-template-columns:auto 1fr auto}
+  .k-menu-toggle{display:inline-flex}
+  .k-nav{display:none;grid-column:1/-1;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+  .k-nav a{padding:16px 0;border-bottom:1px solid var(--line);font-size:18px}
+  .k-header.is-open .k-nav{display:flex}
+}
