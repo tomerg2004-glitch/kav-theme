@@ -169,7 +169,7 @@
       var hdr=document.querySelector('.k-header');if(hdr)root.style.setProperty('--hdr',hdr.offsetHeight+'px');
       root.style.setProperty('--hold',hold);
       pics.forEach(function(p){stage.appendChild(p)});
-      panel.appendChild(list);stage.appendChild(panel);box.appendChild(stage);
+      panel.appendChild(list);box.appendChild(stage);box.appendChild(panel);
       root.classList.add('is-live');draw();
     }
     function rest(){
@@ -177,7 +177,7 @@
       root.classList.remove('is-live');
       box.appendChild(list);
       pics.forEach(function(p,i){items[i].insertBefore(p,items[i].firstChild);p.style.removeProperty('--c');p.style.removeProperty('--z')});
-      items.forEach(function(it){it.classList.remove('is-on')});stage.remove();on=-1;
+      items.forEach(function(it){it.classList.remove('is-on')});stage.remove();panel.remove();on=-1;
     }
     function sync(){(!mq.matches&&innerHeight>=600)?go():rest()}
     var ticking=false;
