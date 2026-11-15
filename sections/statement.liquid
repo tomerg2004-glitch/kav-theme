@@ -1,0 +1,11 @@
+<section class="k-statement" aria-label="{{ section.settings.label | escape }}">
+  <div class="k-wrap">
+    <p class="k-statement__text" data-highlight>{{ section.settings.text }}</p>
+  </div>
+</section>
+{% schema %}
+{"name":"משפט מרכזי","tag":"div","settings":[
+{"type":"text","id":"label","label":"שם האזור (לקוראי מסך)","default":"הגישה שלנו"},
+{"type":"textarea","id":"text","label":"המשפט (12–40 מילים, אפשר <strong> למילים מודגשות)","default":"אנחנו לא מוציאים מאות דגמים. כל מהדורה של KAV קטנה ומדויקת: גזרות רחבות, בדים עם אופי וצבעים שמשתלבים זה בזה, כך ש<strong>כל פריט מוצא לעצמו בן זוג</strong> בארון."}],
+"presets":[{"name":"משפט מרכזי"}]}
+{% endschema %}

@@ -1,7 +1,6 @@
 <section class="k-section" aria-labelledby="H-{{ section.id }}">
   <div class="k-wrap k-news">
     <div class="k-news__copy">
-      {%- if section.settings.eyebrow != blank -%}<p class="k-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
       <h2 id="H-{{ section.id }}" class="k-display k-h2">{{ section.settings.title }}</h2>
       {%- if section.settings.text != blank -%}<p class="k-lead">{{ section.settings.text }}</p>{%- endif -%}
     </div>

@@ -10,10 +10,6 @@
     "limit": 4
    }
   },
-  "story": {
-   "type": "editorial",
-   "settings": {}
-  },
   "shoe": {
    "type": "spotlight",
    "blocks": {
@@ -46,19 +42,6 @@
    ],
    "settings": {
     "link": "/products/contrast-01"
-   }
-  },
-  "look": {
-   "type": "editorial",
-   "settings": {
-    "reverse": true,
-    "asset": "kav-camo-3.jpg",
-    "alt": "ג׳ינס רחב בהדפס הסוואה עם סניקרס שחור-לבן, מבט מהצד",
-    "eyebrow": "ג׳ינס",
-    "title": "רמון.",
-    "text": "<p>ג׳ינס רחב בהדפס הסוואה בגווני זית ופחם. גזרה ישרה שנופלת על הנעל, עם מספיק נפח כדי לשבת טוב עם אוברשירט או קפוצ׳ון.</p>",
-    "btn_label": "לג׳ינס רמון",
-    "btn_link": "/products/camo-04"
    }
   },
   "service": {
@@ -99,14 +82,62 @@
   "news": {
    "type": "newsletter",
    "settings": {}
+  },
+  "statement": {
+   "type": "statement",
+   "settings": {}
+  },
+  "looks": {
+   "type": "chapters",
+   "blocks": {
+    "c1": {
+     "type": "chapter",
+     "settings": {
+      "asset": "kav-camo-3.jpg",
+      "alt": "ג׳ינס רמון בהדפס הסוואה עם קפוצ׳ון אפור, מבט מהצד",
+      "title": "רמון, ליום רגיל",
+      "text": "ג׳ינס רחב שנופל על הנעל, קפוצ׳ון אפור וסניקרס בשחור-לבן.",
+      "link": "/products/camo-04",
+      "link_label": "לג׳ינס רמון"
+     }
+    },
+    "c2": {
+     "type": "chapter",
+     "settings": {
+      "asset": "kav-plaid-3.jpg",
+      "alt": "אוברשירט חרמון פתוח מעל טי-שירט לבנה, מבט מהצד",
+      "title": "חרמון, פתוח",
+      "text": "אוברשירט משבצות מעל טי-שירט לבנה ומכנסי צ׳ינו בהירים.",
+      "link": "/products/plaid-05",
+      "link_label": "לאוברשירט חרמון"
+     }
+    },
+    "c3": {
+     "type": "chapter",
+     "settings": {
+      "asset": "kav-shorts-2.jpg",
+      "alt": "שורט ג׳ינס פלורנטין באפור עם גרביים לבנות גבוהות, מבט מאחור",
+      "title": "פלורנטין, בקיץ",
+      "text": "שורט ג׳ינס אפור עם שוליים פרומים, גרביים גבוהות וסניקרס לבנות.",
+      "link": "/products/raw-02",
+      "link_label": "לשורט פלורנטין"
+     }
+    }
+   },
+   "block_order": [
+    "c1",
+    "c2",
+    "c3"
+   ],
+   "settings": {}
   }
  },
  "order": [
   "hero",
   "collection",
-  "story",
+  "statement",
   "shoe",
-  "look",
+  "looks",
   "service",
   "news"
  ]

@@ -9,13 +9,12 @@
       {%- endif -%}
     </div>
     <div class="k-spot__body">
-      {%- if section.settings.eyebrow != blank -%}<p class="k-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
       <h2 id="H-{{ section.id }}" class="k-display k-h2">{{ section.settings.title }}</h2>
       {%- if section.settings.text != blank -%}<p class="k-lead">{{ section.settings.text }}</p>{%- endif -%}
       {%- if section.blocks.size > 0 -%}
       <ul class="k-spot__list">
         {%- for block in section.blocks -%}
-        <li {{ block.shopify_attributes }}><b aria-hidden="true">0{{ forloop.index }}</b><strong>{{ block.settings.title }}</strong><span>{{ block.settings.text }}</span></li>
+        <li {{ block.shopify_attributes }}><strong>{{ block.settings.title }}</strong><span>{{ block.settings.text }}</span></li>
         {%- endfor -%}
       </ul>
       {%- endif -%}

@@ -105,3 +105,83 @@
     });
   });
 })();
+// statement: words turn to ink as the line crosses the screen (runs back on scroll up)
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-highlight]').forEach(function(text){
+    if(reduce)return;
+    var sec=text.closest('.k-statement');
+    var walker=document.createTreeWalker(text,NodeFilter.SHOW_TEXT),nodes=[],n;
+    while(n=walker.nextNode())nodes.push(n);
+    var words=[];
+    nodes.forEach(function(t){
+      var frag=document.createDocumentFragment();
+      t.textContent.split(/(\s+)/).forEach(function(part){
+        if(!part)return;
+        if(/^\s+$/.test(part)){frag.appendChild(document.createTextNode(part));return;}
+        var s=document.createElement('span');s.className='k-w';s.textContent=part;frag.appendChild(s);words.push(s);
+      });
+      t.parentNode.replaceChild(frag,t);
+    });
+    sec.classList.add('is-live');
+    var last=-1,ticking=false;
+    function draw(){
+      ticking=false;
+      var r=text.getBoundingClientRect(),vh=innerHeight,start=vh*.85,end=vh*.45;
+      var t=Math.min(1,Math.max(0,(start-r.top)/Math.max(1,(start-end)+r.height)));
+      var k=Math.round(t*words.length);
+      if(k===last)return;last=k;
+      words.forEach(function(w,i){w.classList.toggle('is-on',i<k)});
+    }
+    function req(){if(!ticking){ticking=true;requestAnimationFrame(draw)}}
+    addEventListener('scroll',req,{passive:true});addEventListener('resize',req);draw();
+  });
+})();
+// photo chapters: the section holds; each photograph wipes up over the last, the panel follows
+(function(){
+  var mq=window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('[data-chapters]').forEach(function(root){
+    var box=root.querySelector('.k-ch__box'),list=root.querySelector('.k-ch__list');
+    var items=[].slice.call(root.querySelectorAll('.k-ch__item'));
+    var pics=items.map(function(i){return i.querySelector('.k-ch__pic')});
+    var n=items.length;if(n<2)return;
+    var hold=n<=3?2:3,live=false,on=-1;
+    var stage=document.createElement('div');stage.className='k-ch__stage';
+    var panel=document.createElement('div');panel.className='k-ch__panel';
+    var count=document.createElement('p');count.className='k-ch__count';count.setAttribute('aria-hidden','true');panel.appendChild(count);
+    var pad=function(v){return (v<10?'0':'')+v};
+    var ease=function(u){return 1-Math.pow(1-u,3)};
+    function show(k){if(k===on)return;on=k;items.forEach(function(it,i){it.classList.toggle('is-on',i===k)});count.textContent=pad(k+1)+' / '+pad(n);}
+    function draw(){
+      if(!live)return;
+      var r=root.getBoundingClientRect(),total=r.height-innerHeight;
+      var p=Math.min(1,Math.max(0,-r.top/Math.max(1,total))),seg=1/n,k=0;
+      pics.forEach(function(pic,i){
+        var u=i===0?1:Math.min(1,Math.max(0,(p-(i-.25)*seg)/(.45*seg))),e=ease(u);
+        pic.style.setProperty('--c',((1-e)*100).toFixed(2)+'%');
+        pic.style.setProperty('--z',(1.06-.06*e).toFixed(4));
+        if(u>=.5)k=i;
+      });
+      show(k);
+    }
+    function go(){
+      if(live)return;live=true;
+      var hdr=document.querySelector('.k-header');if(hdr)root.style.setProperty('--hdr',hdr.offsetHeight+'px');
+      root.style.setProperty('--hold',hold);
+      pics.forEach(function(p){stage.appendChild(p)});
+      panel.appendChild(list);stage.appendChild(panel);box.appendChild(stage);
+      root.classList.add('is-live');draw();
+    }
+    function rest(){
+      if(!live)return;live=false;
+      root.classList.remove('is-live');
+      box.appendChild(list);
+      pics.forEach(function(p,i){items[i].insertBefore(p,items[i].firstChild);p.style.removeProperty('--c');p.style.removeProperty('--z')});
+      items.forEach(function(it){it.classList.remove('is-on')});stage.remove();on=-1;
+    }
+    function sync(){(!mq.matches&&innerHeight>=600)?go():rest()}
+    var ticking=false;
+    addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(function(){ticking=false;draw()})}},{passive:true});
+    addEventListener('resize',sync);sync();
+  });
+})();
