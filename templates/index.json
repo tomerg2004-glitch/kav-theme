@@ -131,10 +131,15 @@
     "c3"
    ],
    "settings": {}
+  },
+  "ticker": {
+   "type": "marquee",
+   "settings": {}
   }
  },
  "order": [
   "hero",
+  "ticker",
   "collection",
   "statement",
   "shoe",

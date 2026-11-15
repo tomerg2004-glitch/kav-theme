@@ -1,11 +1,50 @@
 {%- assign p = section.settings.product -%}
 <section class="k-spot k-section" aria-labelledby="H-{{ section.id }}">
   <div class="k-wrap k-spot__grid">
-    <div class="k-spot__stage">
-      {%- if section.settings.image -%}
-        {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '700,1100,1400', sizes: '(min-width: 900px) 55vw, 100vw', alt: section.settings.alt }}
-      {%- else -%}
-        <img src="{{ section.settings.asset | asset_url }}" width="1600" height="1280" loading="lazy" alt="{{ section.settings.alt | escape }}">
+    {%- liquid
+      assign color_idx = nil
+      if p != blank
+        for o in p.options_with_values
+          assign on = o.name | downcase
+          if on == 'צבע' or on == 'color'
+            assign color_idx = forloop.index0
+          endif
+        endfor
+      endif
+    -%}
+    <div class="k-spot__media" data-swatch-stage>
+      <div class="k-spot__stage">
+        {%- if color_idx != nil -%}
+          {%- assign seen = '' -%}
+          {%- for v in p.variants -%}
+            {%- assign cname = v.options[color_idx] -%}
+            {%- assign key = '|' | append: cname | append: '|' -%}
+            {%- unless seen contains key -%}{%- if v.featured_media -%}
+              {%- assign seen = seen | append: key -%}
+              <img src="{{ v.featured_media | image_url: width: 1400 }}" srcset="{{ v.featured_media | image_url: width: 700 }} 700w, {{ v.featured_media | image_url: width: 1400 }} 1400w" sizes="(min-width: 900px) 55vw, 100vw" alt="{{ p.title | escape }}, {{ cname | escape }}" width="{{ v.featured_media.width }}" height="{{ v.featured_media.height }}" loading="lazy" data-swatch-img="{{ cname | escape }}"{% if seen == key %} class="is-on"{% endif %}>
+            {%- endif -%}{%- endunless -%}
+          {%- endfor -%}
+        {%- elsif section.settings.image -%}
+          {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'is-on', alt: section.settings.alt }}
+        {%- else -%}
+          <img class="is-on" src="{{ section.settings.asset | asset_url }}" width="1600" height="1280" loading="lazy" alt="{{ section.settings.alt | escape }}">
+        {%- endif -%}
+      </div>
+      {%- if color_idx != nil -%}
+      <div class="k-spot__swatches">
+        <div class="k-swatches" role="radiogroup" aria-label="{{ 'products.color' | t }}">
+          {%- assign seen = '' -%}
+          {%- for v in p.variants -%}
+            {%- assign cname = v.options[color_idx] -%}
+            {%- assign key = '|' | append: cname | append: '|' -%}
+            {%- unless seen contains key -%}{%- if v.featured_media -%}
+              {%- assign seen = seen | append: key -%}
+              <button type="button" class="k-sw" role="radio" aria-checked="{% if seen == key %}true{% else %}false{% endif %}" aria-label="{{ cname | escape }}" data-swatch="{{ cname | escape }}"><span style="background-image:url({{ v.featured_media | image_url: width: 120 }})"></span></button>
+            {%- endif -%}{%- endunless -%}
+          {%- endfor -%}
+        </div>
+        <p class="k-spot__colorname" aria-live="polite"><span data-swatch-label>{{ p.variants.first.options[color_idx] }}</span> · {{ p.options_with_values[color_idx].values.size }} {{ 'products.colors' | t }}</p>
+      </div>
       {%- endif -%}
     </div>
     <div class="k-spot__body">

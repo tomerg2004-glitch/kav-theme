@@ -40,7 +40,9 @@
     "back_home": "חזרה לעמוד הראשי",
     "home": "ראשי",
     "page": "עמוד {{ page }}",
-    "pagination": "עמודים"
+    "pagination": "עמודים",
+    "pause": "עצירת התנועה",
+    "play": "הפעלת התנועה"
   },
   "gift_card": {
     "expired": "תוקף כרטיס המתנה פג"
@@ -81,7 +83,8 @@
     "choose_and_add": "לבחור מידה",
     "details": "פרטי המוצר",
     "size_fit": "מידות וגזרה",
-    "shipping_returns": "משלוח וביטול עסקה"
+    "shipping_returns": "משלוח וביטול עסקה",
+    "colors": "צבעים"
   },
   "search": {
     "none": "לא נמצאו תוצאות עבור \"{{ terms }}\".",

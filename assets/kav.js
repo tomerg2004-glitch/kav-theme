@@ -186,3 +186,33 @@
     addEventListener('resize',sync);sync();
   });
 })();
+// header: hide on scroll down, show on scroll up; measure for the hero overlap
+(function(){
+  var h=document.querySelector('.k-header');if(!h)return;
+  var set=function(){document.documentElement.style.setProperty('--hdr-h',h.offsetHeight+'px')};set();addEventListener('resize',set);
+  var last=scrollY,t=false;
+  addEventListener('scroll',function(){if(t)return;t=true;requestAnimationFrame(function(){t=false;var y=scrollY;
+    if(h.classList.contains('is-open')){last=y;return;}
+    h.classList.toggle('is-hidden',y>last&&y>240);last=y;});},{passive:true});
+  h.addEventListener('focusin',function(){h.classList.remove('is-hidden')});
+})();
+// moving band pause
+document.querySelectorAll('[data-marquee]').forEach(function(m){
+  var b=m.querySelector('[data-marquee-toggle]');if(!b)return;
+  b.addEventListener('click',function(){var p=m.classList.toggle('is-paused');b.setAttribute('aria-pressed',p?'true':'false');b.setAttribute('aria-label',b.getAttribute(p?'data-label-play':'data-label-pause'));});
+});
+// cursor label over product photos
+(function(){
+  if(!matchMedia('(hover:hover) and (pointer:fine)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var c=document.createElement('div');c.className='k-cursor';c.setAttribute('aria-hidden','true');c.textContent=document.documentElement.lang==='he'?'לצפייה':'View';document.body.appendChild(c);
+  var x=0,y=0,tx=0,ty=0,raf=0;
+  function loop(){x+=(tx-x)*.18;y+=(ty-y)*.18;c.style.setProperty('--x',x+'px');c.style.setProperty('--y',y+'px');raf=Math.abs(tx-x)+Math.abs(ty-y)>.5?requestAnimationFrame(loop):0;}
+  addEventListener('pointermove',function(e){tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});
+  document.addEventListener('pointerover',function(e){c.classList.toggle('is-on',!!e.target.closest('.k-pcard__media'))});
+})();
+// spotlight swatches change the picture
+document.querySelectorAll('[data-swatch-stage]').forEach(function(s){
+  var imgs=s.querySelectorAll('[data-swatch-img]'),btns=s.querySelectorAll('[data-swatch]'),lbl=s.querySelector('[data-swatch-label]');
+  function pick(name){imgs.forEach(function(i){var on=i.getAttribute('data-swatch-img')===name;if(on)i.loading='eager';i.classList.toggle('is-on',on)});btns.forEach(function(b){b.setAttribute('aria-checked',b.getAttribute('data-swatch')===name?'true':'false')});if(lbl)lbl.textContent=name;}
+  btns.forEach(function(b){b.addEventListener('click',function(){pick(b.getAttribute('data-swatch'))});b.addEventListener('pointerenter',function(){if(matchMedia('(hover:hover)').matches)pick(b.getAttribute('data-swatch'))});});
+});

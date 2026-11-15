@@ -40,7 +40,9 @@
     "back_home": "Back to home",
     "home": "Home",
     "page": "Page {{ page }}",
-    "pagination": "Pagination"
+    "pagination": "Pagination",
+    "pause": "Pause motion",
+    "play": "Play motion"
   },
   "gift_card": {
     "expired": "This gift card has expired"
@@ -81,7 +83,8 @@
     "choose_and_add": "Choose size & add",
     "details": "Details",
     "size_fit": "Size & fit",
-    "shipping_returns": "Shipping & returns"
+    "shipping_returns": "Shipping & returns",
+    "colors": "colors"
   },
   "search": {
     "none": "No results for \"{{ terms }}\".",

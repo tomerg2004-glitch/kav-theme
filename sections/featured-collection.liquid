@@ -14,7 +14,7 @@
       <a class="k-link" href="{{ col.url | default: routes.all_products_collection_url }}">{{ section.settings.link_label }}</a>
     </div>
   </div>
-  <div class="k-grid">
+  <div class="k-grid k-grid--editorial">
     {%- for product in col.products limit: section.settings.limit -%}
       {% render 'product-card', product: product %}
     {%- else -%}

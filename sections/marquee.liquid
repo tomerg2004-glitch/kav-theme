@@ -1,0 +1,20 @@
+{%- assign items = section.settings.items | split: '|' -%}
+<section class="k-marquee" aria-label="{{ section.settings.label | escape }}" data-marquee>
+  <div class="k-marquee__track" aria-hidden="true">
+    {%- for r in (1..2) -%}
+    <div class="k-marquee__row">
+      {%- for it in items -%}<span>{{ it | strip }}</span><span class="k-marquee__dot"></span>{%- endfor -%}
+    </div>
+    {%- endfor -%}
+  </div>
+  <p class="k-vh">{{ items | join: ', ' }}</p>
+  <button type="button" class="k-marquee__toggle" data-marquee-toggle aria-pressed="false" aria-label="{{ 'general.pause' | t }}" data-label-pause="{{ 'general.pause' | t }}" data-label-play="{{ 'general.play' | t }}">
+    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect class="k-i-pause" x="3" y="2" width="2.5" height="10" fill="currentColor"/><rect class="k-i-pause" x="8.5" y="2" width="2.5" height="10" fill="currentColor"/><path class="k-i-play" d="M4 2l8 5-8 5z" fill="currentColor"/></svg>
+  </button>
+</section>
+{% schema %}
+{"name":"פס נע","tag":"div","settings":[
+{"type":"text","id":"label","label":"שם האזור (לקוראי מסך)","default":"הפריטים במהדורה"},
+{"type":"text","id":"items","label":"פריטים (מופרדים ב-|)","default":"לבונטין · סניקרס|פלורנטין · שורט ג׳ינס|רמון · ג׳ינס רחב|חרמון · אוברשירט|KAV · מהדורה 01"}],
+"presets":[{"name":"פס נע"}]}
+{% endschema %}
