@@ -446,3 +446,6 @@ html{scrollbar-color:#9A948A var(--paper);accent-color:var(--ink)}
 
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* sticky works on the section wrapper (Shopify wraps each section in its own div) */
+.shopify-section:has(> .k-catnav){position:sticky;top:var(--hdr-vis,0px);z-index:25;transition:top 380ms var(--ease-out-smooth)}
+.k-catnav{position:static}
