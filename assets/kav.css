@@ -478,3 +478,20 @@ html{scroll-behavior:smooth}
 @media (hover:hover) and (pointer:fine){.k-look__item:hover{background:rgba(255,255,255,.04)}.k-look__item:hover strong{text-decoration:underline;text-underline-offset:4px}}
 .k-look__total{margin:0;display:flex;justify-content:space-between;font-size:15px;color:rgba(255,255,255,.72)}
 .k-look__total .k-price{color:#fff;font-size:18px}
+
+/* duo hero: the two looks walk in from the sides and settle back to back in the centre */
+.k-hero1__img--duo{display:block;padding:0}
+.k-hero1__img--duo .k-hero1__fig{position:absolute;bottom:0;height:96%;width:auto;display:flex;align-items:flex-end}
+.k-hero1__img--duo .k-hero1__fig:nth-child(1){inset-inline-end:50%;margin-inline-end:-4%;animation:kWalkInA 2.4s cubic-bezier(.22,1,.36,1) .15s both}
+.k-hero1__img--duo .k-hero1__fig:nth-child(2){inset-inline-start:50%;margin-inline-start:-4%;animation:kWalkInB 2.4s cubic-bezier(.22,1,.36,1) .35s both}
+.k-hero1--dark .k-hero1__img--duo img{height:100%;width:auto;animation:kStep 2.4s ease-out both}
+.k-hero1__img--duo .k-hero1__fig:nth-child(2) img{animation-delay:.35s}
+@keyframes kWalkInA{from{opacity:0;transform:translateX(-38vw) scale(.92);filter:brightness(0)}35%{opacity:1}to{opacity:1;transform:none;filter:brightness(1)}}
+@keyframes kWalkInB{from{opacity:0;transform:translateX(38vw) scale(.92);filter:brightness(0)}35%{opacity:1}to{opacity:1;transform:none;filter:brightness(1)}}
+[dir="rtl"] .k-hero1__img--duo .k-hero1__fig:nth-child(1){animation-name:kWalkInB}
+[dir="rtl"] .k-hero1__img--duo .k-hero1__fig:nth-child(2){animation-name:kWalkInA}
+@keyframes kStep{0%,100%{transform:none}12%,37%,62%{transform:translateY(-1.2%)}25%,50%,75%{transform:none}}
+.k-hero1__img--duo .k-hero1__fig:nth-child(1) img{-webkit-mask-image:linear-gradient(to right,transparent,#000 14%,#000 92%,transparent),linear-gradient(to top,transparent,#000 14%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 14%,#000 92%,transparent),linear-gradient(to top,transparent,#000 14%);mask-composite:intersect}
+.k-hero1__img--duo .k-hero1__fig:nth-child(2) img{-webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 86%,transparent),linear-gradient(to top,transparent,#000 14%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 8%,#000 86%,transparent),linear-gradient(to top,transparent,#000 14%);mask-composite:intersect}
+@media (max-width:749px){.k-hero1__img--duo .k-hero1__fig{height:70%;top:8%;bottom:auto}.k-hero1__img--duo .k-hero1__fig:nth-child(1){margin-inline-end:-10%}.k-hero1__img--duo .k-hero1__fig:nth-child(2){margin-inline-start:-10%}}
+@media (prefers-reduced-motion:reduce){.k-hero1__img--duo .k-hero1__fig,.k-hero1__img--duo img{animation:none!important}}
