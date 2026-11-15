@@ -495,3 +495,35 @@ html{scroll-behavior:smooth}
 .k-hero1__img--duo .k-hero1__fig:nth-child(2) img{-webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 86%,transparent),linear-gradient(to top,transparent,#000 14%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 8%,#000 86%,transparent),linear-gradient(to top,transparent,#000 14%);mask-composite:intersect}
 @media (max-width:749px){.k-hero1__img--duo .k-hero1__fig{height:70%;top:8%;bottom:auto}.k-hero1__img--duo .k-hero1__fig:nth-child(1){margin-inline-end:-10%}.k-hero1__img--duo .k-hero1__fig:nth-child(2){margin-inline-start:-10%}}
 @media (prefers-reduced-motion:reduce){.k-hero1__img--duo .k-hero1__fig,.k-hero1__img--duo img{animation:none!important}}
+
+/* duo hero v2: both figures walk toward the viewer out of the dark */
+.k-hero1__img--duo .k-hero1__fig{transform-origin:50% 100%}
+.k-hero1__img--duo .k-hero1__fig:nth-child(1),
+[dir="rtl"] .k-hero1__img--duo .k-hero1__fig:nth-child(1){animation:kApproach 3.6s cubic-bezier(.25,.6,.3,1) .2s both}
+.k-hero1__img--duo .k-hero1__fig:nth-child(2),
+[dir="rtl"] .k-hero1__img--duo .k-hero1__fig:nth-child(2){animation:kApproach 3.6s cubic-bezier(.25,.6,.3,1) .55s both}
+@keyframes kApproach{
+  0%{opacity:0;transform:translateY(-14%) scale(.42);filter:brightness(0) blur(2px)}
+  18%{opacity:1}
+  100%{opacity:1;transform:none;filter:brightness(1) blur(0)}
+}
+/* the walk: a step bob and a small sway, slowing as they arrive */
+.k-hero1--dark .k-hero1__img--duo img{animation:kWalk 3.6s cubic-bezier(.3,.7,.4,1) both;transform-origin:50% 100%}
+.k-hero1__img--duo .k-hero1__fig:nth-child(1) img{animation-delay:.2s}
+.k-hero1__img--duo .k-hero1__fig:nth-child(2) img{animation-delay:.55s}
+@keyframes kWalk{
+  0%{transform:translate(0,0) rotate(0)}
+  9%{transform:translate(-.6%,-1.6%) rotate(-.6deg)}
+  18%{transform:translate(0,0) rotate(0)}
+  27%{transform:translate(.6%,-1.5%) rotate(.6deg)}
+  36%{transform:translate(0,0) rotate(0)}
+  45%{transform:translate(-.5%,-1.2%) rotate(-.45deg)}
+  54%{transform:translate(0,0) rotate(0)}
+  63%{transform:translate(.4%,-.9%) rotate(.35deg)}
+  72%{transform:translate(0,0) rotate(0)}
+  82%{transform:translate(-.2%,-.4%) rotate(-.15deg)}
+  100%{transform:none}
+}
+/* a floor glow that grows under them as they arrive */
+.k-hero1--dark .k-hero1__img--duo::after{content:"";position:absolute;inset-inline:20%;bottom:0;height:18%;background:radial-gradient(ellipse at 50% 100%,rgba(255,255,255,.10),transparent 70%);animation:kFloor 3.6s ease-out .2s both;pointer-events:none}
+@keyframes kFloor{from{opacity:0;transform:scaleX(.4)}to{opacity:1;transform:none}}
