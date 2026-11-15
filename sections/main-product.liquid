@@ -2,6 +2,10 @@
   assign current = product.selected_or_first_available_variant
   assign start_media = current.featured_media | default: product.featured_media
   assign has_options = true
+  assign has_chart = false
+  if product.template_suffix == 'shoes' or product.metafields.custom.size_chart != blank
+    assign has_chart = true
+  endif
   if product.has_only_default_variant
     assign has_options = false
   endif
@@ -9,30 +13,21 @@
 <div class="k-wrap" data-product data-added-msg="{{ 'products.added_title' | t }}" data-cart-label="{{ 'products.view_cart' | t }}" data-cart-url="{{ routes.cart_url }}">
 <script type="application/json" data-product-json>{{ product | json }}</script>
 <section class="k-product" aria-labelledby="ProductTitle-{{ section.id }}">
-  <div class="k-product__media">
-    <div class="k-product__stage{% if section.settings.fit == 'contain' %} k-product__stage--contain{% endif %}" style="--ratio:{{ section.settings.ratio }};{% if section.settings.fit == 'contain' %}background:var(--paper){% endif %}">
-      {%- for media in product.media -%}
-        {%- if media.media_type == 'image' -%}
-        <img src="{{ media | image_url: width: 1400 }}" srcset="{{ media | image_url: width: 700 }} 700w, {{ media | image_url: width: 1100 }} 1100w, {{ media | image_url: width: 1400 }} 1400w" sizes="(min-width: 990px) 55vw, 100vw" width="{{ media.width }}" height="{{ media.height }}" alt="{{ media.alt | default: product.title | escape }}" data-media-id="{{ media.id }}"{% if media.id == start_media.id %} class="is-on"{% else %} loading="lazy"{% endif %}>
-        {%- endif -%}
-      {%- else -%}
-        {{ 'product-1' | placeholder_svg_tag: 'k-placeholder' }}
-      {%- endfor -%}
-    </div>
-    {%- if product.media.size > 1 and section.settings.show_thumbs -%}
-    <div class="k-thumbs" role="group" aria-label="{{ 'products.images' | t }}">
-      {%- for media in product.media -%}{%- if media.media_type == 'image' -%}
-        <button type="button" class="k-thumb{% if media.id == start_media.id %} is-on{% endif %}" data-thumb="{{ media.id }}" aria-pressed="{% if media.id == start_media.id %}true{% else %}false{% endif %}" aria-label="{{ 'products.image_n' | t: n: forloop.index }}">{{ media | image_url: width: 160 | image_tag: alt: '' , loading: 'lazy' }}</button>
-      {%- endif -%}{%- endfor -%}
-    </div>
-    {%- endif -%}
+  <div class="k-gallery{% if section.settings.fit == 'contain' %} k-gallery--contain{% endif %}" role="group" aria-label="{{ 'products.images' | t }}">
+    {%- for media in product.media -%}
+      {%- if media.media_type == 'image' -%}
+      <figure><img src="{{ media | image_url: width: 1400 }}" srcset="{{ media | image_url: width: 700 }} 700w, {{ media | image_url: width: 1100 }} 1100w, {{ media | image_url: width: 1400 }} 1400w" sizes="{% if forloop.first %}(min-width: 990px) 58vw{% else %}(min-width: 990px) 29vw{% endif %}, 86vw" width="{{ media.width }}" height="{{ media.height }}" alt="{{ media.alt | default: product.title | escape }}" data-media-id="{{ media.id }}"{% unless forloop.first %} loading="lazy"{% endunless %}></figure>
+      {%- endif -%}
+    {%- else -%}
+      <figure>{{ 'product-1' | placeholder_svg_tag: 'k-placeholder' }}</figure>
+    {%- endfor -%}
   </div>
 
   <div class="k-product__info">
     <nav class="k-crumbs" aria-label="{{ 'products.breadcrumbs' | t }}"><a class="k-u" href="{{ routes.root_url }}">{{ 'general.home' | t }}</a>{% if collection %} / <a class="k-u" href="{{ collection.url }}">{{ collection.title }}</a>{% endif %} / {{ product.title }}</nav>
-    <div style="display:flex;flex-direction:column;gap:8px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      {%- if product.type != blank -%}<p class="k-product__type">{{ product.type }}</p>{%- endif -%}
       <h1 id="ProductTitle-{{ section.id }}" class="k-display k-product__title">{{ product.title }}</h1>
-      {%- if product.metafields.custom.subtitle != blank -%}<p class="k-lead" style="font-size:18px">{{ product.metafields.custom.subtitle }}</p>{%- endif -%}
     </div>
     <p class="k-product__price"><span data-price>{{ current.price | money_without_trailing_zeros }}</span>{% if current.compare_at_price > current.price %}<s>{{ current.compare_at_price | money_without_trailing_zeros }}</s>{% endif %}</p>
 
@@ -53,7 +48,7 @@
           assign oi = forloop.index0
         -%}
         <fieldset class="k-fieldset">
-          <legend><span style="font-weight:500">{{ option.name }}:</span> <span data-opt-label="{{ oi }}">{% unless is_size %}{{ option.selected_value }}{% endunless %}</span></legend>
+          <legend><span><span style="font-weight:500">{{ option.name }}:</span> <span data-opt-label="{{ oi }}">{% unless is_size %}{{ option.selected_value }}{% endunless %}</span></span>{% if is_size and has_chart %}<a class="k-link" style="font-size:13px" href="#size-guide">{{ 'products.size_fit' | t }}</a>{% endif %}</legend>
           <div class="{% if is_color %}k-swatches{% else %}k-sizes{% endif %}" role="radiogroup" aria-label="{{ option.name | escape }}">
           {%- for value in option.values -%}
             {%- liquid
@@ -102,7 +97,10 @@
         {%- when 'fit_note' -%}
           <p class="k-sub" {{ block.shopify_attributes }}>{{ product.metafields.custom.fit_note | default: block.settings.text }}</p>
         {%- when 'description' -%}
-          {%- if product.description != blank -%}<div class="k-rte" {{ block.shopify_attributes }}>{{ product.description }}</div>{%- endif -%}
+          <div class="k-acc" {{ block.shopify_attributes }}>
+            {%- if product.description != blank -%}<details open><summary>{{ 'products.details' | t }}</summary><div class="k-rte">{{ product.description }}</div></details>{%- endif -%}
+            {%- if block.settings.shipping != blank -%}<details><summary>{{ 'products.shipping_returns' | t }}</summary><div class="k-rte">{{ block.settings.shipping }}</div></details>{%- endif -%}
+          </div>
       {%- endcase -%}
     {%- endfor -%}
   </div>
@@ -111,12 +109,12 @@
 </div>
 {% schema %}
 {"name":"עמוד מוצר","tag":"div","settings":[
-{"type":"select","id":"ratio","label":"יחס תמונה","default":"1","options":[{"value":"1","label":"ריבוע (נעליים)"},{"value":"3/4","label":"לאורך (ביגוד)"}]},
+{"type":"select","id":"ratio","label":"יחס תמונה","default":"1","options":[{"value":"1","label":"ריבוע"},{"value":"4/5","label":"לאורך"}]},
 {"type":"select","id":"fit","label":"התאמת תמונה","default":"cover","options":[{"value":"cover","label":"מילוי"},{"value":"contain","label":"התאמה (מבט צד)"}]},
 {"type":"checkbox","id":"show_thumbs","label":"להציג תמונות קטנות","default":true}],
 "blocks":[{"type":"@app"},
 {"type":"tryon","name":"כפתור תמדוד עליי","limit":1,"settings":[{"type":"text","id":"label","label":"טקסט","default":"תמדוד עליי"},{"type":"url","id":"link","label":"קישור (אם לא משתמשים באפליקציה)"}]},
 {"type":"fit_note","name":"הערת גזרה","limit":1,"settings":[{"type":"text","id":"text","label":"טקסט ברירת מחדל","default":"בין שתי מידות? כדאי לבחור את הגדולה."}]},
-{"type":"perks","name":"משלוח והחזרות","limit":1,"settings":[{"type":"text","id":"shipping","label":"משלוח","default":"משלוח עד הבית, עם מספר מעקב."},{"type":"text","id":"returns","label":"החזרות","default":"החזרה חינם תוך 14 יום מקבלת המשלוח."}]},
-{"type":"description","name":"תיאור","limit":1}]}
+{"type":"perks","name":"משלוח והחזרות","limit":1,"settings":[{"type":"text","id":"shipping","label":"משלוח","default":"משלוח עד הבית, עם מספר מעקב."},{"type":"text","id":"returns","label":"החזרות","default":"ביטול עסקה תוך 14 יום מקבלת המוצר."}]},
+{"type":"description","name":"תיאור ומשלוח","limit":1,"settings":[{"type":"richtext","id":"shipping","label":"משלוח וביטול עסקה","default":"<p>משלוח עד הבית עם מספר מעקב. זמן המשלוח מופיע בעמוד התשלום.</p><p>אפשר לבטל עסקה תוך 14 יום מיום קבלת המוצר. הפרטים המלאים במדיניות הביטולים וההחזרות.</p>"}]}]}
 {% endschema %}

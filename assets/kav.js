@@ -73,7 +73,7 @@
       .then(function(r){if(!r.ok)throw r;return r.json()})
       .then(function(){
         btn.textContent=btn.getAttribute('data-label-added');
-        var img=root.querySelector('.k-product__stage img.is-on');
+        var img=root.querySelector('.k-gallery img');
         window.kavToast((img?'<img src="'+img.currentSrc+'" alt="">':'')+'<span class="k-toast__txt"><strong>'+root.getAttribute('data-added-msg')+'</strong><span>'+data.title+' · '+v.title+'</span></span><a href="'+(root.getAttribute('data-cart-url')||'/cart')+'">'+root.getAttribute('data-cart-label')+'</a>');
         return fetch('/cart.js').then(function(r){return r.json()}).then(function(c){document.querySelectorAll('[data-cart-count]').forEach(function(el){el.textContent=c.item_count})});
       })
@@ -93,5 +93,15 @@
     q.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){
       var n=Math.max(0,(+input.value||0)+(+b.getAttribute('data-step')));input.value=n;input.form.requestSubmit?input.form.requestSubmit():input.form.submit();
     })});
+  });
+})();
+
+// cookie preferences (Shopify privacy banner)
+(function(){
+  document.querySelectorAll('[data-cookie-prefs]').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(window.privacyBanner&&typeof window.privacyBanner.showPreferences==='function'){window.privacyBanner.showPreferences();}
+      else if(window.Shopify&&Shopify.loadFeatures){Shopify.loadFeatures([{name:'consent-tracking-api',version:'0.1'}],function(){if(window.privacyBanner)window.privacyBanner.showPreferences();});}
+    });
   });
 })();

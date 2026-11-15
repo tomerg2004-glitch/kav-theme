@@ -1,16 +1,26 @@
 {%- liquid
   assign img = product.featured_media
+  assign alt_img = nil
+  if product.media.size > 1
+    assign alt_img = product.media[1]
+  endif
+  assign contain = false
+  if product.type contains 'סניקרס' or product.type contains 'נעל'
+    assign contain = true
+  endif
 -%}
-<a class="k-card k-pcard" href="{{ product.url }}">
-  <div class="k-pcard__media">
+<a class="k-pcard" href="{{ product.url }}">
+  <div class="k-pcard__media{% if contain %} k-pcard__media--contain{% endif %}">
     {%- if img -%}
-      {{ img | image_url: width: 900 | image_tag: loading: 'lazy', class: 'k-ph', sizes: '(min-width: 990px) 33vw, 100vw', widths: '360,540,720,900', alt: img.alt | default: product.title }}
+      {{ img | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 1100px) 25vw, 50vw', widths: '360,540,720,900', alt: '' }}
+      {%- if alt_img and contain == false -%}{{ alt_img | image_url: width: 900 | image_tag: loading: 'lazy', class: 'is-alt', sizes: '(min-width: 1100px) 25vw, 50vw', widths: '360,540,720,900', alt: '' }}{%- endif -%}
     {%- else -%}
-      {{ 'product-1' | placeholder_svg_tag: 'k-ph k-placeholder' }}
+      {{ 'product-1' | placeholder_svg_tag: 'k-placeholder' }}
     {%- endif -%}
+    {%- unless product.available -%}<span class="k-pcard__tag">{{ 'products.sold_out' | t }}</span>{%- endunless -%}
   </div>
   <div class="k-pcard__meta">
-    <span><strong>{{ product.title }}</strong>{% if product.metafields.custom.subtitle != blank %} · {{ product.metafields.custom.subtitle }}{% endif %}</span>
-    <span class="k-price">{% if product.price_varies %}{{ 'products.from' | t }} {% endif %}{{ product.price_min | money_without_trailing_zeros }}</span>
+    <span class="k-pcard__name"><strong>{{ product.title }}</strong>{% if product.type != blank %}<span>{{ product.type }}</span>{% endif %}</span>
+    <span class="k-price">{% if product.price_varies %}{{ 'products.from' | t }}{% endif %}{{ product.price_min | money_without_trailing_zeros }}</span>
   </div>
 </a>

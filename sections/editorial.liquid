@@ -1,0 +1,28 @@
+<section class="k-split{% if section.settings.reverse %} k-split--rev{% endif %}" aria-labelledby="H-{{ section.id }}">
+  <div class="k-split__media">
+    {%- if section.settings.image -%}
+      {{ section.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '700,1100,1600', sizes: '(min-width: 850px) 55vw, 100vw', alt: section.settings.image.alt | default: section.settings.alt }}
+    {%- else -%}
+      <img src="{{ section.settings.asset | asset_url }}" width="900" height="1125" loading="lazy" alt="{{ section.settings.alt | escape }}">
+    {%- endif -%}
+  </div>
+  <div class="k-split__body">
+    {%- if section.settings.eyebrow != blank -%}<p class="k-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h2 id="H-{{ section.id }}" class="k-display k-h2">{{ section.settings.title }}</h2>
+    {%- if section.settings.text != blank -%}<div class="k-lead">{{ section.settings.text }}</div>{%- endif -%}
+    {%- if section.settings.btn_label != blank -%}<div><a class="k-btn k-btn--line" href="{{ section.settings.btn_link | default: routes.all_products_collection_url }}">{{ section.settings.btn_label }}</a></div>{%- endif -%}
+  </div>
+</section>
+{% schema %}
+{"name":"תמונה וטקסט","tag":"div","settings":[
+{"type":"image_picker","id":"image","label":"תמונה"},
+{"type":"text","id":"asset","label":"תמונה מהתבנית (אם לא נבחרה)","default":"kav-plaid-5.jpg"},
+{"type":"text","id":"alt","label":"תיאור התמונה","default":"תקריב של אוברשירט משבצות עם כפתורי לחיצה"},
+{"type":"checkbox","id":"reverse","label":"תמונה בצד השני","default":false},
+{"type":"text","id":"eyebrow","label":"שורה קטנה","default":"הגישה שלנו"},
+{"type":"text","id":"title","label":"כותרת","default":"פחות פריטים. יותר שילובים."},
+{"type":"richtext","id":"text","label":"טקסט","default":"<p>אנחנו לא מוציאים מאות דגמים. כל מהדורה של KAV קטנה ומדויקת: גזרות רחבות, בדים עם אופי וצבעים שמשתלבים זה בזה, כך שכל פריט מוצא לעצמו בן זוג בארון.</p>"},
+{"type":"text","id":"btn_label","label":"כפתור","default":"לראות את כל הפריטים"},
+{"type":"url","id":"btn_link","label":"קישור"}],
+"presets":[{"name":"תמונה וטקסט"}]}
+{% endschema %}

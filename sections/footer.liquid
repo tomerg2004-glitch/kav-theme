@@ -1,18 +1,29 @@
 <footer class="k-footer">
-  <div class="k-wrap k-footer__grid">
-    <div class="k-footer__col">
-      <span class="k-logo">{{ shop.name }}</span>
+  <div class="k-wrap k-footer__top">
+    <div class="k-footer__brand">
+      <span class="k-logo">{{ section.settings.wordmark | default: shop.name }}</span>
       {%- if section.settings.tagline != blank -%}<span>{{ section.settings.tagline }}</span>{%- endif -%}
     </div>
     {%- for block in section.blocks -%}
       <nav class="k-footer__col" aria-label="{{ block.settings.title | escape }}" {{ block.shopify_attributes }}>
-        <span class="k-footer__title">{{ block.settings.title }}</span>
+        <h2 class="k-footer__title" style="font-size:15px;margin:0 0 4px">{{ block.settings.title }}</h2>
         {%- for link in block.settings.menu.links -%}<a class="k-u" href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
       </nav>
     {%- endfor -%}
+    <nav class="k-footer__col" aria-label="{{ 'footer.legal' | t }}">
+      <h2 class="k-footer__title" style="font-size:15px;margin:0 0 4px">{{ 'footer.legal' | t }}</h2>
+      {%- if shop.terms_of_service -%}<a class="k-u" href="{{ shop.terms_of_service.url }}">{{ 'footer.terms' | t }}</a>{%- endif -%}
+      {%- if shop.refund_policy -%}<a class="k-u" href="{{ shop.refund_policy.url }}">{{ 'footer.refund' | t }}</a>{%- endif -%}
+      {%- if shop.shipping_policy -%}<a class="k-u" href="{{ shop.shipping_policy.url }}">{{ 'footer.shipping' | t }}</a>{%- endif -%}
+      {%- if shop.privacy_policy -%}<a class="k-u" href="{{ shop.privacy_policy.url }}">{{ 'footer.privacy' | t }}</a>{%- endif -%}
+      {%- if section.settings.accessibility_page != blank -%}<a class="k-u" href="{{ section.settings.accessibility_page.url }}">{{ 'footer.accessibility' | t }}</a>{%- endif -%}
+    </nav>
   </div>
-  <div class="k-wrap k-footer__base">© {{ 'now' | date: '%Y' }} {{ shop.name }}</div>
+  <div class="k-wrap k-footer__base">
+    <span>© {{ 'now' | date: '%Y' }} {{ section.settings.wordmark | default: shop.name }}</span>
+    <button type="button" class="k-u" data-cookie-prefs>{{ 'footer.cookies' | t }}</button>
+  </div>
 </footer>
 {% schema %}
-{"name":"כותרת תחתונה","tag":"div","settings":[{"type":"text","id":"tagline","label":"משפט קצר","default":"נעליים ובגדים לגברים"}],"blocks":[{"type":"menu","name":"עמודת קישורים","settings":[{"type":"text","id":"title","label":"כותרת","default":"שירות"},{"type":"link_list","id":"menu","label":"תפריט","default":"footer"}]}],"enabled_on":{"groups":["footer"]}}
+{"name":"כותרת תחתונה","tag":"div","settings":[{"type":"text","id":"wordmark","label":"שם המותג","default":"KAV"},{"type":"text","id":"tagline","label":"משפט קצר","default":"בגדי רחוב ונעליים לגברים."},{"type":"page","id":"accessibility_page","label":"עמוד הצהרת נגישות"}],"blocks":[{"type":"menu","name":"עמודת קישורים","settings":[{"type":"text","id":"title","label":"כותרת","default":"חנות"},{"type":"link_list","id":"menu","label":"תפריט","default":"footer"}]}],"enabled_on":{"groups":["footer"]}}
 {% endschema %}

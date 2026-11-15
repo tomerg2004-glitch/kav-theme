@@ -1,88 +1,101 @@
 {
- "accessibility": {
-  "skip": "דילוג לתוכן"
- },
- "cart": {
-  "checkout": "לתשלום",
-  "continue": "להמשיך לקנות",
-  "decrease": "להפחית כמות של {{ title }}",
-  "empty": "הסל ריק כרגע.",
-  "increase": "להוסיף כמות של {{ title }}",
-  "note": "הערה להזמנה",
-  "quantity": "כמות",
-  "subtotal": "סכום ביניים",
-  "summary": "סיכום הזמנה",
-  "taxes": "המחירים כוללים מע\"מ. המשלוח מחושב בתשלום.",
-  "title": "הסל שלך",
-  "update": "לעדכן את הסל",
-  "remove": "להסיר"
- },
- "collections": {
-  "all": "כל הקולקציות",
-  "empty": "אין עדיין מוצרים בקולקציה הזו."
- },
- "customer": {
-  "account": "החשבון שלי",
-  "create": "ליצור חשבון",
-  "email": "אימייל",
-  "first_name": "שם פרטי",
-  "login": "כניסה",
-  "logout": "יציאה",
-  "no_orders": "עוד לא ביצעת הזמנות.",
-  "password": "סיסמה",
-  "sign_in": "להיכנס"
- },
- "errors": {
-  "404_text": "העמוד שחיפשת לא קיים או שהועבר.",
-  "404_title": "לא מצאנו את העמוד"
- },
- "general": {
-  "back_home": "חזרה לעמוד הראשי",
-  "home": "ראשי",
-  "page": "עמוד {{ page }}",
-  "pagination": "עמודים"
- },
- "gift_card": {
-  "expired": "תוקף כרטיס המתנה פג"
- },
- "header": {
-  "account": "החשבון שלי",
-  "cart": "סל",
-  "main_nav": "ראשי",
-  "menu": "תפריט",
-  "search": "חיפוש"
- },
- "newsletter": {
-  "email": "אימייל",
-  "success": "נרשמת. נעדכן אותך ראשון."
- },
- "password": {
-  "enter": "כניסה",
-  "notify": "לעדכן אותי",
-  "owner": "כניסת בעלי החנות",
-  "password": "סיסמה",
-  "title": "נפתחים בקרוב"
- },
- "products": {
-  "add": "להוסיף לסל",
-  "added": "נוסף לסל ✓",
-  "breadcrumbs": "מיקום באתר",
-  "choose_size": "כדי להוסיף לסל, צריך לבחור מידה.",
-  "color": "צבע",
-  "error": "משהו השתבש. נסו שוב.",
-  "from": "החל מ-",
-  "image_n": "תמונה {{ n }}",
-  "images": "תמונות המוצר",
-  "sample": "מוצר לדוגמה",
-  "sold_out": "אזל מהמלאי",
-  "added_title": "נוסף לסל",
-  "view_cart": "לסל",
-  "choose_and_add": "לבחור מידה ולהוסיף"
- },
- "search": {
-  "none": "לא נמצאו תוצאות עבור \"{{ terms }}\".",
-  "placeholder": "מה מחפשים?",
-  "submit": "לחפש",
-  "title": "חיפוש"
- }
+  "accessibility": {
+    "skip": "דילוג לתוכן"
+  },
+  "cart": {
+    "checkout": "לתשלום",
+    "continue": "להמשיך לקנות",
+    "decrease": "להפחית כמות של {{ title }}",
+    "empty": "הסל ריק כרגע.",
+    "increase": "להוסיף כמות של {{ title }}",
+    "note": "הערה להזמנה",
+    "quantity": "כמות",
+    "subtotal": "סכום ביניים",
+    "summary": "סיכום הזמנה",
+    "taxes": "המחירים כוללים מע\"מ. המשלוח מחושב בתשלום.",
+    "title": "הסל שלך",
+    "update": "לעדכן את הסל",
+    "remove": "להסיר"
+  },
+  "collections": {
+    "all": "כל הקולקציות",
+    "empty": "אין עדיין מוצרים בקולקציה הזו."
+  },
+  "customer": {
+    "account": "החשבון שלי",
+    "create": "ליצור חשבון",
+    "email": "אימייל",
+    "first_name": "שם פרטי",
+    "login": "כניסה",
+    "logout": "יציאה",
+    "no_orders": "עוד לא ביצעת הזמנות.",
+    "password": "סיסמה",
+    "sign_in": "להיכנס"
+  },
+  "errors": {
+    "404_text": "העמוד שחיפשת לא קיים או שהועבר.",
+    "404_title": "לא מצאנו את העמוד"
+  },
+  "general": {
+    "back_home": "חזרה לעמוד הראשי",
+    "home": "ראשי",
+    "page": "עמוד {{ page }}",
+    "pagination": "עמודים"
+  },
+  "gift_card": {
+    "expired": "תוקף כרטיס המתנה פג"
+  },
+  "header": {
+    "account": "החשבון שלי",
+    "cart": "סל",
+    "main_nav": "ראשי",
+    "menu": "תפריט",
+    "search": "חיפוש",
+    "items": "פריטים"
+  },
+  "newsletter": {
+    "email": "אימייל",
+    "success": "נרשמתם. נעדכן אתכם כשהמהדורה הבאה עולה."
+  },
+  "password": {
+    "enter": "כניסה",
+    "notify": "לעדכן אותי",
+    "owner": "כניסת בעלי החנות",
+    "password": "סיסמה",
+    "title": "נפתחים בקרוב"
+  },
+  "products": {
+    "add": "להוסיף לסל",
+    "added": "נוסף לסל",
+    "breadcrumbs": "מיקום באתר",
+    "choose_size": "צריך לבחור מידה לפני שמוסיפים לסל.",
+    "color": "צבע",
+    "error": "משהו השתבש. נסו שוב.",
+    "from": "החל מ-",
+    "image_n": "תמונה {{ n }}",
+    "images": "תמונות המוצר",
+    "sample": "מוצר לדוגמה",
+    "sold_out": "אזל מהמלאי",
+    "added_title": "נוסף לסל",
+    "view_cart": "לסל",
+    "choose_and_add": "לבחור מידה",
+    "details": "פרטי המוצר",
+    "size_fit": "מידות וגזרה",
+    "shipping_returns": "משלוח וביטול עסקה"
+  },
+  "search": {
+    "none": "לא נמצאו תוצאות עבור \"{{ terms }}\".",
+    "placeholder": "מה מחפשים?",
+    "submit": "לחפש",
+    "title": "חיפוש"
+  },
+  "footer": {
+    "legal": "מידע משפטי",
+    "terms": "תקנון האתר",
+    "refund": "ביטולים והחזרות",
+    "shipping": "משלוחים",
+    "privacy": "מדיניות פרטיות",
+    "accessibility": "הצהרת נגישות",
+    "cookies": "הגדרות עוגיות"
+  }
 }
