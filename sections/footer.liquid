@@ -21,9 +21,10 @@
   </div>
   <div class="k-wrap k-footer__base">
     <span>© {{ 'now' | date: '%Y' }} {{ section.settings.wordmark | default: shop.name }}</span>
+    {%- if section.settings.credit != blank -%}<span>{{ section.settings.credit }}</span>{%- endif -%}
     <button type="button" class="k-u" data-cookie-prefs>{{ 'footer.cookies' | t }}</button>
   </div>
 </footer>
 {% schema %}
-{"name":"כותרת תחתונה","tag":"div","settings":[{"type":"text","id":"wordmark","label":"שם המותג","default":"KAV"},{"type":"text","id":"tagline","label":"משפט קצר","default":"בגדי רחוב ונעליים לגברים."},{"type":"page","id":"accessibility_page","label":"עמוד הצהרת נגישות"}],"blocks":[{"type":"menu","name":"עמודת קישורים","settings":[{"type":"text","id":"title","label":"כותרת","default":"חנות"},{"type":"link_list","id":"menu","label":"תפריט","default":"footer"}]}],"enabled_on":{"groups":["footer"]}}
+{"name":"כותרת תחתונה","tag":"div","settings":[{"type":"text","id":"wordmark","label":"שם המותג","default":"KAV"},{"type":"text","id":"tagline","label":"משפט קצר","default":"בגדי רחוב ונעליים לגברים."},{"type":"page","id":"accessibility_page","label":"עמוד הצהרת נגישות"},{"type":"text","id":"credit","label":"קרדיט לתמונות","default":"תמונת הפתיחה: Laszlo Barta, Unsplash"}],"blocks":[{"type":"menu","name":"עמודת קישורים","settings":[{"type":"text","id":"title","label":"כותרת","default":"חנות"},{"type":"link_list","id":"menu","label":"תפריט","default":"footer"}]}],"enabled_on":{"groups":["footer"]}}
 {% endschema %}

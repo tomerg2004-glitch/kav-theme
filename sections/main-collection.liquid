@@ -2,7 +2,7 @@
   <header class="k-colhead"><h1 class="k-display k-h2">{{ collection.title }}</h1>{%- if collection.description != blank -%}<div class="k-rte" style="max-width:560px;margin-top:16px">{{ collection.description }}</div>{%- endif -%}</header>
   {%- paginate collection.products by section.settings.per_page -%}
   <div class="k-grid" style="padding-bottom:80px">
-    {%- for product in collection.products -%}{% render 'product-card', product: product %}{%- else -%}<p class="k-sub">{{ 'collections.empty' | t }}</p>{%- endfor -%}
+    {%- for product in collection.products -%}{% render 'product-cards', product: product %}{%- else -%}<p class="k-sub">{{ 'collections.empty' | t }}</p>{%- endfor -%}
   </div>
   {%- if paginate.pages > 1 -%}<nav class="k-sechead" aria-label="{{ 'general.pagination' | t }}" style="justify-content:center;padding-bottom:80px">{{ paginate | default_pagination }}</nav>{%- endif -%}
   {%- endpaginate -%}

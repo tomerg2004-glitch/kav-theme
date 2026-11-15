@@ -1,0 +1,15 @@
+{%- assign col = section.settings.collection -%}
+{%- if col != blank and col.products_count > 0 -%}
+<section class="k-wrap k-cat" id="cat-{{ col.handle }}" aria-labelledby="H-{{ section.id }}">
+  <div class="k-cat__head">
+    <h2 id="H-{{ section.id }}" class="k-display k-h2">{{ col.title }}</h2>
+    <a class="k-link" href="{{ col.url }}">{{ 'collections.view_all' | t }}</a>
+  </div>
+  <div class="k-grid">
+    {%- for product in col.products limit: 12 -%}{% render 'product-cards', product: product %}{%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+{% schema %}
+{"name":"קטגוריה","tag":"div","settings":[{"type":"collection","id":"collection","label":"קולקציה"}],"presets":[{"name":"קטגוריה"}]}
+{% endschema %}

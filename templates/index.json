@@ -2,48 +2,8 @@
  "sections": {
   "hero": {
    "type": "hero",
-   "settings": {}
-  },
-  "collection": {
-   "type": "featured-collection",
    "settings": {
-    "limit": 4
-   }
-  },
-  "shoe": {
-   "type": "spotlight",
-   "blocks": {
-    "p1": {
-     "type": "point",
-     "settings": {
-      "title": "שרוכי חבל",
-      "text": "עבים ורכים, בגוון בהיר שבולט על הפאנלים הכהים."
-     }
-    },
-    "p2": {
-     "type": "point",
-     "settings": {
-      "title": "תפר מנוגד",
-      "text": "חוט בהיר לאורך כל פאנל. פרט קטן שרואים מרחוק."
-     }
-    },
-    "p3": {
-     "type": "point",
-     "settings": {
-      "title": "סוליה מוגבהת",
-      "text": "עבה ושטוחה, מוסיפה קצת גובה בלי להכביד."
-     }
-    }
-   },
-   "block_order": [
-    "p1",
-    "p2",
-    "p3"
-   ],
-   "settings": {
-    "link": "/products/contrast-01",
-    "product": "contrast-01",
-    "text": "סניקרס נמוכה ב-13 צבעים. קווים נקיים, ושלושה פרטים שעושים את ההבדל."
+    "image": "shopify://shop_images/photo-1789938581278-4a28ff217f9c.jpg"
    }
   },
   "service": {
@@ -83,10 +43,6 @@
   },
   "news": {
    "type": "newsletter",
-   "settings": {}
-  },
-  "statement": {
-   "type": "statement",
    "settings": {}
   },
   "looks": {
@@ -136,14 +92,53 @@
   "ticker": {
    "type": "marquee",
    "settings": {}
+  },
+  "catnav": {
+   "type": "cat-nav",
+   "settings": {
+    "menu": "main-menu"
+   }
+  },
+  "c_shoes": {
+   "type": "category-row",
+   "settings": {
+    "collection": "shoes"
+   }
+  },
+  "c_shorts": {
+   "type": "category-row",
+   "settings": {
+    "collection": "shorts"
+   }
+  },
+  "c_pants": {
+   "type": "category-row",
+   "settings": {
+    "collection": "pants"
+   }
+  },
+  "c_button": {
+   "type": "category-row",
+   "settings": {
+    "collection": "button-shirts"
+   }
+  },
+  "c_shirts": {
+   "type": "category-row",
+   "settings": {
+    "collection": "shirts"
+   }
   }
  },
  "order": [
   "hero",
+  "catnav",
+  "c_shoes",
+  "c_shorts",
+  "c_pants",
+  "c_button",
+  "c_shirts",
   "ticker",
-  "collection",
-  "statement",
-  "shoe",
   "looks",
   "service",
   "news"

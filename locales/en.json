@@ -19,7 +19,9 @@
   },
   "collections": {
     "all": "All collections",
-    "empty": "No products in this collection yet."
+    "empty": "No products in this collection yet.",
+    "view_all": "View all",
+    "categories": "Categories"
   },
   "customer": {
     "account": "My account",
