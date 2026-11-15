@@ -63,10 +63,23 @@
     "d3"
    ],
    "settings": {}
+  },
+  "new": {
+   "type": "featured-collection",
+   "settings": {
+    "title": "חדש בביגוד",
+    "limit": 3
+   }
+  },
+  "news": {
+   "type": "newsletter",
+   "settings": {}
   }
  },
  "order": [
   "hero",
-  "details"
+  "details",
+  "new",
+  "news"
  ]
 }
