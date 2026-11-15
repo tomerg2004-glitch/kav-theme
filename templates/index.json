@@ -9,10 +9,10 @@
     "focus": "50% 30%",
     "image": "shopify://shop_images/kav-hero-model-02.png",
     "image2": "shopify://shop_images/kav-look-02b.png",
-    "line1": "תלבש אחרת.",
+    "line1": "פשוט להתלבש טוב.",
     "line2": "חורף 2026.",
     "fact": "",
-    "btn_label": "לקולקציה",
+    "btn_label": "לראות מה יש",
     "btn_link": "#cat-shoes",
     "label1": "לוק NOMAD ו-DRIFT",
     "label2": "לוק VOID ו-RECON",
@@ -58,9 +58,9 @@
   "news": {
    "type": "newsletter",
    "settings": {
-    "title": "תהיה הראשון לדעת.",
-    "text": "דרופים חדשים, לפני כולם. בלי ספאם.",
-    "button": "להצטרף"
+    "title": "משהו חדש נכנס? נגיד לך.",
+    "text": "מייל קצר כשמגיע פריט חדש. זהו.",
+    "button": "תעדכנו אותי"
    }
   },
   "ticker": {

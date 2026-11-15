@@ -1,1 +1,1 @@
-{"type": "header", "name": "Header group", "sections": {"announcement": {"type": "announcement", "settings": {"text": "קולקציית חורף 2026 באתר · משלוח לכל הארץ"}}, "header": {"type": "header", "settings": {"menu": "main-menu", "wordmark": "KAV"}}}, "order": ["announcement", "header"]}
+{"type": "header", "name": "Header group", "sections": {"announcement": {"type": "announcement", "settings": {"text": "חורף 2026 · משלוח לכל הארץ"}}, "header": {"type": "header", "settings": {"menu": "main-menu", "wordmark": "KAV"}}}, "order": ["announcement", "header"]}
