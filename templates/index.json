@@ -8,7 +8,7 @@
     "alt": "דוגמן KAV הולך קדימה על רקע שחור, באוברשירט חרמון מעל טי-שירט לבנה וג׳ינס יפו בכחול בהיר",
     "focus": "50% 30%",
     "image": "shopify://shop_images/kav-hero-model-02.png",
-    "image2": "shopify://shop_images/kav-look-02.png",
+    "image2": "shopify://shop_images/kav-look-02b.png",
     "line1": "שני לוקים.",
     "line2": "מהדורה אחת."
    }
@@ -158,7 +158,7 @@
    ],
    "settings": {
     "anchor": "look-2",
-    "image": "shopify://shop_images/kav-look-02.png",
+    "image": "shopify://shop_images/kav-look-02b.png",
     "flip": true,
     "title": "בוסטון ורמון",
     "text": "טי-שירט אוברסייז שחורה עם מפתח רחב, ג׳ינס רחב בהדפס הסוואה וסניקרס בשחור-לבן."
