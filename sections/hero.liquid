@@ -32,7 +32,7 @@
         {%- if section.settings.facts != blank -%}
         <ul class="k-hero__facts">
           {%- assign facts = section.settings.facts | split: '|' -%}
-          {%- for f in facts -%}{%- assign kv = f | split: ':' -%}<li><span>{{ kv[0] | strip }}</span><span>{{ kv[1] | strip }}</span></li>{%- endfor -%}
+          {%- for f in facts -%}{%- assign kv = f | split: ':' -%}<li><span>{{ kv[0] | strip }}</span><bdi dir="ltr">{{ kv[1] | strip }}</bdi></li>{%- endfor -%}
         </ul>
         {%- endif -%}
         <div class="k-hero__actions">
