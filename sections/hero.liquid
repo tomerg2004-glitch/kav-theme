@@ -1,9 +1,9 @@
-<section class="k-hero1" aria-labelledby="Hero-{{ section.id }}">
+<section class="k-hero1{% if section.settings.dark %} k-hero1--dark{% endif %}" aria-labelledby="Hero-{{ section.id }}">
   <div class="k-hero1__img">
     {%- if section.settings.image -%}
       {{ section.settings.image | image_url: width: 2400 | image_tag: widths: '750,1100,1600,2000,2400', sizes: '100vw', fetchpriority: 'high', alt: section.settings.image.alt | default: section.settings.alt, style: 'object-position:' | append: section.settings.focus }}
     {%- else -%}
-      <img src="{{ 'kav-camo-1.jpg' | asset_url }}" width="900" height="1125" fetchpriority="high" alt="{{ section.settings.alt | escape }}">
+      <img src="{{ section.settings.asset | asset_url }}" width="900" height="1125" fetchpriority="high" alt="{{ section.settings.alt | escape }}">
     {%- endif -%}
   </div>
   <div class="k-hero1__shade" aria-hidden="true"></div>
@@ -17,8 +17,8 @@
 </section>
 {% schema %}
 {"name":"פתיחה","tag":"div","settings":[
-{"type":"image_picker","id":"image","label":"תמונה"},
-{"type":"text","id":"alt","label":"תיאור התמונה","default":"גבר בטי-שירט שחורה ומכנסי דגמ״ח אפורים הולך לעבר המצלמה"},
+{"type":"image_picker","id":"image","label":"תמונה"},{"type":"text","id":"asset","label":"תמונה מהתבנית (אם לא נבחרה)","default":"kav-plaid-2.jpg"},{"type":"checkbox","id":"dark","label":"רקע שחור, הדמות יוצאת מהחושך","default":true},
+{"type":"text","id":"alt","label":"תיאור התמונה","default":"גבר באוברשירט חרמון מעל טי-שירט לבנה"},
 {"type":"text","id":"focus","label":"מיקוד התמונה (CSS)","default":"50% 22%"},
 {"type":"text","id":"line1","label":"כותרת שורה 1","default":"בגדי רחוב"},
 {"type":"text","id":"line2","label":"כותרת שורה 2","default":"לגברים."},

@@ -3,7 +3,10 @@
   "hero": {
    "type": "hero",
    "settings": {
-    "image": "shopify://shop_images/photo-1789938581278-4a28ff217f9c.jpg"
+    "dark": true,
+    "asset": "kav-plaid-2.jpg",
+    "alt": "גבר באוברשירט חרמון במשבצות מעל טי-שירט לבנה",
+    "focus": "50% 30%"
    }
   },
   "service": {
