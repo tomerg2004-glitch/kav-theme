@@ -189,7 +189,7 @@
 // header: hide on scroll down, show on scroll up; measure for the hero overlap
 (function(){
   var h=document.querySelector('.k-header');if(!h)return;
-  var set=function(){document.documentElement.style.setProperty('--hdr-h',h.offsetHeight+'px')};set();addEventListener('resize',set);
+  var set=function(){document.documentElement.style.setProperty('--hdr-h',h.offsetHeight+'px');document.documentElement.style.setProperty('--hdr-vis',h.offsetHeight+'px')};set();addEventListener('resize',set);
   var last=scrollY,t=false;
   addEventListener('scroll',function(){if(t)return;t=true;requestAnimationFrame(function(){t=false;var y=scrollY;
     if(h.classList.contains('is-open')){last=y;return;}
