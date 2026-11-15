@@ -442,7 +442,7 @@ html{scrollbar-color:#9A948A var(--paper);accent-color:var(--ink)}
 /* dark hero: the figure steps out of the dark */
 .k-hero1--dark{background:#050505}
 .k-hero1--dark .k-hero1__img{display:flex;justify-content:center;align-items:flex-end}
-.k-hero1--dark .k-hero1__img img{width:auto;height:96%;max-width:100%;object-fit:contain;-webkit-mask-image:radial-gradient(ellipse 52% 60% at 50% 46%,#000 38%,transparent 78%);mask-image:radial-gradient(ellipse 52% 60% at 50% 46%,#000 38%,transparent 78%);filter:contrast(1.08) saturate(.85);animation:kStepOut 2.6s cubic-bezier(.16,1,.3,1) .1s both}
+.k-hero1--dark .k-hero1__img img{width:auto;height:100%;max-width:100%;object-fit:contain;-webkit-mask-image:linear-gradient(to right,transparent,#000 22%,#000 78%,transparent),linear-gradient(to top,transparent,#000 18%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 22%,#000 78%,transparent),linear-gradient(to top,transparent,#000 18%);mask-composite:intersect;filter:contrast(1.08) saturate(.85);animation:kStepOut 2.6s cubic-bezier(.16,1,.3,1) .1s both}
 @keyframes kStepOut{0%{opacity:0;transform:translateY(-3%) scale(.86);filter:brightness(0) contrast(1.08) saturate(.85)}55%{opacity:1}100%{opacity:1;transform:none;filter:brightness(1) contrast(1.08) saturate(.85)}}
 .k-hero1--dark .k-hero1__shade{background:linear-gradient(to top,rgba(5,5,5,.85),rgba(5,5,5,0) 40%)}
 @media (max-width:749px){.k-hero1--dark .k-hero1__img img{height:78%;align-self:flex-start;margin-top:12%}}
