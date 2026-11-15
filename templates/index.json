@@ -32,24 +32,6 @@
    ],
    "settings": {}
   },
-  "street": {
-   "type": "image-pair",
-   "blocks": {
-    "i1": {
-     "type": "image",
-     "settings": {}
-    },
-    "i2": {
-     "type": "image",
-     "settings": {}
-    }
-   },
-   "block_order": [
-    "i1",
-    "i2"
-   ],
-   "settings": {}
-  },
   "details": {
    "type": "details",
    "blocks": {
@@ -81,24 +63,10 @@
     "d3"
    ],
    "settings": {}
-  },
-  "new": {
-   "type": "featured-collection",
-   "settings": {
-    "title": "חדש בביגוד",
-    "limit": 3
-   }
-  },
-  "news": {
-   "type": "newsletter",
-   "settings": {}
   }
  },
  "order": [
   "hero",
-  "street",
-  "details",
-  "new",
-  "news"
+  "details"
  ]
 }
