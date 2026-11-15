@@ -18,9 +18,14 @@
     {%- unless seen contains key -%}
       {%- assign seen = seen | append: cname | append: '|' -%}
       {%- assign img = v.featured_media | default: product.featured_media -%}
+      {%- assign alt_img = nil -%}
+      {%- if product.options_with_values[color_idx].values.size == 1 -%}
+        {%- for m in product.media -%}{%- if m.id != img.id and m.media_type == 'image' -%}{%- assign alt_img = m -%}{%- break -%}{%- endif -%}{%- endfor -%}
+      {%- endif -%}
       <a class="k-pcard" href="{{ v.url }}">
         <div class="k-pcard__media">
           {%- if img -%}{{ img | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 1100px) 25vw, 50vw', widths: '360,540,720,900', alt: '' }}{%- else -%}{{ 'product-1' | placeholder_svg_tag: 'k-placeholder' }}{%- endif -%}
+          {%- if alt_img -%}{{ alt_img | image_url: width: 900 | image_tag: loading: 'lazy', class: 'is-alt', sizes: '(min-width: 1100px) 25vw, 50vw', widths: '360,540,720,900', alt: '' }}{%- endif -%}
         </div>
         <div class="k-pcard__meta">
           <span class="k-pcard__name"><strong>{{ product.title }}</strong><span>{{ cname }}</span></span>
