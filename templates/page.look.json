@@ -1,0 +1,147 @@
+{
+ "sections": {
+  "main": {
+   "type": "look-builder",
+   "blocks": {
+    "t1": {
+     "type": "item",
+     "settings": {
+      "cat": "top",
+      "product": "alpine-half-zip",
+      "color": "משמש",
+      "img": "https://cdn.shopify.com/s/files/1/0791/6149/1508/files/alpine-on-model.jpg",
+      "c": 53,
+      "s": 53
+     }
+    },
+    "t2": {
+     "type": "item",
+     "settings": {
+      "cat": "top",
+      "product": "sherpa-half-zip",
+      "color": "שמנת",
+      "img": "https://cdn.shopify.com/s/files/1/0791/6149/1508/files/north-on-model.jpg",
+      "c": 53,
+      "s": 53
+     }
+    },
+    "t3": {
+     "type": "item",
+     "settings": {
+      "cat": "top",
+      "product": "ridge-corduroy-jacket",
+      "color": "שחור",
+      "img": "https://cdn.shopify.com/s/files/1/0791/6149/1508/files/ridge-black-on-model.jpg",
+      "c": 51,
+      "s": 56
+     }
+    },
+    "t4": {
+     "type": "item",
+     "settings": {
+      "cat": "top",
+      "product": "ridge-corduroy-jacket",
+      "color": "בז׳",
+      "img": "https://cdn.shopify.com/s/files/1/0791/6149/1508/files/ridge-cream-on-model.jpg",
+      "c": 51,
+      "s": 56
+     }
+    },
+    "t5": {
+     "type": "item",
+     "settings": {
+      "cat": "top",
+      "product": "ridge-corduroy-jacket",
+      "color": "ירוק זית",
+      "img": "https://cdn.shopify.com/s/files/1/0791/6149/1508/files/ridge-olive-on-model.jpg",
+      "c": 51,
+      "s": 56
+     }
+    },
+    "t6": {
+     "type": "item",
+     "settings": {
+      "cat": "top",
+      "product": "ridge-corduroy-jacket",
+      "color": "חום קאמל",
+      "img": "https://cdn.shopify.com/s/files/1/0791/6149/1508/files/ridge-on-model.jpg",
+      "c": 51,
+      "s": 56
+     }
+    },
+    "t7": {
+     "type": "item",
+     "settings": {
+      "cat": "top",
+      "product": "timber-check-shirt",
+      "color": "חום משובץ",
+      "img": "https://cdn.shopify.com/s/files/1/0791/6149/1508/files/timber-on-model.jpg",
+      "c": 50,
+      "s": 59
+     }
+    },
+    "t8": {
+     "type": "item",
+     "settings": {
+      "cat": "top",
+      "product": "akko-check-shirt",
+      "color": "חאקי",
+      "img": "https://cdn.shopify.com/s/files/1/0791/6149/1508/files/atlas-on-model.jpg",
+      "c": 56,
+      "s": 56
+     }
+    },
+    "b1": {
+     "type": "item",
+     "settings": {
+      "cat": "bottom",
+      "product": "yafo-jeans",
+      "color": "כחול בהיר",
+      "img": "https://cdn.shopify.com/s/files/1/0791/6149/1508/files/alpine-on-model.jpg",
+      "c": 53,
+      "s": 53
+     }
+    },
+    "b2": {
+     "type": "item",
+     "settings": {
+      "cat": "bottom",
+      "product": "yafo-jeans",
+      "color": "שחור משופשף",
+      "img": "https://cdn.shopify.com/s/files/1/0791/6149/1508/files/north-on-model.jpg",
+      "c": 53,
+      "s": 53
+     }
+    },
+    "s1": {
+     "type": "item",
+     "settings": {
+      "cat": "shoes",
+      "product": "contrast-01",
+      "color": "שחור / לבן",
+      "img": "https://cdn.shopify.com/s/files/1/0791/6149/1508/files/alpine-on-model.jpg",
+      "c": 53,
+      "s": 53
+     }
+    }
+   },
+   "block_order": [
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5",
+    "t6",
+    "t7",
+    "t8",
+    "b1",
+    "b2",
+    "s1"
+   ],
+   "settings": {}
+  }
+ },
+ "order": [
+  "main"
+ ]
+}

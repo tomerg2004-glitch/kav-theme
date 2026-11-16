@@ -1,0 +1,217 @@
+{%- comment -%}
+  Look builder — one model, dressed from the catalogue.
+  Every on-model photo is shot (generated) in the same pose and frame, so a look is composed from layers:
+  the bottom layer is the jeans photo (it carries the shoes too), the top layer is the top-garment photo,
+  masked off at the waist. Open jackets keep their side panels a little lower than the centre, so the
+  front opening shows the chosen jeans, not the ones from the source photo.
+{%- endcomment -%}
+{%- capture items_json -%}[
+{%- for block in section.blocks -%}
+  {%- assign p = block.settings.product -%}
+  {%- if p == blank -%}{%- continue -%}{%- endif -%}
+  {%- assign v = nil -%}
+  {%- for x in p.variants -%}{%- if x.option1 == block.settings.color -%}{%- assign v = x -%}{%- break -%}{%- endif -%}{%- endfor -%}
+  {%- if v == nil -%}{%- assign v = p.selected_or_first_available_variant -%}{%- endif -%}
+  {%- assign sizes = '' -%}
+  {%- for x in p.variants -%}{%- if x.option1 == block.settings.color or p.options.size == 1 -%}{%- assign sizes = sizes | append: x.id | append: ':' | append: x.option2 | append: ':' | append: x.available | append: '|' -%}{%- endif -%}{%- endfor -%}
+  {"id":{{ block.id | json }},"cat":{{ block.settings.cat | json }},"title":{{ p.title | json }},"color":{{ block.settings.color | json }},"img":{{ block.settings.img | json }},"c":{{ block.settings.c }},"s":{{ block.settings.s }},"price":{{ v.price }},"url":{{ v.url | json }},"sizes":{{ sizes | json }}}{% unless forloop.last %},{% endunless %}
+{%- endfor -%}]
+{%- endcapture -%}
+
+<section class="kl" id="Look-{{ section.id }}" aria-labelledby="LookH-{{ section.id }}">
+  <div class="kl__wrap">
+    <div class="kl__stage" aria-live="polite">
+      <div class="kl__model" data-model>
+        <img class="kl__layer kl__layer--bottom" data-bottom alt="">
+        <img class="kl__layer kl__layer--bottom kl__next" data-bottom-next alt="">
+        <img class="kl__layer kl__layer--top" data-top alt="">
+        <img class="kl__layer kl__layer--top kl__next" data-top-next alt="">
+        <span class="kl__sheen" aria-hidden="true"></span>
+      </div>
+      <p class="kl__caption" data-caption></p>
+    </div>
+
+    <div class="kl__panel">
+      <h1 id="LookH-{{ section.id }}" class="kl__title">{{ section.settings.title }}</h1>
+      <p class="kl__sub">{{ section.settings.sub }}</p>
+
+      {%- assign groups = 'top,bottom,shoes' | split: ',' -%}
+      {%- for g in groups -%}
+        {%- capture glabel -%}{%- case g -%}{%- when 'top' -%}{{ section.settings.l_top }}{%- when 'bottom' -%}{{ section.settings.l_bottom }}{%- else -%}{{ section.settings.l_shoes }}{%- endcase -%}{%- endcapture -%}
+        <fieldset class="kl__group" data-group="{{ g }}">
+          <legend class="kl__legend"><span>{{ glabel }}</span><span class="kl__picked" data-picked="{{ g }}"></span></legend>
+          <div class="kl__opts">
+            {%- for block in section.blocks -%}
+              {%- if block.settings.cat == g and block.settings.product != blank -%}
+                <button type="button" class="kl__opt kl__opt--{{ g }}" data-item="{{ block.id }}" aria-pressed="false" aria-label="{{ block.settings.product.title }} {{ block.settings.color }}" {{ block.shopify_attributes }}>
+                  <img src="{{ block.settings.img }}" alt="" loading="lazy" width="825" height="1024">
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          <div class="kl__size" data-size="{{ g }}"></div>
+        </fieldset>
+      {%- endfor -%}
+
+      <div class="kl__total">
+        <span>{{ section.settings.l_total }}</span>
+        <strong data-total></strong>
+      </div>
+      <button type="button" class="kl__add" data-add>{{ section.settings.l_add }}</button>
+      <p class="kl__msg" data-msg role="status"></p>
+    </div>
+  </div>
+  <script type="application/json" data-items>{{ items_json }}</script>
+</section>
+
+<style>
+.kl{--bone:#ece6dc;--ink:#0b0a09;background:var(--ink);color:var(--bone);padding:clamp(24px,4vw,56px) 0 clamp(48px,6vw,96px)}
+.kl__wrap{width:min(1320px,92vw);margin:0 auto;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(24px,4vw,72px);align-items:start}
+.kl__stage{position:sticky;top:calc(var(--hdr-vis,76px) + 16px)}
+.kl__model{position:relative;aspect-ratio:825/1024;max-height:calc(100svh - 140px);margin:0 auto;overflow:hidden;background:#050505}
+.kl__layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s cubic-bezier(.22,1,.36,1)}
+.kl__layer--top{
+  -webkit-mask-image:linear-gradient(#000 var(--c,53%),transparent calc(var(--c,53%) + 3%)),linear-gradient(#000 var(--s,53%),transparent calc(var(--s,53%) + 3%)),linear-gradient(#000 var(--s,53%),transparent calc(var(--s,53%) + 3%));
+  -webkit-mask-size:100% 100%,43% 100%,43% 100%;-webkit-mask-position:0 0,0 0,100% 0;-webkit-mask-repeat:no-repeat;
+  mask-image:linear-gradient(#000 var(--c,53%),transparent calc(var(--c,53%) + 3%)),linear-gradient(#000 var(--s,53%),transparent calc(var(--s,53%) + 3%)),linear-gradient(#000 var(--s,53%),transparent calc(var(--s,53%) + 3%));
+  mask-size:100% 100%,43% 100%,43% 100%;mask-position:0 0,0 0,100% 0;mask-repeat:no-repeat}
+.kl__next{opacity:0}
+.kl__sheen{position:absolute;inset:-10% -50%;background:linear-gradient(105deg,transparent 42%,rgba(255,248,236,.12) 50%,transparent 58%);transform:translateX(-70%);pointer-events:none}
+.kl.is-swapping .kl__sheen{animation:klSheen 1s cubic-bezier(.22,1,.36,1)}
+@keyframes klSheen{to{transform:translateX(70%)}}
+.kl__caption{margin:14px 0 0;text-align:center;font-size:13px;letter-spacing:.06em;color:rgba(236,230,220,.6);min-height:1.4em}
+
+.kl__title{margin:0;font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:300;font-size:clamp(34px,3.4vw,54px);line-height:1}
+.kl__sub{margin:10px 0 28px;color:rgba(236,230,220,.62);font-size:15px}
+.kl__group{border:0;padding:0;margin:0 0 26px;min-width:0}
+.kl__legend{display:flex;justify-content:space-between;width:100%;padding:0 0 10px;margin-bottom:12px;border-bottom:1px solid rgba(236,230,220,.14);font-size:13px;letter-spacing:.04em}
+.kl__picked{color:rgba(236,230,220,.6)}
+.kl__opts{display:flex;gap:10px;overflow-x:auto;padding:2px;scrollbar-width:none}
+.kl__opts::-webkit-scrollbar{display:none}
+.kl__opt{flex:none;width:76px;aspect-ratio:3/4;padding:0;border:1px solid rgba(236,230,220,.16);background:#050505;cursor:pointer;overflow:hidden;position:relative;transition:border-color .25s ease,transform .25s ease}
+.kl__opt img{width:100%;height:100%;object-fit:cover;transform:scale(2.1);transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.kl__opt--top img{object-position:50% 26%}
+.kl__opt--bottom img{object-position:50% 74%}
+.kl__opt--shoes img{object-position:50% 98%;transform:scale(3)}
+@media (hover:hover){.kl__opt:hover{border-color:rgba(236,230,220,.5)}.kl__opt:hover img{transform:scale(2.25)}.kl__opt--shoes:hover img{transform:scale(3.2)}}
+.kl__opt[aria-pressed="true"]{border-color:var(--bone)}
+.kl__opt[aria-pressed="true"]::after{content:"";position:absolute;inset:3px;border:1px solid rgba(236,230,220,.5)}
+.kl__opt:focus-visible{outline:2px solid var(--bone);outline-offset:2px}
+.kl__size{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.kl__size button{min-width:44px;height:36px;padding:0 10px;border:1px solid rgba(236,230,220,.22);background:transparent;color:var(--bone);font-size:13px;cursor:pointer;direction:ltr}
+.kl__size button[aria-pressed="true"]{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.kl__size button:disabled{opacity:.3;text-decoration:line-through;cursor:not-allowed}
+.kl__total{display:flex;justify-content:space-between;align-items:baseline;padding:18px 0;border-top:1px solid rgba(236,230,220,.14);margin-top:6px}
+.kl__total strong{font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:300;font-size:30px}
+.kl__add{width:100%;min-height:56px;border:1px solid var(--bone);background:var(--bone);color:var(--ink);font-size:15px;font-weight:600;cursor:pointer;transition:background .25s ease,color .25s ease}
+@media (hover:hover){.kl__add:hover{background:transparent;color:var(--bone)}}
+.kl__add:disabled{opacity:.5;cursor:wait}
+.kl__msg{margin:10px 0 0;font-size:14px;min-height:1.4em;color:rgba(236,230,220,.75)}
+@media (max-width:899px){
+  .kl__wrap{grid-template-columns:1fr}
+  .kl__stage{position:relative;top:0}
+  .kl__model{max-height:68svh}
+}
+@media (prefers-reduced-motion:reduce){.kl__layer{transition:none}.kl__sheen{display:none}}
+</style>
+
+<script>
+(() => {
+  const root = document.getElementById('Look-{{ section.id }}');
+  if (!root || root.dataset.ready) return; root.dataset.ready = 1;
+  const items = JSON.parse(root.querySelector('[data-items]').textContent).map(it => ({
+    ...it,
+    sizes: (it.sizes || '').split('|').filter(Boolean).map(s => { const [id, label, av] = s.split(':'); return { id: +id, label, available: av === 'true' }; })
+  }));
+  const byId = Object.fromEntries(items.map(i => [i.id, i]));
+  const money = c => '₪' + (c / 100).toLocaleString('he-IL', { maximumFractionDigits: 2 });
+  const state = { top: null, bottom: null, shoes: null, size: {} };
+  const $ = s => root.querySelector(s);
+
+  // a two-buffer crossfade per layer
+  const swap = (cur, next, src, vars) => new Promise(res => {
+    if (cur.getAttribute('src') === src) { Object.entries(vars || {}).forEach(([k, v]) => cur.style.setProperty(k, v)); return res(); }
+    Object.entries(vars || {}).forEach(([k, v]) => next.style.setProperty(k, v));
+    next.onload = () => {
+      next.style.opacity = 1;
+      setTimeout(() => {
+        cur.src = src; Object.entries(vars || {}).forEach(([k, v]) => cur.style.setProperty(k, v));
+        cur.onload = () => { next.style.transition = 'none'; next.style.opacity = 0; requestAnimationFrame(() => next.style.transition = ''); res(); };
+      }, 620);
+    };
+    next.src = src;
+  });
+
+  const render = () => {
+    const t = byId[state.top], b = byId[state.bottom], s = byId[state.shoes];
+    root.classList.remove('is-swapping'); void root.offsetWidth; root.classList.add('is-swapping');
+    if (b) swap($('[data-bottom]'), $('[data-bottom-next]'), b.img);
+    if (t) swap($('[data-top]'), $('[data-top-next]'), t.img, { '--c': t.c + '%', '--s': t.s + '%' });
+    $('[data-caption]').textContent = [t, b, s].filter(Boolean).map(i => i.title).join('  ·  ');
+    ['top', 'bottom', 'shoes'].forEach(g => {
+      const it = byId[state[g]];
+      root.querySelectorAll(`[data-group="${g}"] .kl__opt`).forEach(btn => btn.setAttribute('aria-pressed', btn.dataset.item === state[g]));
+      const pk = root.querySelector(`[data-picked="${g}"]`);
+      pk.textContent = it ? `${it.title} · ${it.color} · ${money(it.price)}` : '';
+      const box = root.querySelector(`[data-size="${g}"]`);
+      box.innerHTML = '';
+      if (it) it.sizes.forEach(sz => {
+        const btn = document.createElement('button');
+        btn.type = 'button'; btn.textContent = sz.label; btn.disabled = !sz.available;
+        btn.setAttribute('aria-pressed', state.size[g] === sz.id);
+        btn.addEventListener('click', () => { state.size[g] = sz.id; render(); });
+        box.appendChild(btn);
+      });
+    });
+    const total = [t, b, s].filter(Boolean).reduce((a, i) => a + i.price, 0);
+    $('[data-total]').textContent = money(total);
+  };
+
+  root.querySelectorAll('.kl__opt').forEach(btn => btn.addEventListener('click', () => {
+    const it = byId[btn.dataset.item]; if (!it) return;
+    if (state[it.cat] !== it.id) state.size[it.cat] = null;
+    state[it.cat] = it.id; render();
+  }));
+
+  // start with the first of each group
+  ['top', 'bottom', 'shoes'].forEach(g => { const f = items.find(i => i.cat === g); if (f) state[g] = f.id; });
+  render();
+
+  $('[data-add]').addEventListener('click', async () => {
+    const msg = $('[data-msg]');
+    const groups = ['top', 'bottom', 'shoes'].filter(g => state[g]);
+    const missing = groups.filter(g => !state.size[g]);
+    if (missing.length) { msg.textContent = {{ section.settings.l_pick | json }}; root.querySelector(`[data-size="${missing[0]}"]`).scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    const btn = $('[data-add]'); btn.disabled = true; msg.textContent = '';
+    try {
+      const r = await fetch('/cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ items: groups.map(g => ({ id: state.size[g], quantity: 1 })) }) });
+      if (!r.ok) throw new Error((await r.json()).description || 'error');
+      msg.textContent = {{ section.settings.l_done | json }};
+      document.dispatchEvent(new CustomEvent('cart:refresh'));
+      setTimeout(() => location.href = '/cart', 700);
+    } catch (e) { msg.textContent = e.message; }
+    btn.disabled = false;
+  });
+})();
+</script>
+
+{% schema %}
+{"name":"תרכיב לוק","tag":"div","settings":[
+{"type":"text","id":"title","label":"כותרת","default":"תרכיב לוק"},
+{"type":"text","id":"sub","label":"שורת הסבר","default":"בוחרים חלק עליון, ג׳ינס ונעליים – ורואים את זה עליו."},
+{"type":"text","id":"l_top","label":"תווית חלק עליון","default":"חלק עליון"},
+{"type":"text","id":"l_bottom","label":"תווית ג׳ינס","default":"ג׳ינס"},
+{"type":"text","id":"l_shoes","label":"תווית נעליים","default":"נעליים"},
+{"type":"text","id":"l_total","label":"תווית סך הכל","default":"סך הלוק"},
+{"type":"text","id":"l_add","label":"כפתור","default":"להוסיף את הלוק לסל"},
+{"type":"text","id":"l_pick","label":"הודעת מידה חסרה","default":"צריך לבחור מידה לכל פריט."},
+{"type":"text","id":"l_done","label":"הודעת הצלחה","default":"הלוק בסל."}],
+"blocks":[{"type":"item","name":"פריט","settings":[
+{"type":"select","id":"cat","label":"סוג","options":[{"value":"top","label":"חלק עליון"},{"value":"bottom","label":"ג׳ינס"},{"value":"shoes","label":"נעליים"}],"default":"top"},
+{"type":"product","id":"product","label":"מוצר"},
+{"type":"text","id":"color","label":"צבע (כמו בשם הווריאנט)"},
+{"type":"text","id":"img","label":"קישור לתמונה על הדוגמן"},
+{"type":"range","id":"c","label":"קו מותן במרכז (%)","min":40,"max":70,"step":1,"default":53},
+{"type":"range","id":"s","label":"קו מותן בצדדים (%)","min":40,"max":70,"step":1,"default":53}]}],
+"presets":[{"name":"תרכיב לוק"}]}
+{% endschema %}
