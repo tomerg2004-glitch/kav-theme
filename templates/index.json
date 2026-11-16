@@ -1,7 +1,7 @@
 {
  "sections": {
   "hero": {
-   "type": "runway",
+   "type": "orbit",
    "settings": {
     "image": "shopify://shop_images/kav-hero-model-02.png",
     "image2": "shopify://shop_images/kav-look-02b.png",
