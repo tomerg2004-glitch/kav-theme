@@ -54,7 +54,7 @@
 .ka__behind p{margin:0;font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:300;font-size:clamp(28px,3.4vw,56px);line-height:1.15;letter-spacing:-.01em;max-width:18ch;opacity:calc(var(--p)*1.6 - .3);transform:scale(calc(.94 + var(--p)*.06))}
 
 /* panels = doors */
-.ka__panels{position:absolute;inset:0;z-index:1;display:flex;gap:2px;background:var(--ink)}
+.ka__panels{position:absolute;inset:0;z-index:1;display:flex;gap:2px}
 .ka__panel{position:relative;flex:1 1 0;min-width:0;overflow:hidden;color:inherit;text-decoration:none;transition:flex-grow 1.1s cubic-bezier(.22,1,.36,1);cursor:none;background:#050505}
 .ka__panel--1{transform:translateX(calc(var(--p) * var(--dir,1) * -105%))}
 .ka__panel--2{transform:translateX(calc(var(--p) * var(--dir,1) * 105%))}
@@ -76,7 +76,7 @@
 
 /* centre column */
 .ka__centre{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;justify-content:center;pointer-events:none;opacity:calc(1 - var(--p)*2.2);mix-blend-mode:difference}
-.ka__foot{position:absolute;z-index:4;left:50%;bottom:clamp(22px,4.5vh,48px);transform:translateX(-50%);width:min(620px,88vw);display:flex;flex-direction:column;align-items:center;text-align:center;pointer-events:none;opacity:calc(1 - var(--p)*2.2)}
+.ka__foot{position:absolute;z-index:4;left:50%;bottom:calc(clamp(22px,4.5vh,48px) + 38px);transform:translateX(-50%);width:min(620px,88vw);display:flex;flex-direction:column;align-items:center;text-align:center;pointer-events:none;opacity:calc(1 - var(--p)*2.2)}
 .ka__foot a{pointer-events:auto}
 .ka__row{display:flex;align-items:center;gap:22px;margin-top:10px}
 .ka__logo{margin:0;display:flex;direction:ltr;font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:300;font-size:clamp(84px,13vw,220px);line-height:.82;letter-spacing:.02em;color:#ece6dc}
