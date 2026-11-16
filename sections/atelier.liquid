@@ -28,12 +28,16 @@
 
     <div class="ka__centre">
       <p class="ka__logo" aria-hidden="true">{%- assign wm = section.settings.wordmark | default: 'KAV' | split: '' -%}{%- for ch in wm -%}<span class="ka__ch"><span>{{ ch }}</span></span>{%- endfor -%}</p>
+    </div>
+    <div class="ka__foot">
       <span class="ka__rule" aria-hidden="true"></span>
       <h1 id="AtelierH-{{ section.id }}" class="ka__h1">{%- assign words = section.settings.headline | split: ' ' -%}{%- for w in words -%}<span class="ka__w">{{ w }}</span>{% unless forloop.last %} {% endunless %}{%- endfor -%}</h1>
-      {%- if section.settings.season != blank -%}<p class="ka__season">{{ section.settings.season }}</p>{%- endif -%}
-      {%- if section.settings.btn_label != blank -%}
-        <a class="ka__btn" href="{{ section.settings.btn_link | default: '#cat-shoes' }}"><span>{{ section.settings.btn_label }}</span><i aria-hidden="true"></i></a>
-      {%- endif -%}
+      <div class="ka__row">
+        {%- if section.settings.season != blank -%}<p class="ka__season">{{ section.settings.season }}</p>{%- endif -%}
+        {%- if section.settings.btn_label != blank -%}
+          <a class="ka__btn" href="{{ section.settings.btn_link | default: '#cat-shoes' }}"><span>{{ section.settings.btn_label }}</span><i aria-hidden="true"></i></a>
+        {%- endif -%}
+      </div>
     </div>
 
     <div class="ka__behind" aria-hidden="true"><p>{{ section.settings.reveal }}</p></div>
@@ -61,26 +65,28 @@
   .ka__panels:hover .ka__panel:not(:hover) .ka__label{opacity:.35}
 }
 .ka__media{position:absolute;inset:0;display:block;clip-path:inset(50% 0 50% 0)}
-.ka__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;transform-origin:50% 40%;filter:contrast(1.05) saturate(.88);transition:filter .9s ease;will-change:transform}
-.ka__media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(11,10,9,.85),rgba(11,10,9,0) 38%),linear-gradient(to bottom,rgba(11,10,9,.55),rgba(11,10,9,0) 22%);pointer-events:none}
+.ka__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0%;transform-origin:50% 25%;filter:contrast(1.05) saturate(.88);transition:filter .9s ease;will-change:transform}
+.ka__media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(11,10,9,.92),rgba(11,10,9,.35) 26%,rgba(11,10,9,0) 44%),linear-gradient(to bottom,rgba(11,10,9,.55),rgba(11,10,9,0) 22%);pointer-events:none}
 .ka__sheen{position:absolute;inset:-20% -60%;background:linear-gradient(105deg,transparent 42%,rgba(255,248,236,.10) 50%,transparent 58%);transform:translateX(-60%);pointer-events:none;mix-blend-mode:screen}
 
-.ka__label{position:absolute;z-index:2;bottom:clamp(24px,5vh,52px);inset-inline-start:clamp(20px,3vw,44px);display:flex;align-items:baseline;gap:14px;transition:opacity .6s ease;opacity:0}
+.ka__label{position:absolute;z-index:2;top:calc(var(--hdr-h,76px) + 22px);inset-inline-start:clamp(20px,3vw,44px);display:flex;align-items:baseline;gap:14px;transition:opacity .6s ease;opacity:0}
 .ka__num{font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:300;font-size:clamp(40px,4.6vw,76px);line-height:.8;direction:ltr}
 .ka__name{font-size:13px;letter-spacing:.14em;text-transform:uppercase;direction:ltr;color:rgba(236,230,220,.75)}
 .ka__panel--2 .ka__label{inset-inline-start:auto;inset-inline-end:clamp(20px,3vw,44px)}
 
 /* centre column */
-.ka__centre{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-46%);width:min(560px,86vw);display:flex;flex-direction:column;align-items:center;text-align:center;pointer-events:none;opacity:calc(1 - var(--p)*2.2)}
-.ka__centre a{pointer-events:auto}
-.ka__logo{margin:0;display:flex;direction:ltr;font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:300;font-size:clamp(84px,13vw,220px);line-height:.82;letter-spacing:.02em;text-shadow:0 10px 60px rgba(0,0,0,.55)}
+.ka__centre{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;justify-content:center;pointer-events:none;opacity:calc(1 - var(--p)*2.2);mix-blend-mode:difference}
+.ka__foot{position:absolute;z-index:4;left:50%;bottom:clamp(22px,4.5vh,48px);transform:translateX(-50%);width:min(620px,88vw);display:flex;flex-direction:column;align-items:center;text-align:center;pointer-events:none;opacity:calc(1 - var(--p)*2.2)}
+.ka__foot a{pointer-events:auto}
+.ka__row{display:flex;align-items:center;gap:22px;margin-top:10px}
+.ka__logo{margin:0;display:flex;direction:ltr;font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:300;font-size:clamp(84px,13vw,220px);line-height:.82;letter-spacing:.02em;color:#ece6dc}
 .ka__ch{display:inline-block;overflow:hidden;padding:0 .02em .04em}
 .ka__ch>span{display:inline-block;transform:translateY(105%)}
-.ka__rule{display:block;width:min(360px,60vw);height:1px;margin:22px 0 20px;background:linear-gradient(90deg,transparent,rgba(236,230,220,.7),transparent);transform:scaleX(0)}
+.ka__rule{display:block;width:min(360px,60vw);height:1px;margin:0 0 16px;background:linear-gradient(90deg,transparent,rgba(236,230,220,.7),transparent);transform:scaleX(0)}
 .ka__h1{margin:0;font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:300;font-size:clamp(26px,2.6vw,42px);line-height:1.15;letter-spacing:-.005em;text-shadow:0 6px 40px rgba(0,0,0,.6)}
 .ka__w{display:inline-block;opacity:0;filter:blur(8px);transform:translateY(10px)}
-.ka__season{margin:12px 0 0;font-size:13px;color:rgba(236,230,220,.65);opacity:0}
-.ka__btn{position:relative;margin-top:28px;display:inline-flex;align-items:center;gap:12px;padding:14px 4px 10px;color:var(--bone);font-size:15px;font-weight:500;text-decoration:none;opacity:0}
+.ka__season{margin:0;font-size:13px;color:rgba(236,230,220,.65);opacity:0}
+.ka__btn{position:relative;display:inline-flex;align-items:center;gap:12px;padding:14px 4px 10px;color:var(--bone);font-size:15px;font-weight:500;text-decoration:none;opacity:0}
 .ka__btn i{position:absolute;left:0;right:0;bottom:4px;height:1px;background:currentColor;transform-origin:right;transition:transform .6s cubic-bezier(.22,1,.36,1)}
 @media (hover:hover){.ka__btn:hover i{transform:scaleX(.35)}}
 .ka__btn:focus-visible,.ka__panel:focus-visible{outline:1px solid var(--bone);outline-offset:-10px}
@@ -94,9 +100,9 @@
 @media (max-width:749px){
   .ka{height:150vh}
   .ka__img{object-position:50% 12%}
-  .ka__label{bottom:auto;top:calc(var(--hdr-h,76px) + 14px)}
   .ka__num{font-size:34px}.ka__name{display:none}
-  .ka__centre{top:auto;bottom:6vh;transform:translateX(-50%)}
+  .ka__centre{top:42%}
+  .ka__row{flex-direction:column;gap:6px}
   .ka__logo{font-size:72px}
   .ka__cursor{display:none}
   .ka__panel{cursor:pointer}
