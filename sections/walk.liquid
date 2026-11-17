@@ -1,0 +1,107 @@
+{%- comment -%}
+  WALK hero — a model walks out of total darkness toward you.
+  Full-bleed muted video. Each loop: rises from black, walks into the light, sinks back to black.
+  Only text: a small look name that surfaces once he's close, plus a quiet pause control.
+{%- endcomment -%}
+{%- assign vid = section.settings.video_file | default: 'kav-walk.mp4' -%}
+{%- assign poster = section.settings.poster_file | default: 'kav-walk-poster.jpg' -%}
+<section class="kw" id="Walk-{{ section.id }}" aria-label="{{ section.settings.label | escape }}">
+  <div class="kw__stage">
+    <video class="kw__video" muted playsinline preload="auto" poster="{{ poster | asset_url }}" aria-hidden="true" tabindex="-1">
+      <source src="{{ vid | asset_url }}" type="video/mp4">
+    </video>
+    <span class="kw__vignette" aria-hidden="true"></span>
+    <h1 class="kw__sr">{{ shop.name }} · {{ section.settings.headline }}</h1>
+
+    <a class="kw__look" href="{{ section.settings.link | default: '/collections/all' }}">
+      <span class="kw__num" aria-hidden="true">01</span>
+      <span class="kw__name">{{ section.settings.label }}</span>
+      <span class="kw__go">{{ section.settings.cta }}</span>
+    </a>
+
+    <button class="kw__pause" type="button" aria-label="עצירת הסרטון" aria-pressed="false">
+      <span class="kw__bars" aria-hidden="true"></span>
+    </button>
+    <span class="kw__cue" aria-hidden="true"></span>
+  </div>
+</section>
+
+<style>
+.kw{--ink:#050505;--bone:#ece6dc;position:relative;background:var(--ink);color:var(--bone);margin-top:calc(-1 * var(--hdr-h,76px))}
+.kw__stage{position:relative;height:100svh;min-height:520px;overflow:hidden;isolation:isolate}
+.kw__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;opacity:0;transform:scale(1.04);transition:opacity 1.4s cubic-bezier(.4,0,.2,1),transform 9s linear;will-change:opacity,transform}
+.kw.is-in .kw__video{opacity:1;transform:scale(1)}
+.kw.is-out .kw__video{opacity:0;transition:opacity .9s cubic-bezier(.4,0,1,1),transform .9s linear}
+.kw__vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 42%,transparent 38%,rgba(5,5,5,.55) 72%,rgba(5,5,5,.92) 100%),linear-gradient(to top,rgba(5,5,5,.75),transparent 28%)}
+.kw__sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.kw__look{position:absolute;z-index:2;bottom:clamp(26px,5vh,54px);inset-inline-start:clamp(20px,3.4vw,52px);display:flex;align-items:baseline;gap:16px;color:var(--bone);text-decoration:none;direction:ltr;opacity:0;transform:translateY(10px);filter:blur(6px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.2,.7,.2,1),filter 1.1s ease}
+.kw.show-look .kw__look{opacity:1;transform:none;filter:none}
+.kw__num{font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:300;font-size:clamp(30px,3vw,48px);line-height:.8}
+.kw__name{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(236,230,220,.82)}
+.kw__go{font-size:12px;letter-spacing:.06em;color:rgba(236,230,220,.55);position:relative;padding-bottom:3px;direction:rtl}
+.kw__go::after{content:"";position:absolute;inset-inline:0;bottom:0;height:1px;background:currentColor;transform:scaleX(.25);transform-origin:right;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.kw__look:hover .kw__go,.kw__look:focus-visible .kw__go{color:var(--bone)}
+.kw__look:hover .kw__go::after,.kw__look:focus-visible .kw__go::after{transform:scaleX(1)}
+.kw__look:focus-visible,.kw__pause:focus-visible{outline:1px solid var(--bone);outline-offset:6px}
+.kw__pause{position:absolute;z-index:2;bottom:clamp(22px,5vh,50px);inset-inline-end:clamp(20px,3.4vw,52px);width:44px;height:44px;display:grid;place-items:center;background:none;border:1px solid rgba(236,230,220,.18);border-radius:50%;color:var(--bone);cursor:pointer;opacity:.55;transition:opacity .3s,border-color .3s}
+.kw__pause:hover{opacity:1;border-color:rgba(236,230,220,.5)}
+.kw__bars{width:8px;height:10px;border-inline:2px solid currentColor}
+.kw__pause[aria-pressed="true"] .kw__bars{width:0;height:0;border:0;border-block:5px solid transparent;border-left:8px solid currentColor;margin-left:2px}
+.kw__cue{position:absolute;z-index:2;left:50%;bottom:0;width:1px;height:clamp(30px,6vh,56px);background:linear-gradient(to bottom,transparent,rgba(236,230,220,.5));transform-origin:top;animation:kwCue 2.8s cubic-bezier(.6,0,.2,1) infinite}
+@keyframes kwCue{0%{transform:scaleY(0);opacity:1}55%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+@media (max-width:749px){
+  .kw__video{object-position:50% 25%}
+  .kw__look{gap:12px}
+  .kw__go{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .kw__video{opacity:1;transform:none;transition:none}
+  .kw__look{opacity:1;transform:none;filter:none;transition:none}
+  .kw__cue{animation:none;opacity:.5}
+  .kw__pause{display:none}
+}
+</style>
+
+<script>
+(function(){
+  var root=document.getElementById('Walk-{{ section.id }}');if(!root)return;
+  var v=root.querySelector('.kw__video'),btn=root.querySelector('.kw__pause');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var LOOK_AT={{ section.settings.look_at | default: 2.4 }},OUT=0.95,paused=false,fading=false,visible=true;
+  if(reduce){root.classList.add('is-in','show-look');return;}
+  function start(){
+    v.currentTime=0;fading=false;
+    root.classList.remove('is-out','show-look');
+    var p=v.play();if(p&&p.catch)p.catch(function(){root.classList.add('is-in','show-look');});
+    requestAnimationFrame(function(){requestAnimationFrame(function(){root.classList.add('is-in');});});
+  }
+  v.addEventListener('timeupdate',function(){
+    if(!v.duration)return;
+    if(v.currentTime>=LOOK_AT)root.classList.add('show-look');
+    if(!fading&&v.currentTime>=v.duration-OUT){fading=true;root.classList.add('is-out');root.classList.remove('is-in');}
+  });
+  v.addEventListener('ended',function(){setTimeout(function(){if(!paused&&visible)start();},500);});
+  btn.addEventListener('click',function(){
+    paused=!paused;btn.setAttribute('aria-pressed',paused);btn.setAttribute('aria-label',paused?'הפעלת הסרטון':'עצירת הסרטון');
+    if(paused){v.pause();}else if(v.ended||fading){start();}else{v.play();}
+  });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(e){visible=e[0].isIntersecting;
+      if(!visible){v.pause();}else if(!paused){if(v.ended||fading)start();else v.play();}
+    },{threshold:.15}).observe(root);
+  }
+  if(v.readyState>=2)start();else v.addEventListener('loadeddata',start,{once:true});
+})();
+</script>
+
+{% schema %}
+{"name":"פתיחה – צעידה","tag":"div","settings":[
+{"type":"text","id":"label","label":"שם הלוק","default":"NOMAD + DRIFT"},
+{"type":"url","id":"link","label":"קישור"},
+{"type":"text","id":"cta","label":"טקסט קישור קטן","default":"לראות את הלוק"},
+{"type":"text","id":"headline","label":"כותרת נסתרת (לגוגל)","default":"בגדים לגברים"},
+{"type":"number","id":"look_at","label":"מתי השם מופיע (שניות)","default":2.4},
+{"type":"text","id":"video_file","label":"קובץ סרטון ב-assets","default":"kav-walk.mp4"},
+{"type":"text","id":"poster_file","label":"תמונת פתיחה ב-assets","default":"kav-walk-poster.jpg"}
+],"presets":[{"name":"פתיחה – צעידה"}]}
+{% endschema %}

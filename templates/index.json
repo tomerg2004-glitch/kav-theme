@@ -8,127 +8,123 @@
  * ------------------------------------------------------------
  */
 {
- "sections": {
-  "hero": {
-   "type": "atelier",
-   "settings": {
-    "image": "shopify://shop_images/kav-hero-model-02.png",
-    "image2": "shopify://shop_images/kav-look-02b.png",
-    "label1": "NOMAD + DRIFT",
-    "link1": "/collections/button-shirts",
-    "label2": "VOID + RECON",
-    "link2": "/collections/pants",
-    "wordmark": "KAV",
-    "headline": "פשוט להתלבש טוב.",
-    "season": "חורף 2026",
-    "btn_label": "לראות מה יש",
-    "btn_link": "#cat-shoes"
-   }
-  },
-  "service": {
-   "type": "service",
-   "blocks": {
-    "s1": {
-     "type": "item",
-     "settings": {
-      "icon": "truck",
-      "title": "משלוח עד הבית",
-      "text": "לכל הארץ, עם מספר מעקב."
-     }
+  "sections": {
+    "hero": {
+      "type": "walk",
+      "settings": {
+        "label": "NOMAD + DRIFT",
+        "link": "/collections/button-shirts",
+        "cta": "לראות את הלוק",
+        "headline": "בגדים לגברים",
+        "look_at": 2.4,
+        "video_file": "kav-walk.mp4",
+        "poster_file": "kav-walk-poster.jpg"
+      }
     },
-    "s2": {
-     "type": "item",
-     "settings": {
-      "icon": "return",
-      "title": "14 יום לביטול",
-      "text": "מיום קבלת ההזמנה."
-     }
+    "service": {
+      "type": "service",
+      "blocks": {
+        "s1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "משלוח עד הבית",
+            "text": "לכל הארץ, עם מספר מעקב."
+          }
+        },
+        "s2": {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "title": "14 יום לביטול",
+            "text": "מיום קבלת ההזמנה."
+          }
+        },
+        "s3": {
+          "type": "item",
+          "settings": {
+            "icon": "lock",
+            "title": "תשלום מאובטח",
+            "text": "פרטי הכרטיס לא נשמרים אצלנו."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {}
     },
-    "s3": {
-     "type": "item",
-     "settings": {
-      "icon": "lock",
-      "title": "תשלום מאובטח",
-      "text": "פרטי הכרטיס לא נשמרים אצלנו."
-     }
+    "news": {
+      "type": "newsletter",
+      "settings": {
+        "title": "משהו חדש נכנס? נגיד לך.",
+        "text": "מייל קצר כשמגיע פריט חדש. זהו.",
+        "button": "תעדכנו אותי"
+      }
+    },
+    "ticker": {
+      "type": "marquee",
+      "settings": {
+        "items": "PHANTOM|DRIFT|RECON|NOMAD|VOID|ATLAS|KAV · חורף 2026",
+        "label": "הפריטים בקולקציה"
+      }
+    },
+    "catnav": {
+      "type": "cat-nav",
+      "settings": {
+        "menu": "main-menu"
+      }
+    },
+    "c_shoes": {
+      "type": "category-row",
+      "settings": {
+        "collection": "shoes"
+      }
+    },
+    "c_shorts": {
+      "type": "category-row",
+      "settings": {
+        "collection": "shorts"
+      }
+    },
+    "c_pants": {
+      "type": "category-row",
+      "settings": {
+        "collection": "pants"
+      }
+    },
+    "c_button": {
+      "type": "category-row",
+      "settings": {
+        "collection": "button-shirts"
+      }
+    },
+    "c_shirts": {
+      "type": "category-row",
+      "settings": {
+        "collection": "shirts"
+      }
+    },
+    "c_hoodies": {
+      "type": "category-row",
+      "settings": {
+        "collection": "hoodies-sweaters"
+      }
     }
-   },
-   "block_order": [
-    "s1",
-    "s2",
-    "s3"
-   ],
-   "settings": {}
   },
-  "news": {
-   "type": "newsletter",
-   "settings": {
-    "title": "משהו חדש נכנס? נגיד לך.",
-    "text": "מייל קצר כשמגיע פריט חדש. זהו.",
-    "button": "תעדכנו אותי"
-   }
-  },
-  "ticker": {
-   "type": "marquee",
-   "settings": {
-    "items": "PHANTOM|DRIFT|RECON|NOMAD|VOID|ATLAS|KAV · חורף 2026",
-    "label": "הפריטים בקולקציה"
-   }
-  },
-  "catnav": {
-   "type": "cat-nav",
-   "settings": {
-    "menu": "main-menu"
-   }
-  },
-  "c_shoes": {
-   "type": "category-row",
-   "settings": {
-    "collection": "shoes"
-   }
-  },
-  "c_shorts": {
-   "type": "category-row",
-   "settings": {
-    "collection": "shorts"
-   }
-  },
-  "c_pants": {
-   "type": "category-row",
-   "settings": {
-    "collection": "pants"
-   }
-  },
-  "c_button": {
-   "type": "category-row",
-   "settings": {
-    "collection": "button-shirts"
-   }
-  },
-  "c_shirts": {
-   "type": "category-row",
-   "settings": {
-    "collection": "shirts"
-   }
-  },
-  "c_hoodies": {
-   "type": "category-row",
-   "settings": {
-    "collection": "hoodies-sweaters"
-   }
-  }
- },
- "order": [
-  "hero",
-  "catnav",
-  "c_shoes",
-  "c_pants",
-  "c_button",
-  "c_shirts",
-  "c_hoodies",
-  "c_shorts",
-  "ticker",
-  "service",
-  "news"
- ]
+  "order": [
+    "hero",
+    "catnav",
+    "c_shoes",
+    "c_pants",
+    "c_button",
+    "c_shirts",
+    "c_hoodies",
+    "c_shorts",
+    "ticker",
+    "service",
+    "news"
+  ]
 }
