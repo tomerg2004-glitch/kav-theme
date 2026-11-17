@@ -16,9 +16,12 @@
         "link": "/collections/button-shirts",
         "cta": "לראות את הלוק",
         "headline": "בגדים לגברים",
-        "look_at": 2.4,
+        "look_at": 2.2,
         "video_file": "kav-walk.mp4",
-        "poster_file": "kav-walk-poster.jpg"
+        "poster_file": "kav-walk-poster.jpg",
+        "video_file2": "kav-walk-2.mp4",
+        "label2": "VOID + RECON",
+        "link2": "/collections/pants"
       }
     },
     "service": {

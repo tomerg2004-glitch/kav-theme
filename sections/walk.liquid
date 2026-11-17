@@ -5,11 +5,10 @@
 {%- endcomment -%}
 {%- assign vid = section.settings.video_file | default: 'kav-walk.mp4' -%}
 {%- assign poster = section.settings.poster_file | default: 'kav-walk-poster.jpg' -%}
-<section class="kw" id="Walk-{{ section.id }}" aria-label="{{ section.settings.label | escape }}">
+{%- capture clips -%}[{"src":{{ vid | asset_url | json }},"label":{{ section.settings.label | json }},"link":{{ section.settings.link | default: '/collections/all' | json }}}{%- if section.settings.video_file2 != blank -%},{"src":{{ section.settings.video_file2 | asset_url | json }},"label":{{ section.settings.label2 | json }},"link":{{ section.settings.link2 | default: '/collections/all' | json }}}{%- endif -%}]{%- endcapture -%}
+<section class="kw" data-clips='{{ clips | escape }}' id="Walk-{{ section.id }}" aria-label="{{ section.settings.label | escape }}">
   <div class="kw__stage">
-    <video class="kw__video" muted playsinline preload="auto" poster="{{ poster | asset_url }}" aria-hidden="true" tabindex="-1">
-      <source src="{{ vid | asset_url }}" type="video/mp4">
-    </video>
+    <video class="kw__video" muted playsinline preload="auto" poster="{{ poster | asset_url }}" src="{{ vid | asset_url }}" aria-hidden="true" tabindex="-1"></video>
     <span class="kw__vignette" aria-hidden="true"></span>
     <h1 class="kw__sr">{{ shop.name }} · {{ section.settings.headline }}</h1>
 
@@ -69,6 +68,15 @@
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var LOOK_AT={{ section.settings.look_at | default: 2.4 }},OUT=0.95,paused=false,fading=false,visible=true;
   if(reduce){root.classList.add('is-in','show-look');return;}
+  var clips=[];try{clips=JSON.parse(root.getAttribute('data-clips'))||[]}catch(e){}
+  var idx=0,look=root.querySelector('.kw__look'),num=root.querySelector('.kw__num'),nm=root.querySelector('.kw__name');
+  clips.slice(1).forEach(function(c){var l=document.createElement('link');l.rel='prefetch';l.href=c.src;l.as='video';document.head.appendChild(l);});
+  function next(){
+    if(clips.length<2){start();return;}
+    idx=(idx+1)%clips.length;var c=clips[idx];
+    v.src=c.src;look.href=c.link;nm.textContent=c.label;num.textContent=('0'+(idx+1)).slice(-2);
+    v.addEventListener('loadeddata',start,{once:true});v.load();
+  }
   function start(){
     v.currentTime=0;fading=false;
     root.classList.remove('is-out','show-look');
@@ -80,7 +88,7 @@
     if(v.currentTime>=LOOK_AT)root.classList.add('show-look');
     if(!fading&&v.currentTime>=v.duration-OUT){fading=true;root.classList.add('is-out');root.classList.remove('is-in');}
   });
-  v.addEventListener('ended',function(){setTimeout(function(){if(!paused&&visible)start();},500);});
+  v.addEventListener('ended',function(){setTimeout(function(){if(!paused&&visible)next();},500);});
   btn.addEventListener('click',function(){
     paused=!paused;btn.setAttribute('aria-pressed',paused);btn.setAttribute('aria-label',paused?'הפעלת הסרטון':'עצירת הסרטון');
     if(paused){v.pause();}else if(v.ended||fading){start();}else{v.play();}
@@ -100,6 +108,9 @@
 {"type":"url","id":"link","label":"קישור"},
 {"type":"text","id":"cta","label":"טקסט קישור קטן","default":"לראות את הלוק"},
 {"type":"text","id":"headline","label":"כותרת נסתרת (לגוגל)","default":"בגדים לגברים"},
+{"type":"text","id":"video_file2","label":"סרטון 2 ב-assets"},
+{"type":"text","id":"label2","label":"שם לוק 2"},
+{"type":"url","id":"link2","label":"קישור לוק 2"},
 {"type":"number","id":"look_at","label":"מתי השם מופיע (שניות)","default":2.4},
 {"type":"text","id":"video_file","label":"קובץ סרטון ב-assets","default":"kav-walk.mp4"},
 {"type":"text","id":"poster_file","label":"תמונת פתיחה ב-assets","default":"kav-walk-poster.jpg"}
