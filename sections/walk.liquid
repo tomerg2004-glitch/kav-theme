@@ -29,7 +29,7 @@
 <style>
 .kw{--ink:#050505;--bone:#ece6dc;position:relative;background:var(--ink);color:var(--bone);margin-top:calc(-1 * var(--hdr-h,76px))}
 .kw__stage{position:relative;height:100svh;min-height:520px;overflow:hidden;isolation:isolate}
-.kw__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%;opacity:0;transform:scale(1.04);transition:opacity 1.4s cubic-bezier(.4,0,.2,1),transform 9s linear;will-change:opacity,transform}
+.kw__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0%;opacity:0;transform:scale(1.04);transition:opacity 1.4s cubic-bezier(.4,0,.2,1),transform 9s linear;will-change:opacity,transform}
 .kw.is-in .kw__video{opacity:1;transform:scale(1)}
 .kw.is-out .kw__video{opacity:0;transition:opacity .9s cubic-bezier(.4,0,1,1),transform .9s linear}
 .kw__vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 42%,transparent 38%,rgba(5,5,5,.55) 72%,rgba(5,5,5,.92) 100%),linear-gradient(to top,rgba(5,5,5,.75),transparent 28%)}
