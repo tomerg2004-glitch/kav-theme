@@ -224,3 +224,25 @@ document.querySelectorAll('[data-swatch-stage]').forEach(function(s){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){chips.forEach(function(c){c.classList.remove('is-on')});var c=map[e.target.id];if(c){c.classList.add('is-on');var row=c.parentNode,rr=row.getBoundingClientRect(),cr=c.getBoundingClientRect();row.scrollBy({left:(cr.left+cr.width/2)-(rr.left+rr.width/2),behavior:'smooth'});}}})},{rootMargin:'-40% 0px -55% 0px'});
   Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)});
 })();
+
+// ink pill glides to the active category chip
+(function(){
+  document.querySelectorAll('.k-catnav__row').forEach(function(row){
+    var ink=row.querySelector('.k-chip-ink');if(!ink)return;
+    function place(c){if(!c){ink.classList.remove('is-ready');return}
+      var x=c.offsetLeft;ink.style.width=c.offsetWidth+'px';ink.style.transform='translateX('+x+'px)';ink.style.top=c.offsetTop+'px';ink.style.height=c.offsetHeight+'px';ink.classList.add('is-ready');}
+    function cur(){return row.querySelector('.k-chip.is-on')}
+    place(cur());
+    if('MutationObserver' in window)new MutationObserver(function(){place(cur())}).observe(row,{subtree:true,attributes:true,attributeFilter:['class']});
+    addEventListener('resize',function(){place(cur())});
+    row.addEventListener('click',function(e){var c=e.target.closest('.k-chip');if(!c)return;row.querySelectorAll('.k-chip').forEach(function(k){k.classList.toggle('is-on',k===c)});});
+  });
+})();
+
+// the product photo you click flies into the product page
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a.k-pcard,a.kd__link');if(!a||e.metaKey||e.ctrlKey||e.shiftKey)return;
+  document.querySelectorAll('[style*="view-transition-name"]').forEach(function(el){el.style.viewTransitionName=''});
+  var img=a.querySelector('.k-pcard__media img:not(.is-alt)');if(img)img.style.viewTransitionName='kv-product';
+});
+window.addEventListener('pageshow',function(){document.querySelectorAll('.k-pcard__media img').forEach(function(i){i.style.viewTransitionName=''})});

@@ -24,6 +24,7 @@
   </style>
   {{ 'kav.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'kav.js' | asset_url }}" defer></script>
+  <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/cart*","/checkout*","/account*","/*/cart*","/search*","/*\\?*"]}}]},"eagerness":"moderate"}]}</script>
   {{ content_for_header }}
 </head>
 <body class="template-{{ template.name }}">

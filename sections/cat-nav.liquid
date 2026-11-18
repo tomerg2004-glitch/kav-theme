@@ -2,8 +2,10 @@
   <div class="k-wrap k-catnav__row">
     {%- for link in section.settings.menu.links -%}
       {%- if link.type == 'collection_link' and link.object.products_count == 0 -%}{%- continue -%}{%- endif -%}
-      <a class="k-chip" href="{% if link.type == 'collection_link' and template.name == 'index' %}#cat-{{ link.object.handle }}{% else %}{{ link.url }}{% endif %}">{{ link.title }}</a>
+      {%- assign on = false -%}{%- if template.name == 'collection' and link.type == 'collection_link' and link.object.handle == collection.handle -%}{%- assign on = true -%}{%- endif -%}{%- if template.name == 'collection' and link.url == '/collections/all' and collection.handle == 'all' -%}{%- assign on = true -%}{%- endif -%}
+      <a class="k-chip{% if on %} is-on{% endif %}"{% if on %} aria-current="page"{% endif %} href="{% if link.type == 'collection_link' and template.name == 'index' %}#cat-{{ link.object.handle }}{% else %}{{ link.url }}{% endif %}">{{ link.title }}</a>
     {%- endfor -%}
+    <span class="k-chip-ink" aria-hidden="true"></span>
   </div>
 </nav>
 {% schema %}

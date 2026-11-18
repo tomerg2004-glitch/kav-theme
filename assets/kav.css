@@ -531,3 +531,26 @@ html{scroll-behavior:smooth}
 .k-hero1__img--duo .k-hero1__fig:nth-child(1) img,.k-hero1__img--duo .k-hero1__fig:nth-child(2) img{
   -webkit-mask-image:linear-gradient(to right,transparent,#000 16%,#000 84%,transparent),linear-gradient(to top,transparent,#000 12%,#000 88%,transparent);-webkit-mask-composite:source-in;
   mask-image:linear-gradient(to right,transparent,#000 16%,#000 84%,transparent),linear-gradient(to top,transparent,#000 12%,#000 88%,transparent);mask-composite:intersect}
+
+/* ===== Motion layer: smooth, elegant movement between pages and categories ===== */
+@view-transition{navigation:auto}
+.k-header{view-transition-name:kv-header}
+.k-catnav__row{position:relative}
+.k-chip{position:relative;z-index:1;background:transparent}
+.k-chip.is-on{background:transparent;color:var(--paper);border-color:transparent}
+.k-chip-ink{position:absolute;z-index:0;top:12px;left:0;height:44px;width:0;border-radius:999px;background:var(--ink);opacity:0;pointer-events:none;view-transition-name:kv-ink;transition:transform 520ms cubic-bezier(.65,0,.35,1),width 520ms cubic-bezier(.65,0,.35,1),opacity 240ms ease}
+.k-chip-ink.is-ready{opacity:1}
+@media (hover:hover) and (pointer:fine){.k-chip:not(.is-on):hover{background:transparent;color:var(--ink);border-color:var(--ink)}}
+.k-gallery figure:first-child img{view-transition-name:kv-product}
+@keyframes kvPageOut{to{opacity:0;transform:translateY(-10px)}}
+@keyframes kvPageIn{from{opacity:0;transform:translateY(18px)}}
+::view-transition-old(root){animation:kvPageOut 220ms cubic-bezier(.4,0,1,1) both}
+::view-transition-new(root){animation:kvPageIn 560ms cubic-bezier(.2,.7,.2,1) 60ms both}
+::view-transition-group(kv-ink){animation-duration:620ms;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+::view-transition-group(kv-product){animation-duration:640ms;animation-timing-function:cubic-bezier(.65,0,.25,1)}
+::view-transition-old(kv-product),::view-transition-new(kv-product){height:100%;object-fit:cover}
+::view-transition-group(kv-header){animation:none}
+@media (prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  .k-chip-ink{transition:none}
+}
