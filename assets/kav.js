@@ -232,8 +232,9 @@ document.querySelectorAll('[data-swatch-stage]').forEach(function(s){
     var last=null;
     function place(c){if(!c){if(ink.classList.contains('is-ready'))ink.classList.remove('is-ready');last=null;return}
       var key=c.offsetLeft+'/'+c.offsetWidth;if(key===last)return;last=key;
+      var first=!ink.classList.contains('is-ready');if(first){ink.style.transition='none';}
       ink.style.width=c.offsetWidth+'px';ink.style.transform='translateX('+c.offsetLeft+'px)';ink.style.top=c.offsetTop+'px';ink.style.height=c.offsetHeight+'px';
-      if(!ink.classList.contains('is-ready'))ink.classList.add('is-ready');}
+      if(first){void ink.offsetWidth;ink.style.transition='';ink.classList.add('is-ready');}}
     function cur(){return row.querySelector('.k-chip.is-on')}
     place(cur());
     if('MutationObserver' in window){var mo=new MutationObserver(function(){place(cur())});row.querySelectorAll('.k-chip').forEach(function(ch){mo.observe(ch,{attributes:true,attributeFilter:['class']})});}
