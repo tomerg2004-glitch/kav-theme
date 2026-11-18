@@ -13,8 +13,8 @@
       "type": "duo",
       "settings": {
         "sr_title": "KAV · בגדים לגברים",
-        "video1": "kav-walk.mp4",
-        "poster1": "kav-walk-poster.jpg",
+        "video1": "kav-walk-nomad.mp4",
+        "poster1": "kav-walk-nomad-poster.jpg",
         "name1": "Nomad",
         "link1": "/products/plaid-05",
         "look1": [
@@ -22,12 +22,12 @@
           "yafo-jeans",
           "contrast-01"
         ],
-        "video2": "kav-walk-2.mp4",
-        "poster2": "kav-walk-2-poster.jpg",
-        "name2": "Void",
-        "link2": "/products/camo-04",
+        "video2": "kav-walk-layer.mp4",
+        "poster2": "kav-walk-layer-poster.jpg",
+        "name2": "Layer",
+        "link2": "/products/layer-tee",
         "look2": [
-          "boston-tee",
+          "layer-tee",
           "camo-04",
           "contrast-01"
         ],
