@@ -1,0 +1,139 @@
+{%- comment -%}
+  DUO hero: two models walk out of the dark side by side, each in a real KAV look.
+  As each one comes close, the pieces he wears surface beneath him with their prices, as links.
+  Hover a side: it widens, the other side dims. One opening moment: the two doors part from the seam.
+{%- endcomment -%}
+<section class="kd" id="Duo-{{ section.id }}" aria-label="{{ section.settings.sr_title | escape }}">
+  <h1 class="kd__sr">{{ section.settings.sr_title }}</h1>
+  <div class="kd__stage">
+    {%- for n in (1..2) -%}
+      {%- if n == 1 -%}
+        {%- assign vid = section.settings.video1 -%}{%- assign poster = section.settings.poster1 -%}{%- assign items = section.settings.look1 -%}{%- assign lname = section.settings.name1 -%}{%- assign lnk = section.settings.link1 -%}
+      {%- else -%}
+        {%- assign vid = section.settings.video2 -%}{%- assign poster = section.settings.poster2 -%}{%- assign items = section.settings.look2 -%}{%- assign lname = section.settings.name2 -%}{%- assign lnk = section.settings.link2 -%}
+      {%- endif -%}
+      <div class="kd__side kd__side--{{ n }}" data-side>
+        <a class="kd__media" href="{{ lnk | default: '/collections/all' }}" tabindex="-1" aria-hidden="true">
+          <video class="kd__video" muted playsinline preload="auto" poster="{{ poster | asset_url }}" src="{{ vid | asset_url }}"></video>
+        </a>
+        <div class="kd__look">
+          <p class="kd__name">{{ lname }}</p>
+          {%- if items.size > 0 -%}
+            <ul class="kd__items" role="list">
+              {%- for p in items -%}
+                <li class="kd__item" style="--i:{{ forloop.index0 }}">
+                  <a href="{{ p.url }}" class="kd__link">
+                    <span class="kd__title">{{ p.title }}</span>
+                    <span class="kd__price">{{ p.price | money_without_trailing_zeros }}</span>
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+    <button class="kd__pause" type="button" aria-label="עצירת הסרטונים" aria-pressed="false"><span class="kd__bars" aria-hidden="true"></span></button>
+  </div>
+</section>
+
+<style>
+.kd{--ink:#000;--bone:#ece6dc;--smoke:#8c877f;--tan:#c9b48c;position:relative;background:var(--ink);color:var(--bone);margin-top:calc(-1 * var(--hdr-h,76px))}
+.kd__sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.kd__stage{position:relative;height:100svh;min-height:560px;display:flex;gap:6px;padding-top:var(--hdr-h,76px);overflow:hidden;isolation:isolate}
+.kd__side{position:relative;flex:1 1 0;min-width:0;overflow:hidden;clip-path:inset(0 0 0 0);transition:flex-grow .9s cubic-bezier(.65,0,.2,1)}
+.kd__media{position:absolute;inset:0;display:block}
+.kd__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0%;opacity:0;transition:opacity 1.3s cubic-bezier(.4,0,.2,1),filter .9s ease;will-change:opacity}
+.kd__side.is-in .kd__video{opacity:1}
+.kd__side.is-out .kd__video{opacity:0;transition:opacity .9s cubic-bezier(.4,0,1,1),filter .9s ease}
+.kd__side::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(0,0,0,.88) 0,rgba(0,0,0,.35) 24%,transparent 46%),radial-gradient(130% 80% at 50% 30%,transparent 50%,rgba(0,0,0,.6) 100%)}
+/* opening: the two doors part from the seam */
+.kd.is-boot .kd__side--1{clip-path:inset(0 0 0 100%)}
+.kd.is-boot .kd__side--2{clip-path:inset(0 100% 0 0)}
+.kd.is-open .kd__side{transition:clip-path 1.6s cubic-bezier(.76,0,.24,1),flex-grow .9s cubic-bezier(.65,0,.2,1)}
+[dir=rtl] .kd.is-boot .kd__side--1{clip-path:inset(0 100% 0 0)}
+[dir=rtl] .kd.is-boot .kd__side--2{clip-path:inset(0 0 0 100%)}
+/* hover / focus: one side leads */
+@media (hover:hover) and (min-width:750px){
+  .kd__stage:has(.kd__side:hover) .kd__side:hover,.kd__stage:has(.kd__side:focus-within) .kd__side:focus-within{flex-grow:1.45}
+  .kd__stage:has(.kd__side:hover) .kd__side:not(:hover) .kd__video{filter:grayscale(1) brightness(.42)}
+  .kd__stage:has(.kd__side:hover) .kd__side:not(:hover) .kd__look{opacity:.35}
+}
+.kd__look{position:absolute;z-index:2;inset-inline:clamp(18px,3vw,48px);bottom:clamp(22px,5vh,52px);transition:opacity .6s ease}
+.kd__name{margin:0 0 14px;font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:300;font-size:clamp(22px,2.2vw,34px);line-height:1;letter-spacing:.01em;direction:ltr;text-align:start;opacity:0;transform:translateY(12px);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+[dir=rtl] .kd__name{text-align:right}
+.kd__items{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px}
+.kd__item{opacity:0;transform:translateY(10px);transition:opacity .8s ease calc(var(--i) * 110ms + 150ms),transform .8s cubic-bezier(.2,.7,.2,1) calc(var(--i) * 110ms + 150ms)}
+.kd__side.show-look .kd__name,.kd__side.show-look .kd__item{opacity:1;transform:none}
+.kd__link{display:grid;grid-template-columns:auto auto;column-gap:10px;align-items:baseline;color:var(--bone);text-decoration:none;padding-block:4px;border-bottom:1px solid rgba(236,230,220,.18);transition:border-color .35s ease}
+.kd__type{grid-column:1/-1;font-size:11px;color:var(--smoke);letter-spacing:.02em}
+.kd__title{font-size:14px;letter-spacing:.04em;direction:ltr}
+.kd__price{font-size:13px;color:var(--tan)}
+.kd__link:hover,.kd__link:focus-visible{border-color:var(--bone)}
+.kd__link:focus-visible,.kd__pause:focus-visible{outline:1px solid var(--bone);outline-offset:5px}
+.kd__pause{position:absolute;z-index:3;top:calc(var(--hdr-h,76px) + 16px);inset-inline-end:clamp(14px,2vw,28px);width:40px;height:40px;display:grid;place-items:center;background:rgba(0,0,0,.25);border:1px solid rgba(236,230,220,.2);border-radius:50%;color:var(--bone);cursor:pointer;opacity:.5;transition:opacity .3s}
+.kd__pause:hover{opacity:1}
+.kd__bars{width:8px;height:10px;border-inline:2px solid currentColor}
+.kd__pause[aria-pressed="true"] .kd__bars{width:0;height:0;border:0;border-block:5px solid transparent;border-left:8px solid currentColor;margin-left:2px}
+@media (max-width:749px){
+  .kd__stage{gap:3px;min-height:520px}
+  .kd__look{inset-inline:12px;bottom:18px}
+  .kd__name{font-size:19px;margin-bottom:8px}
+  .kd__items{flex-direction:column;gap:2px}
+  .kd__type{display:none}
+  .kd__title{font-size:12px}.kd__price{font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  .kd__video,.kd__name,.kd__item{opacity:1!important;transform:none!important;transition:none!important}
+  .kd.is-boot .kd__side{clip-path:none!important}
+  .kd__pause{display:none}
+}
+</style>
+
+<script>
+(function(){
+  var root=document.getElementById('Duo-{{ section.id }}');if(!root)return;
+  var sides=[].slice.call(root.querySelectorAll('[data-side]')),btn=root.querySelector('.kd__pause');
+  var LOOK_AT={{ section.settings.look_at | default: 2.4 }},OUT=.95,paused=false,visible=true;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){sides.forEach(function(s){s.classList.add('is-in','show-look')});return;}
+  root.classList.add('is-boot');
+  var states=sides.map(function(s,k){
+    var v=s.querySelector('video'),st={s:s,v:v,fading:false,delay:k*900};
+    st.start=function(){v.currentTime=0;st.fading=false;s.classList.remove('is-out','show-look');
+      var p=v.play();if(p&&p.catch)p.catch(function(){s.classList.add('is-in','show-look')});
+      requestAnimationFrame(function(){requestAnimationFrame(function(){s.classList.add('is-in')})});};
+    v.addEventListener('timeupdate',function(){if(!v.duration)return;
+      if(v.currentTime>=LOOK_AT)s.classList.add('show-look');
+      if(!st.fading&&v.currentTime>=v.duration-OUT){st.fading=true;s.classList.add('is-out');s.classList.remove('is-in')}});
+    v.addEventListener('ended',function(){setTimeout(function(){if(!paused&&visible)st.start()},600)});
+    return st;
+  });
+  function ready(v){return new Promise(function(r){if(v.readyState>=2)r();else v.addEventListener('loadeddata',r,{once:true})})}
+  Promise.all(states.map(function(st){return ready(st.v)})).then(function(){
+    requestAnimationFrame(function(){root.classList.add('is-open');root.classList.remove('is-boot');});
+    states.forEach(function(st){setTimeout(st.start,300+st.delay)});
+  });
+  setTimeout(function(){if(root.classList.contains('is-boot')){root.classList.add('is-open');root.classList.remove('is-boot');states.forEach(function(st){st.start()})}},4000);
+  btn.addEventListener('click',function(){paused=!paused;btn.setAttribute('aria-pressed',paused);btn.setAttribute('aria-label',paused?'הפעלת הסרטונים':'עצירת הסרטונים');
+    states.forEach(function(st){if(paused)st.v.pause();else if(st.v.ended||st.fading)st.start();else st.v.play()})});
+  if('IntersectionObserver' in window){new IntersectionObserver(function(e){visible=e[0].isIntersecting;
+    states.forEach(function(st){if(!visible)st.v.pause();else if(!paused){if(st.v.ended||st.fading)st.start();else st.v.play()}})},{threshold:.15}).observe(root);}
+})();
+</script>
+
+{% schema %}
+{"name":"פתיחה – שני דוגמנים","tag":"div","settings":[
+{"type":"text","id":"sr_title","label":"כותרת נסתרת (לגוגל)","default":"KAV · בגדים לגברים"},
+{"type":"text","id":"video1","label":"סרטון 1 ב-assets","default":"kav-walk.mp4"},
+{"type":"text","id":"poster1","label":"תמונה 1 ב-assets","default":"kav-walk-poster.jpg"},
+{"type":"text","id":"name1","label":"שם לוק 1","default":"Nomad"},
+{"type":"url","id":"link1","label":"קישור לוק 1"},
+{"type":"product_list","id":"look1","label":"פריטים בלוק 1","limit":4},
+{"type":"text","id":"video2","label":"סרטון 2 ב-assets","default":"kav-walk-2.mp4"},
+{"type":"text","id":"poster2","label":"תמונה 2 ב-assets","default":"kav-walk-2-poster.jpg"},
+{"type":"text","id":"name2","label":"שם לוק 2","default":"Void"},
+{"type":"url","id":"link2","label":"קישור לוק 2"},
+{"type":"product_list","id":"look2","label":"פריטים בלוק 2","limit":4},
+{"type":"number","id":"look_at","label":"מתי הפריטים מופיעים (שניות)","default":2.4}
+],"presets":[{"name":"פתיחה – שני דוגמנים"}]}
+{% endschema %}

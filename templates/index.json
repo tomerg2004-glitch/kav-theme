@@ -10,18 +10,28 @@
 {
   "sections": {
     "hero": {
-      "type": "walk",
+      "type": "duo",
       "settings": {
-        "label": "NOMAD + DRIFT",
-        "link": "/collections/button-shirts",
-        "cta": "לראות את הלוק",
-        "headline": "בגדים לגברים",
-        "look_at": 2.2,
-        "video_file": "kav-walk.mp4",
-        "poster_file": "kav-walk-poster.jpg",
-        "video_file2": "kav-walk-2.mp4",
-        "label2": "VOID + RECON",
-        "link2": "/collections/pants"
+        "sr_title": "KAV · בגדים לגברים",
+        "video1": "kav-walk.mp4",
+        "poster1": "kav-walk-poster.jpg",
+        "name1": "Nomad",
+        "link1": "/products/plaid-05",
+        "look1": [
+          "plaid-05",
+          "yafo-jeans",
+          "contrast-01"
+        ],
+        "video2": "kav-walk-2.mp4",
+        "poster2": "kav-walk-2-poster.jpg",
+        "name2": "Void",
+        "link2": "/products/camo-04",
+        "look2": [
+          "boston-tee",
+          "camo-04",
+          "contrast-01"
+        ],
+        "look_at": 2.2
       }
     },
     "service": {
