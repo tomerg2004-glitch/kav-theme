@@ -8,35 +8,35 @@
  * ------------------------------------------------------------
  */
 {
- "sections": {
-  "main": {
-   "type": "main-product",
-   "blocks": {
-    "desc": {
-     "type": "description",
-     "settings": {
-      "shipping": "<p>משלוח עד הבית תוך 2–3 שבועות, עם מספר מעקב.</p><p>אפשר לבטל עסקה תוך 14 יום מיום קבלת המוצר. הפרטים המלאים במדיניות הביטולים וההחזרות.</p>"
-     }
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "desc": {
+          "type": "description",
+          "settings": {
+            "shipping": "<p>משלוח עד הבית, עם מספר מעקב. זמן אספקה משוער: 2–3 שבועות מרגע ההזמנה. המועד המחייב יופיע באישור ההזמנה, ואם החבילה לא תגיע עד אליו – אפשר לבטל ולקבל החזר מלא.</p><p>אפשר לבטל עסקה תוך 14 יום מיום קבלת המוצר. הפרטים המלאים ב<a href=\"/policies/refund-policy\">מדיניות הביטולים וההחזרות</a> וב<a href=\"/policies/shipping-policy\">מדיניות המשלוחים</a>.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "desc"
+      ],
+      "settings": {
+        "ratio": "1",
+        "fit": "contain",
+        "show_thumbs": false
+      }
+    },
+    "sizes": {
+      "type": "size-guide",
+      "settings": {
+        "rows": "40:25|41:25.5|42:26.5|43:27|44:28|45:28.5|46:29.5|47:30"
+      }
     }
-   },
-   "block_order": [
-    "desc"
-   ],
-   "settings": {
-    "ratio": "1",
-    "fit": "contain",
-    "show_thumbs": false
-   }
   },
-  "sizes": {
-   "type": "size-guide",
-   "settings": {
-    "rows": "40:25|41:25.5|42:26.5|43:27|44:28|45:28.5|46:29.5|47:30"
-   }
-  }
- },
- "order": [
-  "main",
-  "sizes"
- ]
+  "order": [
+    "main",
+    "sizes"
+  ]
 }

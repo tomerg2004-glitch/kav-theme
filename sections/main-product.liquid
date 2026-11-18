@@ -13,6 +13,7 @@
 <div class="k-wrap" data-product data-added-msg="{{ 'products.added_title' | t }}" data-cart-label="{{ 'products.view_cart' | t }}" data-cart-url="{{ routes.cart_url }}">
 <script type="application/json" data-product-json>{{ product | json }}</script>
 <section class="k-product" aria-labelledby="ProductTitle-{{ section.id }}">
+  <div class="k-gallery-wrap">
   <div class="k-gallery{% if section.settings.fit == 'contain' %} k-gallery--contain{% endif %}" role="group" aria-label="{{ 'products.images' | t }}">
     {%- for media in product.media -%}
       {%- if media.media_type == 'image' -%}
@@ -21,6 +22,9 @@
     {%- else -%}
       <figure>{{ 'product-1' | placeholder_svg_tag: 'k-placeholder' }}</figure>
     {%- endfor -%}
+  </div>
+
+  <p class="k-imgnote">חלק מתמונות הדוגמן הן הדמיה של הפריט על הגוף. הצבע עשוי להיראות מעט שונה במסך.</p>
   </div>
 
   <div class="k-product__info">
@@ -83,6 +87,11 @@
         <button type="submit" class="k-btn k-btn--dark k-btn--block" data-add data-label-add="{{ 'products.add' | t }}" data-label-added="{{ 'products.added' | t }}" data-label-sold="{{ 'products.sold_out' | t }}" data-label-error="{{ 'products.error' | t }}"{% unless current.available %} disabled{% endunless %}>{% if current.available %}{{ 'products.add' | t }}{% else %}{{ 'products.sold_out' | t }}{% endif %}</button>
       </div>
     {%- endform -%}
+    <ul class="k-legal-strip" role="list">
+      <li>זמן אספקה משוער: {% if product.type contains 'סניק' or template.suffix == 'shoes' %}2–3 שבועות{% else %}7–21 ימי עסקים{% endif %}, עם מספר מעקב</li>
+      <li>המחיר כולל מע"מ כחוק. עלות משלוח, אם יש, מוצגת לפני התשלום</li>
+      <li>אפשר לבטל תוך 14 יום מקבלת המוצר · <a href="/policies/refund-policy">מדיניות ביטולים והחזרות</a></li>
+    </ul>
 
     {%- for block in section.blocks -%}
       {%- case block.type -%}
@@ -118,3 +127,9 @@
 {"type":"perks","name":"משלוח והחזרות","limit":1,"settings":[{"type":"text","id":"shipping","label":"משלוח","default":"משלוח עד הבית, עם מספר מעקב."},{"type":"text","id":"returns","label":"החזרות","default":"ביטול עסקה תוך 14 יום מקבלת המוצר."}]},
 {"type":"description","name":"תיאור ומשלוח","limit":1,"settings":[{"type":"richtext","id":"shipping","label":"משלוח וביטול עסקה","default":"<p>משלוח עד הבית עם מספר מעקב. זמן המשלוח מופיע בעמוד התשלום.</p><p>אפשר לבטל עסקה תוך 14 יום מיום קבלת המוצר. הפרטים המלאים במדיניות הביטולים וההחזרות.</p>"}]}]}
 {% endschema %}
+<style>
+.k-legal-strip{list-style:none;margin:14px 0 0;padding:14px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)}
+.k-legal-strip a{color:inherit}
+.k-imgnote{margin:10px 0 0;font-size:12px;color:var(--muted)}
+.k-gallery-wrap{min-width:0}
+</style>

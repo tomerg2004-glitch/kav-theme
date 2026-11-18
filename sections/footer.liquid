@@ -16,6 +16,7 @@
       {%- if shop.refund_policy -%}<a class="k-u" href="{{ shop.refund_policy.url }}">{{ 'footer.refund' | t }}</a>{%- endif -%}
       {%- if shop.shipping_policy -%}<a class="k-u" href="{{ shop.shipping_policy.url }}">{{ 'footer.shipping' | t }}</a>{%- endif -%}
       {%- if pages['privacy'].url -%}<a class="k-u" href="{{ pages['privacy'].url }}">{{ 'footer.privacy' | t }}</a>{%- elsif shop.privacy_policy -%}<a class="k-u" href="{{ shop.privacy_policy.url }}">{{ 'footer.privacy' | t }}</a>{%- endif -%}
+      {%- if shop.contact_information -%}<a class="k-u" href="{{ shop.contact_information.url }}">פרטי העסק</a>{%- endif -%}
       {%- if section.settings.accessibility_page != blank -%}<a class="k-u" href="{{ section.settings.accessibility_page.url }}">{{ 'footer.accessibility' | t }}</a>{%- elsif pages['accessibility'].url -%}<a class="k-u" href="{{ pages['accessibility'].url }}">הצהרת נגישות</a>{%- endif -%}
     </nav>
   </div>

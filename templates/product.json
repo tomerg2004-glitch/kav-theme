@@ -8,33 +8,33 @@
  * ------------------------------------------------------------
  */
 {
- "sections": {
-  "main": {
-   "type": "main-product",
-   "blocks": {
-    "desc": {
-     "type": "description",
-     "settings": {
-      "shipping": "<p>משלוח עד הבית עם מספר מעקב. זמן המשלוח מופיע בעמוד התשלום.</p><p>אפשר לבטל עסקה תוך 14 יום מיום קבלת המוצר. הפרטים המלאים במדיניות הביטולים וההחזרות.</p>"
-     }
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "desc": {
+          "type": "description",
+          "settings": {
+            "shipping": "<p>משלוח עד הבית, עם מספר מעקב. זמן אספקה משוער: 7–21 ימי עסקים מרגע ההזמנה. המועד המחייב יופיע באישור ההזמנה, ואם החבילה לא תגיע עד אליו – אפשר לבטל ולקבל החזר מלא.</p><p>אפשר לבטל עסקה תוך 14 יום מיום קבלת המוצר. הפרטים המלאים ב<a href=\"/policies/refund-policy\">מדיניות הביטולים וההחזרות</a> וב<a href=\"/policies/shipping-policy\">מדיניות המשלוחים</a>.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "desc"
+      ],
+      "settings": {
+        "ratio": "4/5",
+        "fit": "cover",
+        "show_thumbs": false
+      }
+    },
+    "sizes": {
+      "type": "size-guide",
+      "settings": {}
     }
-   },
-   "block_order": [
-    "desc"
-   ],
-   "settings": {
-    "ratio": "4/5",
-    "fit": "cover",
-    "show_thumbs": false
-   }
   },
-  "sizes": {
-   "type": "size-guide",
-   "settings": {}
-  }
- },
- "order": [
-  "main",
-  "sizes"
- ]
+  "order": [
+    "main",
+    "sizes"
+  ]
 }

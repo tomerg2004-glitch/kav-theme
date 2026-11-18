@@ -1,0 +1,40 @@
+<section class="k-wrap k-contact" style="padding-block:clamp(48px,8vw,110px)">
+  <div style="max-width:620px">
+    <h1 class="k-display k-h2">{{ page.title }}</h1>
+    {%- if page.content != blank -%}<div class="k-rte" style="margin-top:16px">{{ page.content }}</div>{%- endif -%}
+    <p class="k-sub" style="margin-top:16px">{{ section.settings.intro }}</p>
+    {%- form 'contact', class: 'k-cform' -%}
+      {%- if form.posted_successfully? -%}<p class="k-msg" role="status">{{ section.settings.success }}</p>{%- endif -%}
+      {%- if form.errors -%}<p class="k-msg k-msg--err" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+      <label class="k-cform__f"><span>נושא</span>
+        <select class="k-input" name="contact[נושא]">
+          <option>שאלה על מוצר או מידה</option>
+          <option>הזמנה ומשלוח</option>
+          <option>ביטול עסקה / החזרה</option>
+          <option>פריט פגום או לא תואם</option>
+          <option>נגישות</option>
+          <option>פרטיות (עיון, תיקון או מחיקת מידע)</option>
+          <option>אחר</option>
+        </select></label>
+      <label class="k-cform__f"><span>שם מלא</span><input class="k-input" type="text" name="contact[name]" autocomplete="name" required></label>
+      <label class="k-cform__f"><span>מייל</span><input class="k-input" type="email" name="contact[email]" autocomplete="email" dir="ltr" required></label>
+      <label class="k-cform__f"><span>טלפון (לא חובה)</span><input class="k-input" type="tel" name="contact[phone]" autocomplete="tel" dir="ltr"></label>
+      <label class="k-cform__f"><span>מספר הזמנה (אם יש)</span><input class="k-input" type="text" name="contact[מספר הזמנה]" dir="ltr"></label>
+      <label class="k-cform__f"><span>ההודעה</span><textarea class="k-input" name="contact[body]" rows="5" required></textarea></label>
+      <p class="k-consent">המידע שתמסרו ישמש רק כדי לענות לפנייה ולטפל בה. אין חובה חוקית למסור אותו, אבל בלי מייל לא נוכל לחזור אליכם. פרטים ב<a href="/pages/privacy">מדיניות הפרטיות</a>.</p>
+      <button class="k-btn k-btn--dark" type="submit">שליחה</button>
+    {%- endform -%}
+  </div>
+</section>
+<style>
+.k-cform{display:flex;flex-direction:column;gap:16px;margin-top:28px}
+.k-cform__f{display:flex;flex-direction:column;gap:6px;font-size:14px}
+.k-cform textarea.k-input{min-height:130px;padding-block:12px;resize:vertical}
+.k-cform select.k-input{appearance:auto}
+</style>
+{% schema %}
+{"name":"טופס יצירת קשר","settings":[
+{"type":"textarea","id":"intro","label":"פתיח","default":"שאלה על מידה, הזמנה או ביטול? כתבו לנו ונחזור תוך יום עסקים אחד. לביטול עסקה מספיק לבחור \"ביטול עסקה\" ולכתוב שם ומספר הזמנה."},
+{"type":"text","id":"success","label":"הודעת הצלחה","default":"קיבלנו, נחזור אליך בהקדם."}
+]}
+{% endschema %}
